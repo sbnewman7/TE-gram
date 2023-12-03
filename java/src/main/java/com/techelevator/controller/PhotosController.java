@@ -18,8 +18,8 @@ public class PhotosController {
         this.photoDao = photoDao;
     }
 
-    @GetMapping("/movies")
-    public List<Photo> getMovies() {
+    @GetMapping("/photos")
+    public List<Photo> getPhotos() {
         return photoDao.getAll();
     }
 

@@ -1,12 +1,12 @@
 package com.techelevator.model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Photo {
     private int id;
     private String caption;
     private String photoUrl;
-    private LocalDate releaseDate;
+    private LocalDateTime datePublished;
 
     public int getId() {
         return id;
@@ -32,12 +32,12 @@ public class Photo {
         this.photoUrl = photoUrl;
     }
 
-    public LocalDate getReleaseDate() {
-        return releaseDate;
+    public LocalDateTime getDatePublished() {
+        return datePublished;
     }
 
-    public void setReleaseDate(LocalDate releaseDate) {
-        this.releaseDate = releaseDate;
+    public void setDatePublished(LocalDateTime datePublished) {
+        this.datePublished = datePublished;
     }
 
 }

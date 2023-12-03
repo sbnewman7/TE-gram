@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,9 +23,8 @@ public class JdbcPhotoDao implements PhotoDao {
     @Override
     public List<Photo> getAll() {
 
-        final String sql = "SELECT movie_id, title, poster_path, release_date, length_minutes\n" +
-                "FROM movie \n" +
-                "LIMIT 25;\n";
+        final String sql = "SELECT photo_id, caption, pic_url \n" +
+                "FROM photo_feed";
 
         final List<Photo> photos = new ArrayList<>();
 
@@ -33,15 +33,11 @@ public class JdbcPhotoDao implements PhotoDao {
             final SqlRowSet results = this.jdbcTemplate.queryForRowSet(sql);
             while (results.next()) {
                 final Photo photo = new Photo();
-                photo.setId(results.getInt("movie_id"));
-                photo.setCaption(results.getString("title"));
-                photo.setPhotoUrl(results.getString("poster_path"));
+                photo.setId(results.getInt("photo_id"));
+                photo.setCaption(results.getString("caption"));
+                photo.setPhotoUrl(results.getString("pic_url"));
+                photo.setDatePublished(LocalDateTime.now());
 
-                if (results.getDate("release_date") != null) {
-                    photo.setReleaseDate(results.getDate("release_date").toLocalDate());
-                }
-
-                photo.setRunningTimeInMinutes(results.getInt("length_minutes"));
                 photos.add(photo);
             }
 
