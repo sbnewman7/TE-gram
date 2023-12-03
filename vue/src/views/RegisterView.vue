@@ -18,6 +18,7 @@
         <input type="password" id="confirmPassword" placeholder="confirm password" v-model="user.confirmPassword"
           required />
       </div>
+      <cloudinary-upload />
       <button id="submit" type="submit">Submit</button>
       <hr id="bar">
       <p>
@@ -30,8 +31,12 @@
 
 <script>
 import authService from '../services/AuthService';
+import CloudinaryUpload from '../components/CloudinaryUpload.vue';
 
 export default {
+  components: {
+    CloudinaryUpload
+  },
   data() {
     return {
       user: {
@@ -39,6 +44,7 @@ export default {
         email: '',
         password: '',
         confirmPassword: '',
+        picUrl: '',
         role: 'user',
       },
       registrationErrors: false,
@@ -90,6 +96,8 @@ label {
 a {
   color: #7393C3;
 }
+
+
 
 .form-input-group {
   margin-bottom: 1rem;
