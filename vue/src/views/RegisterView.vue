@@ -1,24 +1,29 @@
 <template>
   <div id="register" class="text-center">
-    <form v-on:submit.prevent="register">
-      <h1>Create Account</h1>
+    <form id="form" v-on:submit.prevent="register">
+      <h1 id="title">Register</h1>
       <div role="alert" v-if="registrationErrors">
         {{ registrationErrorMsg }}
       </div>
       <div class="form-input-group">
-        <label for="username">Username</label>
-        <input type="text" id="username" v-model="user.username" required autofocus />
+        <input type="text" id="username" placeholder="username" v-model="user.username" required autofocus />
       </div>
       <div class="form-input-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" v-model="user.password" required />
+        <input type="text" id="email" placeholder="email" v-model="user.email" required autofocus />
       </div>
       <div class="form-input-group">
-        <label for="confirmPassword">Confirm Password</label>
-        <input type="password" id="confirmPassword" v-model="user.confirmPassword" required />
+        <input type="password" id="password" placeholder="password" v-model="user.password" required />
       </div>
-      <button type="submit">Create Account</button>
-      <p><router-link v-bind:to="{ name: 'login' }">Already have an account? Log in.</router-link></p>
+      <div class="form-input-group">
+        <input type="password" id="confirmPassword" placeholder="confirm password" v-model="user.confirmPassword"
+          required />
+      </div>
+      <button id="submit" type="submit">Submit</button>
+      <hr id="bar">
+      <p>
+        Already have an account?
+        <router-link v-bind:to="{ name: 'login' }">Log in.</router-link>
+      </p>
     </form>
   </div>
 </template>
@@ -31,6 +36,7 @@ export default {
     return {
       user: {
         username: '',
+        email: '',
         password: '',
         confirmPassword: '',
         role: 'user',
@@ -76,7 +82,68 @@ export default {
 .form-input-group {
   margin-bottom: 1rem;
 }
+
 label {
   margin-right: 0.5rem;
+}
+
+a {
+  color: #7393C3;
+}
+
+.form-input-group {
+  margin-bottom: 1rem;
+}
+
+#register {
+  display: flex;
+  justify-content: center;
+}
+
+#form {
+  display: flex;
+  width: 40vw;
+  flex-direction: column;
+  align-items: center;
+}
+
+label {
+  margin-right: 0.5rem;
+}
+
+#title {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+#bar {
+  width: 30vw;
+  margin-top: 30px;
+}
+
+#username,
+#email,
+#password,
+#confirmPassword {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  width: 25vw;
+  padding-left: 5px;
+}
+
+#username,
+#email,
+#password,
+#confirmPassword,
+#submit {
+  background-color: #D9D9D9;
+  border: none;
+  border-radius: 4px;
+
+}
+
+#submit {
+  padding: 5px 2vw 5px 2vw;
+
 }
 </style>

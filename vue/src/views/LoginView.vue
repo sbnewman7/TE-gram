@@ -62,6 +62,10 @@ export default {
 </script>
 
 <style scoped>
+a {
+  color: #7393C3;
+}
+
 .form-input-group {
   margin-bottom: 1rem;
 }
@@ -84,6 +88,7 @@ label {
 
 #title {
   text-align: center;
+  margin-bottom: 60px;
 }
 
 #bar {
@@ -104,10 +109,11 @@ label {
 #submit {
   background-color: #D9D9D9;
   border: none;
+  border-radius: 4px;
 }
 
 #submit {
-  padding: 5px 20px 5px 20px;
+  padding: 5px 2vw 5px 2vw;
 
 }
 </style>
