@@ -11,6 +11,7 @@
 import PhotoCard from "../components/PhotoCard.vue"
 import photoService from "../services/PhotosGateway"
 
+
 export default {
   name: "Home",
   components: {

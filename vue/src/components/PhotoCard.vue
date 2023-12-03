@@ -1,24 +1,26 @@
 <template>
     <article>
         <img :src="photo.photoUrl">
-        <h2>{{ photo.caption }} {{ photo.caption }} {{ photo.caption }} {{ photo.caption }}</h2>
-        <div>
+        <h2>{{ photo.caption }}</h2>
+        <div v-show="hasComments">
             <span>
-        I am a comment! this comment 
-is about this photo! I am a comment! this comment 
-is about this photo!I am a comment! this comment 
-is about this photo!I am a comment! this comment 
-is about this photo!I am a comment! this comment 
-is about this photo!
-</span>
+                {{ photo.comments[0].commentBody }}
+            </span>
         </div>
-        <!-- <h3>{{ photo.comments[0] }}</h3> -->
     </article>
 </template>
 
 <script>
+import CommentService from "../services/CommentsGateway"
+
 export default {
-    props: ['photo']
+    props: ['photo'],
+    computed:{
+        hasComments(){
+            return this.photo.comments&&this.photo.comments.length!=0;
+        }
+    }
+    
 }
 </script>
 
