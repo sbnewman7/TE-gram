@@ -1,7 +1,8 @@
 <template>
     <article>
-        <h2>{{ photo.title }}</h2>
-        <img :src="photo.posterUrl">
+        <!-- <h2>{{ photo.caption }}</h2> -->
+        <p>I am here!</p>
+        <img :src="photo.photoUrl">
     </article>
 </template>
 

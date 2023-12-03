@@ -24,8 +24,8 @@
     },
     created() {
       photoService.getAll()
-        .then(r => {
-          this.photos = r.data;
+        .then(response => {
+          this.photos = response.data;
         })
     }
   };
