@@ -34,6 +34,7 @@ export default {
 .photo-list {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 * {
@@ -49,6 +50,6 @@ h1{
 
 .photo {
   
-  margin: 20px;
+  margin: 16px;
 }
 </style>
