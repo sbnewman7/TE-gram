@@ -2,8 +2,7 @@
   <div class="home">
     <h1>Photos</h1>
     <section class="photo-list">
-      <photo-card class="photo" :photo="photo" v-for="photo in photos"
-        :key="photo.id" />
+      <photo-card class="photo" :photo="photo" v-for="photo in photos" :key="photo.id" />
     </section>
   </div>
 </template>
@@ -37,7 +36,14 @@ export default {
   flex-wrap: wrap;
 }
 
+* {
+  background-color: #eef5ff;
+
+
+}
+
 .photo {
   flex-basis: 30rem;
+
 }
 </style>
