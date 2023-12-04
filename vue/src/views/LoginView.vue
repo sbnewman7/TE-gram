@@ -34,8 +34,6 @@ export default {
       user: {
         username: "",
         password: "",
-        email: "",
-        profilePicUrl: ""
       },
       invalidCredentials: false
     };
