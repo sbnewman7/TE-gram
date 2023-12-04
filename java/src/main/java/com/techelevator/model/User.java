@@ -12,16 +12,23 @@ public class User {
    private String username;
    @JsonIgnore
    private String password;
+
+   private String email;
+
+   private String picUrl;
+
    @JsonIgnore
    private boolean activated;
    private Set<Authority> authorities = new HashSet<>();
 
    public User() { }
 
-   public User(int id, String username, String password, String authorities) {
+   public User(int id, String username, String password, String email, String profilePicUrl, String authorities) {
       this.id = id;
       this.username = username;
       this.password = password;
+      this.email = email;
+      this.picUrl = profilePicUrl;
       if (authorities != null) this.setAuthorities(authorities);
       this.activated = true;
    }
@@ -48,6 +55,21 @@ public class User {
 
    public void setPassword(String password) {
       this.password = password;
+   }
+   public String getEmail() {
+      return email;
+   }
+
+   public String getPicUrl() {
+      return picUrl;
+   }
+
+   public void setEmail(String email) {
+      this.email = email;
+   }
+
+   public void setPicUrl(String profilePicUrl) {
+      this.picUrl = profilePicUrl;
    }
 
    public boolean isActivated() {

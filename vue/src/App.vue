@@ -17,34 +17,38 @@
 
 
 <style>
+* {
+  font-family: Roboto;
+}
+
 .active-link {
-  text-decoration: none; 
-  color: #ffffff ; 
+  text-decoration: none;
+  color: #ffffff;
   font-weight: bold;
 }
 
 .active-link:hover {
-  color: #abb9c8; 
+  color: #abb9c8;
 }
 
-body{
+body {
   background-color: #EEF5FF;
   margin: 0;
   padding: 0;
 }
 
-#nav{
+#nav {
   background-color: #A25772;
   height: 7vh;
   font-size: 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color:azure;
+  color: azure;
   padding: 0px 3vh 0px 3vh;
 }
 
-.logo{
-height: 5vh;
+.logo {
+  height: 5vh;
 }
 </style>

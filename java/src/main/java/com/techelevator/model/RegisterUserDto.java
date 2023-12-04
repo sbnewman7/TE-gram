@@ -15,6 +15,10 @@ public class RegisterUserDto {
     private String password;
     @NotEmpty
     private String confirmPassword;
+    @NotEmpty
+    private String email;
+
+    private String picUrl;
     @NotEmpty(message = "Please select a role for this user.")
     private String role;
 
@@ -40,6 +44,21 @@ public class RegisterUserDto {
 
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
+    }
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPicUrl() {
+        return picUrl;
+    }
+
+    public void setProfilePicUrl(String picUrl) {
+        this.picUrl = picUrl;
     }
 
     public String getRole() {
