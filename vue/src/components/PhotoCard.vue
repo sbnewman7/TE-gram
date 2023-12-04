@@ -28,16 +28,14 @@ article {
     display: flex;
     background-color: #9eb8d9;
     flex-direction: column;
-    
     align-items: center;
     padding: 10px, 0px, 10px, 0px;
     border: #7C93C3 5px solid;
-border-radius: 5px;
-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
 }
 
 div{
-   
    display: flex;
    justify-content: center;
 }
@@ -51,17 +49,14 @@ img {
 
 h2 {
     margin: 0 10px; 
-    /* padding: 10px;  */
     width: 30vh;
-    
-    
 }
 
 span {
     display: block;
     font-size: 1.1rem;
     width: 30vh;
-    box-sizing: border-box; /* Include padding and border in the total width */ 
+    box-sizing: border-box;
     padding: 1vh 1vh 3vh 1vh;   
     
 }
