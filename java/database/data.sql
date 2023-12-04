@@ -14,6 +14,12 @@ INSERT INTO photo_feed (user_id, caption, pic_url) VALUES (2, 'caption here', 'h
 INSERT INTO photo_feed (user_id, caption, pic_url) VALUES (2, 'caption here', 'https://media.istockphoto.com/id/1750478284/photo/diverse-students-making-banners-for-climate-change-protest.jpg?s=2048x2048&w=is&k=20&c=2vI5m9IFYOhdsAQsI8iT7sPoGTXH8TuWWzPiRTv1aHA=');
 INSERT INTO photo_feed (user_id, caption, pic_url) VALUES (1, 'caption here', 'https://media.istockphoto.com/id/1665614059/photo/paddle-board-entering-the-water-with-the-board-in-hand.jpg?s=2048x2048&w=is&k=20&c=944HSaTRZhusK9WT44dZpgAp5ew2CEgmWKWusESqPPQ=');
 INSERT INTO photo_feed (user_id, caption, pic_url) VALUES (1, 'caption here', 'https://i0.wp.com/picjumbo.com/wp-content/uploads/woman-enjoying-the-sunset-by-the-sea-free-photo.jpg?w=600&quality=80');
+INSERT INTO comments (user_id, photo_id, comment_text) VALUES (1, 1, 'i am a comment1');
+INSERT INTO comments (user_id, photo_id, comment_text) VALUES (1, 2, 'i am a comment2');
+INSERT INTO comments (user_id, photo_id, comment_text) VALUES (1, 3, 'i am a comment3');
+INSERT INTO comments (user_id, photo_id, comment_text) VALUES (1, 6, 'i am a comment4');
+INSERT INTO comments (user_id, photo_id, comment_text) VALUES (1, 1, 'i am a comment I am testing the comments');
+
 
 
 

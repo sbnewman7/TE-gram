@@ -11,6 +11,7 @@
 import PhotoCard from "../components/PhotoCard.vue"
 import photoService from "../services/PhotosGateway"
 
+
 export default {
   name: "Home",
   components: {
@@ -37,15 +38,17 @@ export default {
   justify-content: center;
 }
 
-* {
+template {
   background-color: #eef5ff;
-
-
 }
 
 h1{
-  font-size: 2.5rem;
+  font-size: 3.5rem;
   color: rgb(55, 55, 157);
+margin-top: 13px;
+margin-bottom: 13px;
+display: flex;
+justify-content: center;
 }
 
 .photo {
