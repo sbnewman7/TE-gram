@@ -1,24 +1,25 @@
 <template>
     <article>
         <img :src="photo.photoUrl">
-        <h2>{{ photo.caption }} {{ photo.caption }} {{ photo.caption }} {{ photo.caption }}</h2>
-        <div>
+        <h2>{{ photo.caption }}</h2>
+        <div v-if="hasComments">
             <span>
-        I am a comment! this comment 
-is about this photo! I am a comment! this comment 
-is about this photo!I am a comment! this comment 
-is about this photo!I am a comment! this comment 
-is about this photo!I am a comment! this comment 
-is about this photo!
-</span>
+                {{ photo.comments[0].commentBody }}
+            </span>
         </div>
-        <!-- <h3>{{ photo.comments[0] }}</h3> -->
     </article>
 </template>
 
 <script>
+
 export default {
-    props: ['photo']
+    props: ['photo'],
+    computed:{
+        hasComments(){
+            return this.photo.comments&&this.photo.comments.length!=0;
+        }
+    }
+    
 }
 </script>
 
@@ -27,19 +28,16 @@ article {
     display: flex;
     background-color: #9eb8d9;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
     padding: 10px, 0px, 10px, 0px;
     border: #7C93C3 5px solid;
-border-radius: 5px;
-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
 }
 
 div{
-   
    display: flex;
    justify-content: center;
-    white-space: break-spaces;
 }
 
 img {
@@ -51,7 +49,6 @@ img {
 
 h2 {
     margin: 0 10px; 
-    /* padding: 10px;  */
     width: 30vh;
 }
 
@@ -59,8 +56,9 @@ span {
     display: block;
     font-size: 1.1rem;
     width: 30vh;
-    box-sizing: border-box; /* Include padding and border in the total width */ 
-    padding: 1vh;   
+    box-sizing: border-box;
+    padding: 1vh 1vh 3vh 1vh;   
+    
 }
 
 </style>
