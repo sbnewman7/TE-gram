@@ -27,6 +27,7 @@ export default {
             // We could set up an endpoint in a Java application to generate a signature if we wanted to be more
             // secure, but this demo is intended to show this as simply as possible.
             // More documentation here: https://cloudinary.com/documentation/upload_widget
+            // eslint-disable-next-line no-undef
             const uploadWidget = cloudinary.createUploadWidget({
                 // Setting the values from the .env file; could be done manually if preferred
                 // These values can be obtained through the Cloudinary site

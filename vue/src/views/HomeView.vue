@@ -44,7 +44,7 @@ template {
 
 h1{
   font-size: 3.5rem;
-  color: rgb(55, 55, 157);
+  color: rgb(42, 42, 53);
 margin-top: 13px;
 margin-bottom: 13px;
 display: flex;

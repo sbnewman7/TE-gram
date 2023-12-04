@@ -29,6 +29,9 @@ export function createStore(currentToken, currentUser) {
         state.pictureUrl = picUrl;
       }
     },
+    getters: {
+      currentUser: state => state.user
+    }
   });
   return store;
 }
