@@ -20,7 +20,7 @@
           required />
       </div>
       <cloudinary-upload />
-      <!-- <button id="submit" type="submit">Submit</button> -->
+      <!-- button changed from type "submit" to type "button" to prevent cloudinary component from triggering submit -->
       <button id="submit" type="button" v-on:click="register">Submit</button>
       <hr id="bar">
       <p>
@@ -53,11 +53,6 @@ export default {
       registrationErrorMsg: 'There were problems registering this user.',
     };
   },
-  computed: {
-    pictureUrl() {
-      return this.$store.state.pictureUrl;
-    }
-  },
   methods: {
     register() {
       if (this.user.password != this.user.confirmPassword) {
@@ -65,13 +60,10 @@ export default {
         this.registrationErrorMsg = 'Password & Confirm Password do not match.';
       } else {
         // getting picture url
-        console.log('inside register view--calling computed property');
-        this.user.picUrl = this.pictureUrl;
-        console.log(this.user.picUrl);
-        // if (this.user.picUrl != '') {
-        //   this.$store.commit('SET_PIC_URL', '');
-        // }
-
+        this.user.picUrl = this.$store.state.pictureUrl;
+        if (this.user.picUrl != '') {
+          this.$store.commit('SET_PIC_URL', '');
+        }
         authService
           .register(this.user)
           .then((response) => {
@@ -167,6 +159,7 @@ label {
 
 #submit {
   padding: 5px 2vw 5px 2vw;
+  background-color: #9EB8D9;
 
 }
 </style>

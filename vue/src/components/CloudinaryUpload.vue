@@ -77,12 +77,20 @@ export default {
 
 }
 
+#cloud-image {
+    max-width: 60%;
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
 #upload {
     background-color: #D9D9D9;
     border: none;
     border-radius: 4px;
     padding: 5px 2vw 5px 2vw;
-    width: 75%;
+    max-width: 60%;
+
 
 }
 </style>
