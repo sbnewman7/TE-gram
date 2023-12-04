@@ -53,12 +53,25 @@ export default {
       registrationErrorMsg: 'There were problems registering this user.',
     };
   },
+  computed: {
+    pictureUrl() {
+      return this.$store.state.pictureUrl;
+    }
+  },
   methods: {
     register() {
       if (this.user.password != this.user.confirmPassword) {
         this.registrationErrors = true;
         this.registrationErrorMsg = 'Password & Confirm Password do not match.';
       } else {
+        // getting picture url
+        console.log('inside register view--calling computed property');
+        this.user.picUrl = this.pictureUrl;
+        console.log(this.user.picUrl);
+        // if (this.user.picUrl != '') {
+        //   this.$store.commit('SET_PIC_URL', '');
+        // }
+
         authService
           .register(this.user)
           .then((response) => {

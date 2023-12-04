@@ -18,7 +18,7 @@ public class RegisterUserDto {
     @NotEmpty
     private String email;
 
-    private String profilePicUrl;
+    private String picUrl;
     @NotEmpty(message = "Please select a role for this user.")
     private String role;
 
@@ -53,12 +53,12 @@ public class RegisterUserDto {
         this.email = email;
     }
 
-    public String getProfilePicUrl() {
-        return profilePicUrl;
+    public String getPicUrl() {
+        return picUrl;
     }
 
-    public void setProfilePicUrl(String profilePicUrl) {
-        this.profilePicUrl = profilePicUrl;
+    public void setProfilePicUrl(String picUrl) {
+        this.picUrl = picUrl;
     }
 
     public String getRole() {

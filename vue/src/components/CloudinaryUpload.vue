@@ -46,6 +46,8 @@ export default {
                     // result.info.url
 
                     this.imgUrl = result.info.url;
+                    this.$store.commit('SET_PIC_URL', result.info.url);
+
                     // There are other properties that might be useful, including:
                     // * result.info.height and result.info.width
                     //     can be used to size the image

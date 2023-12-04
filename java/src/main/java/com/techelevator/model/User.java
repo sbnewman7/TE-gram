@@ -15,7 +15,8 @@ public class User {
 
    private String email;
 
-   private String profilePicUrl;
+   private String picUrl;
+
    @JsonIgnore
    private boolean activated;
    private Set<Authority> authorities = new HashSet<>();
@@ -27,7 +28,7 @@ public class User {
       this.username = username;
       this.password = password;
       this.email = email;
-      this.profilePicUrl = profilePicUrl;
+      this.picUrl = profilePicUrl;
       if (authorities != null) this.setAuthorities(authorities);
       this.activated = true;
    }
@@ -59,16 +60,16 @@ public class User {
       return email;
    }
 
-   public String getProfilePicUrl() {
-      return profilePicUrl;
+   public String getPicUrl() {
+      return picUrl;
    }
 
    public void setEmail(String email) {
       this.email = email;
    }
 
-   public void setProfilePicUrl(String profilePicUrl) {
-      this.profilePicUrl = profilePicUrl;
+   public void setPicUrl(String profilePicUrl) {
+      this.picUrl = profilePicUrl;
    }
 
    public boolean isActivated() {
