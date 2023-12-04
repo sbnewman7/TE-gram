@@ -1,6 +1,7 @@
 <template>
   <div id="register" class="text-center">
-    <form id="form" v-on:submit.prevent="register">
+    <form id="form" v-on:submit.prevent="">
+      <!-- register -->
       <h1 id="title">Register</h1>
       <div role="alert" v-if="registrationErrors">
         {{ registrationErrorMsg }}
@@ -19,7 +20,8 @@
           required />
       </div>
       <cloudinary-upload />
-      <button id="submit" type="submit">Submit</button>
+      <!-- <button id="submit" type="submit">Submit</button> -->
+      <button id="submit" type="button" v-on:click="register">Submit</button>
       <hr id="bar">
       <p>
         Already have an account?
