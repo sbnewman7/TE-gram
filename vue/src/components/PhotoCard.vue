@@ -2,7 +2,7 @@
     <article>
         <img :src="photo.photoUrl">
         <h2>{{ photo.caption }}</h2>
-        <div v-show="hasComments">
+        <div v-if="hasComments">
             <span>
                 {{ photo.comments[0].commentBody }}
             </span>
@@ -11,7 +11,6 @@
 </template>
 
 <script>
-import CommentService from "../services/CommentsGateway"
 
 export default {
     props: ['photo'],
@@ -29,7 +28,7 @@ article {
     display: flex;
     background-color: #9eb8d9;
     flex-direction: column;
-    justify-content: space-between;
+    
     align-items: center;
     padding: 10px, 0px, 10px, 0px;
     border: #7C93C3 5px solid;
@@ -41,7 +40,6 @@ div{
    
    display: flex;
    justify-content: center;
-    white-space: break-spaces;
 }
 
 img {
@@ -55,6 +53,8 @@ h2 {
     margin: 0 10px; 
     /* padding: 10px;  */
     width: 30vh;
+    
+    
 }
 
 span {
@@ -62,7 +62,8 @@ span {
     font-size: 1.1rem;
     width: 30vh;
     box-sizing: border-box; /* Include padding and border in the total width */ 
-    padding: 1vh;   
+    padding: 1vh 1vh 3vh 1vh;   
+    
 }
 
 </style>

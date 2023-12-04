@@ -53,7 +53,7 @@ public class JdbcPhotoDao implements PhotoDao {
 
         final ArrayList<Comment> comments = new ArrayList<>();
 
-        final String sql = "SELECT user_id, photo_id, comment_id, comment_text FROM comments WHERE photo_id = ?;";
+        final String sql = "SELECT user_id, photo_id, comment_id, comment_text FROM comments WHERE photo_id = ? ORDER BY date_time DESC;";
 
         try {
 
