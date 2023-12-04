@@ -38,6 +38,6 @@
   }
   
   .photo {
-    flex-basis: 30rem;
+    flex-basis: 20vw;
   }
   </style>

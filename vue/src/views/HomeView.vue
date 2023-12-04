@@ -1,9 +1,8 @@
 <template>
   <div class="home">
-    <h1>Photos</h1>
+    <h1>Home</h1>
     <section class="photo-list">
-      <photo-card class="photo" :photo="photo" v-for="photo in photos"
-        :key="photo.id" />
+      <photo-card class="photo" :photo="photo" v-for="photo in photos" :key="photo.id" />
     </section>
   </div>
 </template>
@@ -24,8 +23,8 @@ export default {
   },
   created() {
     photoService.getAll()
-      .then(r => {
-        this.photos = r.data;
+      .then(response => {
+        this.photos = response.data;
       })
   }
 };
@@ -35,9 +34,22 @@ export default {
 .photo-list {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+}
+
+* {
+  background-color: #eef5ff;
+
+
+}
+
+h1{
+  font-size: 2.5rem;
+  color: rgb(55, 55, 157);
 }
 
 .photo {
-  flex-basis: 30rem;
+  
+  margin: 16px;
 }
 </style>
