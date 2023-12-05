@@ -1,12 +1,16 @@
 import { createStore as _createStore } from 'vuex';
 import axios from 'axios';
+const NOTIFICATION_TIMEOUT = 6000;
+
 
 export function createStore(currentToken, currentUser) {
   let store = _createStore({
     state: {
       token: currentToken || '',
       user: currentUser || {},
-      pictureUrl: ''
+      pictureUrl: '',
+      notification: null,
+
     },
     mutations: {
       SET_AUTH_TOKEN(state, token) {
@@ -31,6 +35,7 @@ export function createStore(currentToken, currentUser) {
       UPDATE_USER(state, user) {
         state.user = user;
       }
+
     },
     getters: {
       currentUser: state => state.user

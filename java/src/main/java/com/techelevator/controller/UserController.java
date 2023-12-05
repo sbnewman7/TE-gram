@@ -26,6 +26,7 @@ public class UserController {
         }
         userToUpdate.setUsername(updatedUser.getUsername());
         userToUpdate.setEmail(updatedUser.getEmail());
+        userToUpdate.setPicUrl(updatedUser.getPicUrl());
         return this.userDao.updateUser(userToUpdate);
 
     }

@@ -1,8 +1,10 @@
 <template>
-    <div>
-        <h1>Edit Profile</h1>
-        <UserProfile :user="currentUser" />
-    </div>
+    <span class="megacontainer">
+        <div class="container">
+            <h1>Edit Profile</h1>
+            <UserProfile :user="currentUser" />
+        </div>
+    </span>
 </template>
 
 <script>
@@ -30,5 +32,18 @@ h1 {
     margin-bottom: 13px;
     display: flex;
     justify-content: center;
+}
+
+.megacontainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+
+.container {
+    min-height: 100vh;
+    padding: 20px
 }
 </style>
