@@ -24,9 +24,15 @@
 export default {
   methods: {
     search() {
+      // TODO: pass <username> prop or param to gallery
+      // --- OR ---
+      // do a user lookup:
+      // if user not found:
+      //   alert("Please type in a valid username.");
+      // else
       this.$router.push("/gallery");
-      // TODO: pass prop or param to gallery
-      //       clear search textbox
+      //  and CLEAR search textbox
+      document.getElementById("search").value = "";
     },
     goToHome() {
       this.$router.push({ name: 'home' });
