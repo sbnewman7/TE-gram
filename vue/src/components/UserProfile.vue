@@ -11,9 +11,26 @@
     <cloudinary-upload v-model:pictureUrl="pictureUrl" />
     <p>User Name: {{ user.username }}</p>
     <p>User Email: {{ user.email }}</p>
-    <p>User Password: *********</p>
 
   </div>
+  <form id="form" v-on:submit.prevent="">
+    <div role="alert" v-if="registrationErrors">
+      {{ registrationErrorMsg }}
+    </div>
+    <div class="form-input-group">
+      <img v-on:click="switchUserForm" class="icon"
+        :src="'https://cdn1.iconfinder.com/data/icons/essential-21/128/Edit-512.png'">
+      <input v-if="showUserForm" type="text" id="username" v-model="changeUser.username" required autofocus />
+      <span>User Name: {{ user.username }}
+      </span>
+    </div>
+    <div class="form-input-group">
+      <input v-if="showEmailForm" type="text" id="email" v-model="changeUser.email" required autofocus />
+    </div>
+    <!-- button changed from type "submit" to type "button" to prevent cloudinary component from triggering submit -->
+    <button v-if="showSubmit" id="submit" type="button" v-on:click.prevent="onSubmit">Submit</button>
+
+  </form>
 </template>
   
 <script>
@@ -22,6 +39,23 @@ import CloudinaryUpload from '../components/CloudinaryUpload.vue';
 
 
 export default {
+  data() {
+    return {
+      changeUser: {
+        username: this.$store.state.user.username,
+        email: this.$store.state.user.email,
+        password: this.$store.state.user.password,
+        confirmPassword: this.$store.state.user.confirmPassword,
+        picUrl: this.$store.state.user.picUrl,
+        role: 'user',
+      },
+      registrationErrors: false,
+      registrationErrorMsg: 'There were problems registering this user.',
+      showUserForm: false,
+      showEmailForm: false,
+      showSubmit: false
+    };
+  },
   components: {
     CloudinaryUpload
   },
@@ -29,15 +63,30 @@ export default {
   created() {
     console.log('User object:', this.user);
   },
+
   methods: {
-    changePic() {
-      this.$store.state.pictureUrl;
+    updateProfile() {
+
+    },
+    switchUserForm() {
+      this.showUserForm = !this.showUserForm;
+      if (this.showUserForm) this.showSubmit = true;
+      else this.showSubmit = false;
+    },
+    switchEmailForm() {
+      this.showEmailForm = !this.showEmailForm;
+      if (this.showEmailForm) this.showSubmit = true;
+      else this.showSubmit = false;
+    },
+    onSubmit() {
+      this.showEmailForm = false;
+      this.showUserForm = false;
     }
   },
   computed: {
     pictureUrl() {
       return this.$store.state.pictureUrl;
-    }
+    },
   }
 }
 
@@ -46,15 +95,21 @@ export default {
 <style scoped>
 .circular--landscape {
   display: inline-block;
-  position: relative;
+  justify-content: center;
   width: 200px;
   height: 200px;
   overflow: hidden;
   border-radius: 50%;
+  background-color: black;
+}
+
+.icon {
+  max-width: 20px;
 }
 
 .circular--landscape img {
   width: auto;
+  display: flex;
   height: 100%;
   margin-left: -50px;
 }

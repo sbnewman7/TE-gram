@@ -4,6 +4,21 @@ import { createStore } from './store'
 import router from './router'
 import axios from 'axios'
 
+// import the fontawesome core
+import { library } from "@fortawesome/fontawesome-svg-core";
+
+// import fontawesome icon component
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+
+// import config so we can set a default style
+import { config } from "@fortawesome/fontawesome-svg-core";
+
+
+// add the icon style(s) you have installed to the library
+
+// set the default style
+config.styleDefault = "duotone";
+
 /* sets the base url for server API communication with axios */
 axios.defaults.baseURL = import.meta.env.VITE_REMOTE_API;
 
@@ -25,6 +40,7 @@ if (currentToken) {
 const store = createStore(currentToken, currentUser);
 
 const app = createApp(CapstoneApp);
+app.component("font-awesome-icon", FontAwesomeIcon);
 app.use(store);
 app.use(router);
 app.mount('#app');
