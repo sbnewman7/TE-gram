@@ -47,8 +47,8 @@ export default {
       changeUser: {
         username: this.$store.state.user.username,
         email: this.$store.state.user.email,
-        password: this.$store.state.user.password,
-        confirmPassword: this.$store.state.user.confirmPassword,
+        // password: this.$store.state.user.password,
+        // confirmPassword: this.$store.state.user.confirmPassword,
         picUrl: this.$store.state.user.picUrl,
         role: 'user',
       },
@@ -64,7 +64,8 @@ export default {
   },
   props: ['user'],
   created() {
-    console.log('User object:', this.user);
+    console.log(this.user.id);
+    console.log('User object:', this.changeUser);
   },
 
   methods: {
@@ -83,6 +84,8 @@ export default {
     },
     onSubmit() {
       this.$store.commit('UPDATE_USER', this.changeUser);
+      console.log(this.changeUser);
+      this.changeUser.id = this.user.id;
       UserGateway.updateUser(this.changeUser);
       this.showEmailForm = false;
       this.showUserForm = false;
