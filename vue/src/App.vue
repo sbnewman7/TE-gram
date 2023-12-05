@@ -5,7 +5,6 @@
         <img class="logo" :src="'img/Telogo_2.gif'" alt="Home">
       </button>
       <div id="searchControl">
-        <!-- <router-link class="active-link" v-bind:to="{ name: 'gallery' }"></router-link> -->
         <label for="search">search</label>
         <input type="text" id="search" maxlength="50" v-on:keyup.enter="search">
       </div>
@@ -25,10 +24,14 @@
 export default {
   methods: {
     search() {
-      alert("i'm in search");
-    }
-  }
-}
+      alert("I'm in search");
+      this.$router.push("/gallery");
+    },
+    goToHome() {
+      this.$router.push({ name: 'home' });
+    },
+  },
+};
 </script>
 
 <style>
@@ -38,12 +41,12 @@ export default {
 
 .active-link {
   text-decoration: none;
-  color: #ffffff;
+  color: #FFFFFF;
   font-weight: bold;
 }
 
 .active-link:hover {
-  color: #abb9c8;
+  color: #ABB9C8;
 }
 
 body {
@@ -66,9 +69,7 @@ body {
 .logo-button {
   border: none;
   background: none;
-  /* Optional: to remove any background color */
   padding: 0;
-  /* Optional: to remove padding */
   cursor: pointer;
 }
 
