@@ -32,13 +32,16 @@ public class UserModelDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(final String login) {
         log.debug("Authenticating user '{}'", login);
-        String lowercaseLogin = login.toLowerCase();
-        return createSpringSecurityUser(lowercaseLogin, userDao.getUserByUsername(lowercaseLogin));
+        // TODO To fix login bug that doesn't allow mixed case usernames, removed .toLowerCase() on login
+//        String lowercaseLogin = login.toLowerCase();
+//        return createSpringSecurityUser(lowercaseLogin, userDao.getUserByUsername(lowercaseLogin));
+        return createSpringSecurityUser(login, userDao.getUserByUsername(login));
     }
 
-    private org.springframework.security.core.userdetails.User createSpringSecurityUser(String lowercaseLogin, User user) {
+    private org.springframework.security.core.userdetails.User createSpringSecurityUser(String login, User user) {
+        // TODO To fix login bug that doesn't allow mixed case usernames, removed .toLowerCase() on login
         if (!user.isActivated()) {
-            throw new UserNotActivatedException("User " + lowercaseLogin + " was not activated");
+            throw new UserNotActivatedException("User " + login + " was not activated");
         }
 
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();

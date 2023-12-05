@@ -59,7 +59,9 @@ public class JdbcUserDao implements UserDao {
     public User getUserByUsername(String username) {
         if (username == null) throw new IllegalArgumentException("Username cannot be null");
         User user = null;
-        String sql = "SELECT user_id, username, password_hash, email, profile_pic_url, role FROM users WHERE username = ?;";
+        // TODO To fix login bug that doesn't allow mixed case usernames,changed username = ? to username ILIKE ?
+//        String sql = "SELECT user_id, username, password_hash, email, profile_pic_url, role FROM users WHERE username = ?;";
+        String sql = "SELECT user_id, username, password_hash, email, profile_pic_url, role FROM users WHERE username ILIKE ?;";
         try {
             SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, username);
             if (rowSet.next()) {
