@@ -1,7 +1,9 @@
 <template>
   <div id="capstone-app">
     <div id="nav">
-      <img class="logo" :src="'https://www.diabetes.ie/wp-content/uploads/2021/05/logo-Placeholder.jpg'" v-on:click="">
+      <button @click="goToHome" class="logo-button">
+        <img class="logo" :src="'img/Telogo_2.gif'" alt="Home">
+      </button>
       <div id="searchControl">
         <label for="search">search</label>
         <input type="text" id="search" maxlength="50" v-on:keyup.enter="search">
@@ -22,10 +24,13 @@
 export default {
   methods: {
     search() {
-      alert("i'm in search");
-    }
-  }
-}
+      alert("I'm in search");
+    },
+    goToHome() {
+      this.$router.push({ name: 'home' });
+    },
+  },
+};
 </script>
 
 <style>
@@ -60,8 +65,17 @@ body {
   padding: 0px 3vh 0px 3vh;
 }
 
+.logo-button {
+  border: none;
+  background: none;
+  /* Optional: to remove any background color */
+  padding: 0;
+  /* Optional: to remove padding */
+  cursor: pointer;
+}
+
 .logo {
-  height: 5vh;
+  height: 7vh;
 }
 
 #searchControl {
@@ -71,5 +85,4 @@ body {
 #search {
   width: 20vw;
   margin: 6px 10px 6px 10px;
-}
-</style>
+}</style>
