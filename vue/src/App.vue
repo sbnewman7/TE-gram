@@ -3,6 +3,7 @@
     <div id="nav">
       <img class="logo" :src="'https://www.diabetes.ie/wp-content/uploads/2021/05/logo-Placeholder.jpg'" v-on:click="">
       <div id="searchControl">
+        <!-- <router-link class="active-link" v-bind:to="{ name: 'gallery' }"></router-link> -->
         <label for="search">search</label>
         <input type="text" id="search" maxlength="50" v-on:keyup.enter="search">
       </div>
@@ -23,6 +24,9 @@ export default {
   methods: {
     search() {
       alert("i'm in search");
+      this.$router.push("/gallery");
+      // this.$router.push("/login");
+
     }
   }
 }
