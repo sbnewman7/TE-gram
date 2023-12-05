@@ -24,7 +24,6 @@
 export default {
   methods: {
     search() {
-      alert("I'm in search");
       this.$router.push("/gallery");
     },
     goToHome() {

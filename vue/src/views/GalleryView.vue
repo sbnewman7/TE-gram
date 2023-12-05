@@ -1,6 +1,6 @@
 <template>
     <div class="gallery">
-        <h1>Joe User</h1> <!-- // TODO: bind to user name -->
+        <user-details />
         <section class="photo-list">
             <photo-card class="photo" :photo="photo" v-for="photo in photos" :key="photo.id" />
         </section>
@@ -8,6 +8,7 @@
 </template>
   
 <script>
+import UserDetails from "../components/UserDetails.vue";
 import PhotoCard from "../components/PhotoCard.vue"
 import photoService from "../services/PhotosGateway"
 
@@ -15,6 +16,7 @@ import photoService from "../services/PhotosGateway"
 export default {
     name: "Home",
     components: {
+        UserDetails,
         PhotoCard
     },
     data() {
