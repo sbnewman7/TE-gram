@@ -50,8 +50,8 @@ const routes = [
     }
   },
   {
-    // path: "/users/{id}/pics",
-    path: "/gallery/",
+    // path: "/users/:id/gallery",
+    path: "/gallery",
     name: "gallery",
     component: GalleryView,
     meta: {

@@ -5,7 +5,7 @@
         <img class="logo" :src="'img/Telogo_2.gif'" alt="Home">
       </button>
       <div id="searchControl">
-        <label for="search">search</label>
+        <img src="../img/magnifyingGlass.png" alt="magnifying glass" id="magGlass">
         <input type="text" id="search" maxlength="50" v-on:keyup.enter="search">
       </div>
       <section>
@@ -25,6 +25,8 @@ export default {
   methods: {
     search() {
       this.$router.push("/gallery");
+      // TODO: pass prop or param to gallery
+      //       clear search textbox
     },
     goToHome() {
       this.$router.push({ name: 'home' });
@@ -78,6 +80,13 @@ body {
 
 #searchControl {
   display: flex;
+  justify-content: center;
+}
+
+#magGlass {
+  width: 25px;
+  height: 25px;
+  margin-top: 4px;
 }
 
 #search {
