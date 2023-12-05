@@ -5,6 +5,7 @@
         <img class="logo" :src="'img/Telogo_2.gif'" alt="Home">
       </button>
       <div id="searchControl">
+        <!-- <router-link class="active-link" v-bind:to="{ name: 'gallery' }"></router-link> -->
         <label for="search">search</label>
         <input type="text" id="search" maxlength="50" v-on:keyup.enter="search">
       </div>
@@ -24,13 +25,10 @@
 export default {
   methods: {
     search() {
-      alert("I'm in search");
-    },
-    goToHome() {
-      this.$router.push({ name: 'home' });
-    },
-  },
-};
+      alert("i'm in search");
+    }
+  }
+}
 </script>
 
 <style>
@@ -85,4 +83,5 @@ body {
 #search {
   width: 20vw;
   margin: 6px 10px 6px 10px;
-}</style>
+}
+</style>
