@@ -9,8 +9,6 @@
     </div>
 
     <cloudinary-upload v-model:pictureUrl="pictureUrl" />
-    <p>User Name: {{ user.username }}</p>
-    <p>User Email: {{ user.email }}</p>
 
   </div>
   <form id="form" v-on:submit.prevent="">
@@ -21,11 +19,16 @@
       <img v-on:click="switchUserForm" class="icon"
         :src="'https://cdn1.iconfinder.com/data/icons/essential-21/128/Edit-512.png'">
       <input v-if="showUserForm" type="text" id="username" v-model="changeUser.username" required autofocus />
-      <span>User Name: {{ user.username }}
+      <span v-if="!showUserForm">User Name: {{ user.username }}
       </span>
     </div>
     <div class="form-input-group">
+      <img v-on:click="switchEmailForm" class="icon"
+        :src="'https://cdn1.iconfinder.com/data/icons/essential-21/128/Edit-512.png'">
+
       <input v-if="showEmailForm" type="text" id="email" v-model="changeUser.email" required autofocus />
+      <span v-if="!showEmailForm">User Email: {{ user.email }}</span>
+
     </div>
     <!-- button changed from type "submit" to type "button" to prevent cloudinary component from triggering submit -->
     <button v-if="showSubmit" id="submit" type="button" v-on:click.prevent="onSubmit">Submit</button>
@@ -36,7 +39,7 @@
 <script>
 
 import CloudinaryUpload from '../components/CloudinaryUpload.vue';
-
+import UserGateway from '../services/UserGateway';
 
 export default {
   data() {
@@ -79,6 +82,8 @@ export default {
       else this.showSubmit = false;
     },
     onSubmit() {
+      this.$store.commit('UPDATE_USER', this.changeUser);
+      UserGateway.updateUser(this.changeUser);
       this.showEmailForm = false;
       this.showUserForm = false;
     }

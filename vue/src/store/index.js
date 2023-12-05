@@ -27,6 +27,9 @@ export function createStore(currentToken, currentUser) {
       },
       SET_PIC_URL(state, picUrl) {
         state.pictureUrl = picUrl;
+      },
+      UPDATE_USER(state, user) {
+        state.user = user;
       }
     },
     getters: {
