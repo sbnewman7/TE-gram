@@ -71,7 +71,7 @@ public class AuthenticationController {
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping(path = "/users")
-    public User getUserByUsername(@Valid @PathVariable String username) {
+    public User getUserByUsername(@RequestParam String username) {
         try {
             User user = userDao.getUserByUsername(username);
             if (user == null) {

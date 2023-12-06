@@ -14,12 +14,12 @@
 
 export default {
     props: ['photo'],
-    computed:{
-        hasComments(){
-            return this.photo.comments&&this.photo.comments.length!=0;
+    computed: {
+        hasComments() {
+            return this.photo.comments && this.photo.comments.length != 0;
         }
     }
-    
+
 }
 </script>
 
@@ -35,20 +35,20 @@ article {
     color: rgb(255, 255, 255);
 }
 
-div{
-   display: flex;
-   justify-content: center;
+div {
+    display: flex;
+    justify-content: center;
 }
 
 img {
     width: 300px;
-    margin: .75vw; 
+    margin: .75vw;
     border: #c3d1e4 5px solid;
     border-radius: 5px;
 }
 
 h2 {
-    margin: 0 10px; 
+    margin: 0 10px;
     width: 30vh;
 }
 
@@ -57,8 +57,7 @@ span {
     font-size: 1.1rem;
     width: 30vh;
     box-sizing: border-box;
-    padding: 1vh 1vh 3vh 1vh;   
-    
-}
+    padding: 1vh 1vh 3vh 1vh;
 
+}
 </style>

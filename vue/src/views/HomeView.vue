@@ -42,17 +42,17 @@ template {
   background-color: #eef5ff;
 }
 
-h1{
+h1 {
   font-size: 3.5rem;
   color: rgb(55, 55, 157);
-margin-top: 13px;
-margin-bottom: 13px;
-display: flex;
-justify-content: center;
+  margin-top: 13px;
+  margin-bottom: 13px;
+  display: flex;
+  justify-content: center;
 }
 
 .photo {
-  
+
   margin: 16px;
 }
 </style>
