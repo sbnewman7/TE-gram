@@ -11,6 +11,9 @@ export function createStore(currentToken, currentUser) {
       pictureUrl: '',
       notification: null,
 
+      searchedUser: {}
+
+
     },
     mutations: {
       SET_AUTH_TOKEN(state, token) {
@@ -34,7 +37,12 @@ export function createStore(currentToken, currentUser) {
       },
       UPDATE_USER(state, user) {
         state.user = user;
+
+      },
+      SET_SEARCHED_USER(state, user) {
+        state.searchedUser = user;
       }
+
 
     },
     getters: {

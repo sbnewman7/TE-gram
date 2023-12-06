@@ -38,4 +38,14 @@ public class UserController {
         return this.userDao.updateUser(userToUpdate);
 
     }
+    @RequestMapping(path = "/users/{username}", method = RequestMethod.GET)
+
+    public User getUser(@PathVariable String username) {
+    User retrieveUser = this.userDao.getUserByUsername(username);
+    if (retrieveUser == null) {
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User NOT found");
+    }
+        return retrieveUser;
+
+    }
 }

@@ -51,20 +51,20 @@ const routes = [
     }
   },
   {
-<<<<<<< HEAD
     // path: "/users/:id/gallery",
     path: "/gallery",
     name: "gallery",
     component: GalleryView,
     meta: {
       requiresAuth: false
-=======
+    }
+  },
+  {
     path: '/user/{id}',
     name: 'user',
     component: UserView,
     meta: {
       requiresAuth: true
->>>>>>> 0bac6efb072d69adc14908af0b2bf92b7a51ee9c
     }
   }
 ];

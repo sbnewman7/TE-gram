@@ -44,19 +44,11 @@ template {
 
 h1 {
   font-size: 3.5rem;
-<<<<<<< HEAD
-  color: rgb(55, 55, 157);
+  color: rgb(42, 42, 53);
   margin-top: 13px;
   margin-bottom: 13px;
   display: flex;
   justify-content: center;
-=======
-  color: rgb(42, 42, 53);
-margin-top: 13px;
-margin-bottom: 13px;
-display: flex;
-justify-content: center;
->>>>>>> 0bac6efb072d69adc14908af0b2bf92b7a51ee9c
 }
 
 .photo {

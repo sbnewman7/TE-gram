@@ -43,7 +43,14 @@ export default {
       AuthService.getUsersByUsername(this.username)
         .then(response => {
           this.users = response.data;
+        })
+        .catch(error => {
+          const response = error.response;
         });
+      this.$store.commit("SET_SEARCHED_USER", this.users[0]);
+
+      console.log(this.$store.state.searchedUser);
+
 
       this.$router.push("/gallery");
       this.username = ""; // Clear the search textbox
