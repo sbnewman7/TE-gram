@@ -75,11 +75,6 @@ export default {
     console.log(this.user.id);
     console.log('User object:', this.changeUser);
   },
-<<<<<<< HEAD
-  computed:{
-    pictureUrl(){
-        return this.$store.state.pictureUrl;
-=======
 
   methods: {
     onUpload(url) {
@@ -111,7 +106,6 @@ export default {
       this.showEmailForm = false;
       this.showUserForm = false;
 
->>>>>>> 8c9d65e15f58e4851a7636ee35468d1446016aa0
     }
   }
 
