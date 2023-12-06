@@ -8,6 +8,7 @@
           in</router-link> &nbsp;|&nbsp;
         <router-link class="active-link" v-bind:to="{ name: 'user' }" v-if="$store.state.token != ''">User</router-link>
         &nbsp;|&nbsp;
+<router-link v-bind:to="{ name: 'photoupload' }">Photo Upload</router-link>&nbsp;|&nbsp;
         <router-link class="active-link" v-bind:to="{ name: 'logout' }"
           v-if="$store.state.token != ''">Logout</router-link>
       </section>
