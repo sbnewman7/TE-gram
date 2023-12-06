@@ -22,6 +22,7 @@
 
 <script>
 export default {
+
   methods: {
     search() {
       // TODO: pass <username> prop or param to gallery

@@ -10,7 +10,7 @@ export default {
     return axios.post('/register', user)
   },
 
-  getUser(username) {
+  getUsersByUsername(username) {
     return axios.get('/users?username=' + username)
   }
 
