@@ -17,7 +17,9 @@
   </template>
     
   <script>
-    
+    import PhotosGateway from "../services/PhotosGateway";
+
+
     export default {
         data() {
           return {
@@ -30,11 +32,11 @@
         methods: {
           submit() {
             let photo = {};
-            photo.userid = this.$store.state.user.id;
+            photo.userId = this.$store.state.user.id;
             photo.caption = this.caption;
-            photo.pic_url = this.imgUrl;
-
-            
+            photo.photoUrl = this.imgUrl;
+            console.log (photo);
+            PhotosGateway.addPhoto(photo);
         },
         home() {
           this.$router.push("/");

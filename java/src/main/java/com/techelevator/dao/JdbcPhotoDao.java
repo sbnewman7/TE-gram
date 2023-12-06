@@ -3,6 +3,7 @@ package com.techelevator.dao;
 import com.techelevator.exception.DaoException;
 import com.techelevator.model.Comment;
 import com.techelevator.model.Photo;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -74,5 +75,22 @@ public class JdbcPhotoDao implements PhotoDao {
 
         }
         return comments;
+    }
+
+    @Override
+    public int addPhoto(Photo photo) {
+        final String sql = "INSERT INTO photo_feed(user_id, date_time, caption, pic_url) " +
+                "VALUES (?, ?, ?, ?) RETURNING photo_id;";
+        int photoID = 0;
+        try {
+            photoID = jdbcTemplate.queryForObject(sql, int.class, photo.getUserId(), photo.getDatePublished(), photo.getCaption(), photo.getPhotoUrl());
+        }
+        catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        }
+        catch (DataIntegrityViolationException e) {
+                throw new DaoException("Data integrity violation");
+        }
+        return photoID;
     }
 }
