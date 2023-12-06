@@ -6,9 +6,10 @@
       </button>
       <div id="searchControl">
         <img src="../img/magnifyingGlass.png" alt="magnifying glass" id="magGlass">
-        <input type="text" id="search" maxlength="50" v-bind:value="username" v-on:keyup.enter="search">
+        <input type="text" id="search" maxlength="50" v-model="this.username" v-on:keyup.enter="search">
       </div>
       <section>
+        <h3>{{ this.username }}</h3>
         <router-link class="active-link" v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp;
         <router-link class="active-link" v-bind:to="{ name: 'login' }" v-if="this.$store.state.token == ''">Log
           in</router-link>
@@ -38,6 +39,7 @@ export default {
   },
   methods: {
     search() {
+      console.log("this is username: " + this.username);
       if (this.username === "") {
         alert("Please type in a valid username.");
         return;
