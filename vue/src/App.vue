@@ -6,7 +6,7 @@
       </button>
       <div id="searchControl">
         <img src="../img/magnifyingGlass.png" alt="magnifying glass" id="magGlass">
-        <input type="text" id="search" maxlength="50" v-on:keyup.enter="search">
+        <input type="text" id="search" maxlength="50" v-bind:value="username" v-on:keyup.enter="search">
       </div>
       <section>
         <router-link class="active-link" v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp;
@@ -21,25 +21,48 @@
 </template>
 
 <script>
-export default {
+import AuthService from "./services/AuthService";
 
-  methods: {
-    search() {
-      // TODO: pass <username> prop or param to gallery
-      // --- OR ---
-      // do a user lookup:
-      // if user not found:
-      //   alert("Please type in a valid username.");
-      // else
-      this.$router.push("/gallery");
-      //  and CLEAR search textbox
-      document.getElementById("search").value = "";
-    },
-    goToHome() {
-      this.$router.push({ name: 'home' });
-    },
+export default {
+  username: "",
+  users: [
+    // user: {
+    //   id: "",
+    //   username: "",
+    //   email: "",
+    //   picUrl: ""
+  ]
+},
+methods: {
+  search() {
+    if (this.undefined === "") {
+      alert("Please type in a valid username.");
+      return;
+    }
+    AuthService.getUsersByUsername(this.username)
+      .then(response => {
+        this.users = response.data;
+      })
+    // check if returned user
+    // pass user to gallery
+
+
+    // TODO: pass <username> prop or param to gallery
+    // --- OR ---
+    // do a user lookup:
+    // if user not found:
+    // else
+    this.$router.push("/gallery");
+    //  and CLEAR search textbox
   },
+  goToHome() {
+    this.$router.push({ name: 'home' });
+  },
+}
 };
+
+
+
 </script>
 
 <style>

@@ -69,7 +69,7 @@ public class AuthenticationController {
         }
     }
 
-    @PreAuthorize("isAuthenticated()")
+//    @PreAuthorize("isAuthenticated()")
     @GetMapping(path = "/users")
     public User getUserByUsername(@RequestParam String username) {
         try {
