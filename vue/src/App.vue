@@ -3,10 +3,13 @@
     <div id="nav">
       <img class="logo" :src="'https://www.diabetes.ie/wp-content/uploads/2021/05/logo-Placeholder.jpg'">
       <section>
-      <router-link class="active-link" v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp;
-      <router-link class="active-link" v-bind:to="{ name: 'login' }" v-if="$store.state.token == ''" >Log in</router-link> &nbsp;|&nbsp;
-      <router-link class="active-link" v-bind:to="{ name: 'user' }">User</router-link> &nbsp;|&nbsp;
-      <router-link class="active-link" v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link>
+        <router-link class="active-link" v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp;
+        <router-link class="active-link" v-bind:to="{ name: 'login' }" v-if="$store.state.token == ''">Log
+          in</router-link> &nbsp;|&nbsp;
+        <router-link class="active-link" v-bind:to="{ name: 'user' }" v-if="$store.state.token != ''">User</router-link>
+        &nbsp;|&nbsp;
+        <router-link class="active-link" v-bind:to="{ name: 'logout' }"
+          v-if="$store.state.token != ''">Logout</router-link>
       </section>
     </div>
     <router-view />
@@ -50,5 +53,4 @@ body {
 
 .logo {
   height: 5vh;
-}
-</style>
+}</style>

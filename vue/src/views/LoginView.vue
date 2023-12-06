@@ -115,6 +115,12 @@ label {
 
 #submit {
   padding: 5px 2vw 5px 2vw;
+  background-color: #9EB8D9;
+
+}
+
+#submit:hover {
+  background-color: #b8d0f0;
 
 }
 </style>

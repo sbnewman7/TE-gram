@@ -2,7 +2,7 @@
     <div class="cloud-upload">
         <button id="upload" v-on:click="upload">Upload Photo</button><br />
         <!-- Linking the  -->
-        <h3>Last uploaded image:</h3>
+        <h3>Pic to upload:</h3>
         <!-- this will bind the image tag to the imgUrl variable loaded below 
            in createUploadWidget -->
         <img id="cloud-image" v-bind:src="imgUrl">
@@ -48,6 +48,7 @@ export default {
 
                     this.imgUrl = result.info.url;
                     this.$store.commit('SET_PIC_URL', result.info.url);
+                    this.$emit('uploaded', this.imgUrl);
 
                     // There are other properties that might be useful, including:
                     // * result.info.height and result.info.width
@@ -79,10 +80,11 @@ export default {
 }
 
 #cloud-image {
-    max-width: 60%;
-    height: auto;
+    max-width: 40%;
+    max-height: 20rem;
     margin-bottom: 20px;
     border-radius: 5px;
+
 }
 
 #upload {
