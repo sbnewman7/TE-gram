@@ -92,8 +92,5 @@ export default {
     border: none;
     border-radius: 4px;
     padding: 5px 2vw 5px 2vw;
-    max-width: 60%;
-
-
 }
 </style>

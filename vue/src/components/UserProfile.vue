@@ -1,15 +1,9 @@
 <template>
   <div class="pic">
     <div class="currentPic">
-      <img v-on:click="switchCloudinaryForm" class="icon"
-        :src="'https://cdn1.iconfinder.com/data/icons/essential-21/128/Edit-512.png'">
-      <span>Current Profile Pic:</span>
-      <div v-if="pictureUrl" class="circular--landscape">
-        <img :src="pictureUrl">
-      </div>
-      <div v-if="!pictureUrl" class="circular--landscape">
-        <img :src="user.picUrl">
-      </div>
+      <button v-on:click="switchCloudinaryForm" class="edit">Edit</button>
+       <span>Current Profile Pic:</span>
+      <profile-picture :profilePic="user.picUrl" id="profile-picture"/>
     </div>
     <cloudinary-upload v-if="showCloudinaryForm" @uploaded="onUpload" v-model:pictureUrl="pictureUrl" />
 
@@ -20,17 +14,15 @@
     </div>
     <section>
       <div class="form-input-group">
-        <img v-on:click="switchUserForm" class="icon"
-          :src="'https://cdn1.iconfinder.com/data/icons/essential-21/128/Edit-512.png'">
-        <input v-if="showUserForm" type="text" id="username" v-model="changeUser.username" required autofocus />
+        <button v-on:click="switchUserForm" class="edit">Edit</button>
+        <input v-if="showUserForm" type="text" id="username" v-model="changeUser.username" required autofocus class="input" />
         <span v-if="!showUserForm">User Name: {{ user.username }}
         </span>
       </div>
       <div class="form-input-group">
-        <img v-on:click="switchEmailForm" class="icon"
-          :src="'https://cdn1.iconfinder.com/data/icons/essential-21/128/Edit-512.png'">
+        <button v-on:click="switchEmailForm" class="edit">Edit</button>
 
-        <input v-if="showEmailForm" type="text" id="email" v-model="changeUser.email" required autofocus />
+        <input v-if="showEmailForm" type="text" id="email" v-model="changeUser.email" required autofocus class="input" />
         <span v-if="!showEmailForm">User Email: {{ user.email }}</span>
 
       </div>
@@ -46,6 +38,7 @@
 
 import CloudinaryUpload from '../components/CloudinaryUpload.vue';
 import UserGateway from '../services/UserGateway';
+import ProfilePicture from '../components/ProfilePicture.vue'
 
 export default {
   data() {
@@ -67,7 +60,8 @@ export default {
     };
   },
   components: {
-    CloudinaryUpload
+    CloudinaryUpload,
+    ProfilePicture
   },
   props: ['user'],
   created() {
@@ -114,16 +108,35 @@ export default {
 </script>
 
 <style scoped>
-.circular--landscape {
-  display: inline-block;
-  justify-content: center;
-  width: 150px;
-  height: 150px;
-  overflow: hidden;
-  border-radius: 50%;
-  background-color: black;
-  border: #7C93C3 2px solid;
-  margin-left: 10px;
+
+*{
+  color: aliceblue;
+  font-size: 1.5rem;
+}
+
+#profile-picture{
+  height: 200px;
+  width: 200px;
+}
+
+.edit{
+  background-color: #7C93C3;
+  border: #6d87bf 2px solid;
+  border-radius: 3px;
+  margin-right: 6px;
+  padding: 2px 9px;
+}
+.input{
+  color:#5e75a8;
+  padding-left: 6px;
+  border-radius: 5px;
+  border: #6d87bf 2px solid;
+}
+
+.edit:hover{
+  background-color: #91a5cd;
+  border: #93a6d0 2px solid;
+
 }
 
 .icon {
@@ -156,12 +169,6 @@ section {
   padding: 10px;
 }
 
-.circular--landscape img {
-  width: auto;
-  display: flex;
-  height: 100%;
-}
-
 #submit {
   border: #7C93C3 3px solid;
   border-radius: 4px;
@@ -173,5 +180,11 @@ section {
 #submit:hover {
   background-color: #b8d0f0;
 
+}
+
+.form-input-group{
+  display: flex;
+  align-items: center;
+  margin: 8px
 }
 </style>
