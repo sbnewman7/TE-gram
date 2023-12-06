@@ -5,16 +5,16 @@
         <img class="logo" :src="'img/Telogo_2.gif'" alt="Home">
       </button>
       <div id="searchControl">
-        <img src="../img/magnifyingGlass.png" alt="magnifying glass" id="magGlass">
-        <input type="text" id="search" maxlength="50" v-model="this.username" v-on:keyup.enter="search">
+        <img src="../img/magnifyingGlass.png" alt="magnifying glass" id="magGlass" @click="search">
+        <input type="text" id="search" maxlength="50" v-model="username" v-on:keyup.enter="search">
       </div>
       <section>
-        <h3>{{ this.username }}</h3>
+        <h3>{{ username }}</h3>
         <router-link class="active-link" v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp;
-        <router-link class="active-link" v-bind:to="{ name: 'login' }" v-if="this.$store.state.token == ''">Log
+        <router-link class="active-link" v-bind:to="{ name: 'login' }" v-if="$store.state.token == ''">Log
           in</router-link>
         <router-link class="active-link" v-bind:to="{ name: 'logout' }"
-          v-if="this.$store.state.token != ''">Logout</router-link>
+          v-if="$store.state.token != ''">Logout</router-link>
       </section>
     </div>
     <router-view />
@@ -28,14 +28,8 @@ export default {
   data() {
     return {
       username: "",
-      users: [
-        // user: {
-        //   id: "",
-        //   username: "",
-        //   email: "",
-        //   picUrl: ""
-      ]
-    }
+      users: []
+    };
   },
   methods: {
     search() {
@@ -47,29 +41,17 @@ export default {
       AuthService.getUsersByUsername(this.username)
         .then(response => {
           this.users = response.data;
-        })
-
-
-      // check if returned user
-      // pass user to gallery
-
-      // TODO: pass <username> prop or param to gallery
-      // --- OR ---
-      // do a user lookup:
-      // if user not found:
-      // else
+        });
 
       this.$router.push("/gallery");
-
-      //  and CLEAR search textbox
+      this.username = ""; // Clear the search textbox
     },
 
     goToHome() {
       this.$router.push({ name: 'home' });
     }
   }
-}
-
+};
 </script>
 
 <style>
