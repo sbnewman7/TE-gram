@@ -1,6 +1,7 @@
 <template>
     <div>
-      <span>Profile Pic: </span> <img :src="pictureUrl">
+      <span>Profile Pic: </span> 
+      <img v-if="!pictureUrl" :src="user.picUrl"> <img v-else :src="pictureUrl">
       <cloudinary-upload v-model:pictureUrl="pictureUrl"/>
       <p>User Name: {{ user.username }}</p>
       <p>User Email: {{ user.email }}</p>
@@ -21,11 +22,6 @@ import CloudinaryUpload from '../components/CloudinaryUpload.vue';
     props: ['user'],
     created() {
     console.log('User object:', this.user);
-  },
-  methods: {
-    changePic(){
-        this.$store.state.pictureUrl;
-    }
   },
   computed:{
     pictureUrl(){
