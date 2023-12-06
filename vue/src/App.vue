@@ -24,44 +24,49 @@
 import AuthService from "./services/AuthService";
 
 export default {
-  username: "",
-  users: [
-    // user: {
-    //   id: "",
-    //   username: "",
-    //   email: "",
-    //   picUrl: ""
-  ]
-},
-methods: {
-  search() {
-    if (this.undefined === "") {
-      alert("Please type in a valid username.");
-      return;
+  data() {
+    return {
+      username: "",
+      users: [
+        // user: {
+        //   id: "",
+        //   username: "",
+        //   email: "",
+        //   picUrl: ""
+      ]
     }
-    AuthService.getUsersByUsername(this.username)
-      .then(response => {
-        this.users = response.data;
-      })
-    // check if returned user
-    // pass user to gallery
+  },
+  methods: {
+    search() {
+      if (this.username === "") {
+        alert("Please type in a valid username.");
+        return;
+      }
+      AuthService.getUsersByUsername(this.username)
+        .then(response => {
+          this.users = response.data;
+        })
 
 
-    // TODO: pass <username> prop or param to gallery
-    // --- OR ---
-    // do a user lookup:
-    // if user not found:
-    // else
-    this.$router.push("/gallery");
-    //  and CLEAR search textbox
-  },
-  goToHome() {
-    this.$router.push({ name: 'home' });
-  },
+      // check if returned user
+      // pass user to gallery
+
+      // TODO: pass <username> prop or param to gallery
+      // --- OR ---
+      // do a user lookup:
+      // if user not found:
+      // else
+
+      this.$router.push("/gallery");
+
+      //  and CLEAR search textbox
+    },
+
+    goToHome() {
+      this.$router.push({ name: 'home' });
+    }
+  }
 }
-};
-
-
 
 </script>
 
