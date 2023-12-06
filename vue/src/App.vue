@@ -9,7 +9,6 @@
         <input type="text" id="search" maxlength="50" v-model="username" v-on:keyup.enter="search">
       </div>
       <section>
-        <h3>{{ username }}</h3>
         <router-link class="active-link" v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp;
         <router-link class="active-link" v-bind:to="{ name: 'login' }" v-if="$store.state.token == ''">Log
           in</router-link> &nbsp;|&nbsp;
@@ -35,25 +34,29 @@ export default {
   },
   methods: {
     search() {
-      console.log("this is username: " + this.username);
       if (this.username === "") {
         alert("Please type in a valid username.");
         return;
       }
-      AuthService.getUsersByUsername(this.username)
+      AuthService
+        .getUsersByUsername(this.username)
         .then(response => {
-          this.users = response.data;
+          if (response.status == 200) {
+            this.users = response.data;
+            console.log(this.users);
+            this.$store.commit("SET_SEARCHED_USER", this.users);
+
+            this.$router.push("/gallery");
+            this.username = "";
+
+
+            console.log(this.$store.state.searchedUser);
+
+          }
         })
         .catch(error => {
-          const response = error.response;
+          alert("User not found.");
         });
-      this.$store.commit("SET_SEARCHED_USER", this.users[0]);
-
-      console.log(this.$store.state.searchedUser);
-
-
-      this.$router.push("/gallery");
-      this.username = ""; // Clear the search textbox
     },
 
     goToHome() {
