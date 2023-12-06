@@ -32,6 +32,7 @@
     <button v-if="showSubmit" id="submit" type="button" v-on:click.prevent="onSubmit">Submit</button>
     <button v-if="showUpdated" class="edit updated">Information Updated!</button>
     <button v-if="showError" class="edit updated error">There was an error, please try again later.</button>
+    <button v-if="showRequired" class="edit updated error">Username and email required</button>
 
   </form>
 </template>
@@ -60,7 +61,9 @@ export default {
       showSubmit: false,
       showCloudinaryForm: false,
       showUpdated: false,
-      showError: false    };
+      showError: false,
+      showRequired: false   
+     };
   },
   components: {
     CloudinaryUpload,
@@ -94,6 +97,7 @@ export default {
       else if (!boo2 && !boo3) this.showSubmit = false;
     },
     onSubmit() {
+      if(this.changeUser.email&&this.changeUser.username){
       this.$store.commit('UPDATE_USER', this.changeUser);
       console.log(this.changeUser);
       this.changeUser.picUrl = this.pictureUrl || this.changeUser.picUrl;
@@ -117,8 +121,13 @@ export default {
       this.showEmailForm = false;
       this.showUserForm = false;
       this.showSubmit = false;
-      
-      
+    }
+      else{
+        this.showRequired = true;
+        window.setTimeout(() => {
+      this.showRequired = false;
+    }, 2500)
+      }
 
     }
   }
