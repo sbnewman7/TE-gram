@@ -30,6 +30,8 @@
 
     <!-- button changed from type "submit" to type "button" to prevent cloudinary component from triggering submit -->
     <button v-if="showSubmit" id="submit" type="button" v-on:click.prevent="onSubmit">Submit</button>
+    <button v-if="showUpdated" class="edit updated">Information Updated!</button>
+    <button v-if="showError" class="edit updated error">There was an error, please try again later.</button>
 
   </form>
 </template>
@@ -56,8 +58,9 @@ export default {
       showUserForm: false,
       showEmailForm: false,
       showSubmit: false,
-      showCloudinaryForm: false
-    };
+      showCloudinaryForm: false,
+      showUpdated: false,
+      showError: false    };
   },
   components: {
     CloudinaryUpload,
@@ -73,7 +76,6 @@ export default {
   methods: {
     onUpload(url) {
       this.changeUser.picUrl = url;
-      alert(url);
     },
     switchUserForm() {
       this.showUserForm = !this.showUserForm;
@@ -96,9 +98,27 @@ export default {
       console.log(this.changeUser);
       this.changeUser.picUrl = this.pictureUrl || this.changeUser.picUrl;
       this.changeUser.id = this.user.id;
-      UserGateway.updateUser(this.changeUser);
+      UserGateway.updateUser(this.changeUser).then(response => {
+        if (response.status == 200){
+          this.showUpdated = true;
+          window.setTimeout(() => {
+      this.showUpdated = false;
+    }, 2500);
+        }
+      }).catch(error => {
+        if(error.response||error.request){
+          this.showUpdated = false;
+          this.showError = true;
+          window.setTimeout(() => {
+      this.showError = false;
+    }, 4000)
+        }
+      });
       this.showEmailForm = false;
       this.showUserForm = false;
+      this.showSubmit = false;
+      
+      
 
     }
   }
@@ -186,5 +206,25 @@ section {
   display: flex;
   align-items: center;
   margin: 8px
+}
+
+.updated{
+  border:none;
+  position: absolute;
+    top: 44%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    width: 100%;
+    text-align: center;
+  background-color: green;
+}
+
+.error{
+  background-color: rgb(225, 42, 42);
 }
 </style>
