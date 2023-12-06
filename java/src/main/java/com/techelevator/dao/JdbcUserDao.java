@@ -89,6 +89,20 @@ public class JdbcUserDao implements UserDao {
         }
         return newUser;
     }
+    public boolean updateUser(User user) {
+        final String sql = "UPDATE users\n" +
+                "SET username = ?,email= ?, profile_pic_url= ?\n" +
+                "WHERE user_id = ?;";
+        int rows;
+        try {
+            rows = jdbcTemplate.update(sql, user.getUsername(), user.getEmail(), user.getPicUrl(), user.getId());
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
+        }
+        return (rows > 0);
+    }
 
     private User mapRowToUser(SqlRowSet rs) {
         User user = new User();

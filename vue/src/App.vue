@@ -12,7 +12,9 @@
         <h3>{{ username }}</h3>
         <router-link class="active-link" v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp;
         <router-link class="active-link" v-bind:to="{ name: 'login' }" v-if="$store.state.token == ''">Log
-          in</router-link>
+          in</router-link> &nbsp;|&nbsp;
+        <router-link class="active-link" v-bind:to="{ name: 'user' }" v-if="$store.state.token != ''">User</router-link>
+        &nbsp;|&nbsp;
         <router-link class="active-link" v-bind:to="{ name: 'logout' }"
           v-if="$store.state.token != ''">Logout</router-link>
       </section>
@@ -113,3 +115,4 @@ body {
   margin: 6px 10px 6px 10px;
 }
 </style>
+

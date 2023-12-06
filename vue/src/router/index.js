@@ -7,6 +7,7 @@ import LoginView from '../views/LoginView.vue';
 import LogoutView from '../views/LogoutView.vue';
 import RegisterView from '../views/RegisterView.vue';
 import GalleryView from '../views/GalleryView.vue';
+import UserView from '../views/UserView.vue';
 
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -50,12 +51,20 @@ const routes = [
     }
   },
   {
+<<<<<<< HEAD
     // path: "/users/:id/gallery",
     path: "/gallery",
     name: "gallery",
     component: GalleryView,
     meta: {
       requiresAuth: false
+=======
+    path: '/user/{id}',
+    name: 'user',
+    component: UserView,
+    meta: {
+      requiresAuth: true
+>>>>>>> 0bac6efb072d69adc14908af0b2bf92b7a51ee9c
     }
   }
 ];

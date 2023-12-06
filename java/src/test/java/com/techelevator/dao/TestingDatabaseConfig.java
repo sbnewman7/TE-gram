@@ -41,8 +41,8 @@ public class TestingDatabaseConfig {
             adminDataSource.setUsername("postgres");
             adminDataSource.setPassword("postgres1");
             adminJdbcTemplate = new JdbcTemplate(adminDataSource);
-//            adminJdbcTemplate.update("DROP DATABASE IF EXISTS \"" + DB_NAME + "\";");
-//            adminJdbcTemplate.update("CREATE DATABASE \"" + DB_NAME + "\";");
+            adminJdbcTemplate.update("DROP DATABASE IF EXISTS \"" + DB_NAME + "\";");
+            adminJdbcTemplate.update("CREATE DATABASE \"" + DB_NAME + "\";");
         }
     }
 
@@ -65,7 +65,7 @@ public class TestingDatabaseConfig {
         return ds;
     }
 
-//    @PreDestroy
+    @PreDestroy
     public void cleanup() throws SQLException {
         if (adminDataSource != null) {
             adminJdbcTemplate.update("DROP DATABASE \"" + DB_NAME + "\";");

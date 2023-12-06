@@ -2,6 +2,7 @@ package com.techelevator.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.validation.constraints.NotBlank;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -9,10 +10,11 @@ import java.util.Set;
 public class User {
 
    private int id;
+   @NotBlank
    private String username;
    @JsonIgnore
    private String password;
-
+   @NotBlank
    private String email;
 
    private String picUrl;

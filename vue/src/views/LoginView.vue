@@ -46,6 +46,7 @@ export default {
           if (response.status == 200) {
             this.$store.commit("SET_AUTH_TOKEN", response.data.token);
             this.$store.commit("SET_USER", response.data.user);
+            console.log(response.data.user);
             this.$router.push("/");
           }
         })
@@ -114,6 +115,12 @@ label {
 
 #submit {
   padding: 5px 2vw 5px 2vw;
+  background-color: #9EB8D9;
+
+}
+
+#submit:hover {
+  background-color: #b8d0f0;
 
 }
 </style>
