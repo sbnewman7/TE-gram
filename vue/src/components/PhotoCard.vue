@@ -6,9 +6,9 @@
                 src="https://upload.wikimedia.org/wikipedia/commons/3/35/Red-simple-heart-symbol-only.png" alt="">
             <img v-if="!liked" v-on:click="like" class="heart-dark"
                 src="https://upload.wikimedia.org/wikipedia/commons/3/35/Red-simple-heart-symbol-only.png" alt="">
+            <p class="likeCount">{{ likeCount }}</p>
             <h2>{{ photo.caption }}</h2>
         </div>
-
         <div v-if="hasComments">
             <span>
                 {{ photo.comments[0].commentBody }}
@@ -23,23 +23,21 @@ import LikesGateway from '../services/LikesGateway';
 export default {
     data() {
         return {
-            liked: false
+            liked: false,
+            likeCount: 0
         }
     },
     created() {
         if (this.$store.state.token !== '') {
-            console.log(this.$store.state.user.id);
             LikesGateway.getLiked(this.$store.state.user.id, this.photo.id)
                 .then((response) => {
-                    console.log(response.data)
                     if (response.data) this.like();
                 });
-            // console.log(isLiked);
-            // if (isLiked) {
-            //     this.like();
-            // } else {
-            //     this.unlike();
-            // }
+            LikesGateway.getLikeCount(this.photo.id)
+                .then((response) => {
+                    if (response.data)
+                        this.likeCount = response.data;
+                })
         }
     },
     props: ['photo'],
@@ -52,6 +50,7 @@ export default {
         like() {
             if (this.$store.state.token !== '') {
                 this.liked = true;
+                LikesGateway.addLike(this.photo.id, this.$store.state.user.id)
             }
         },
         unlike() {
@@ -89,6 +88,10 @@ div {
     max-width: 50px;
     opacity: 30%;
     border: none;
+}
+
+.likeCount {
+    justify-content: start;
 }
 
 .like-caption {

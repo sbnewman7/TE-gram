@@ -13,8 +13,16 @@ public class LikesController {
         this.likeDao = likeDao;
     }
 
-    @GetMapping("/likes/{userId}/{photoId}")
+    @GetMapping("/liked/{userId}/{photoId}")
     public boolean getLiked(@PathVariable int userId, @PathVariable int photoId ){
         return likeDao.getUserLiked(userId, photoId);
+    }
+    @GetMapping("likes/{photoId}")
+    public int getLikeCount(@PathVariable int photoId){
+        return likeDao.getLikeCount(photoId);
+    }
+    @PostMapping("/likes/{userId}/{photoId}")
+    public void addLike(@PathVariable int userId, @PathVariable int photoId){
+        likeDao.addLike(userId, photoId);
     }
 }
