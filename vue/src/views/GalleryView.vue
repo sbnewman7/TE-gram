@@ -37,6 +37,9 @@ export default {
             .then(response => {
                 this.photos = response.data;
             })
+    },
+    beforeRouteUpdate() {
+        console.log("in beforeRouteUpdate event");
     }
 };
 </script>
