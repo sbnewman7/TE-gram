@@ -13,7 +13,6 @@ export function createStore(currentToken, currentUser) {
 
       searchedUser: {}
 
-
     },
     mutations: {
       SET_AUTH_TOKEN(state, token) {

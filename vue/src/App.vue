@@ -43,19 +43,19 @@ export default {
         .then(response => {
           if (response.status == 200) {
             this.users = response.data;
-            console.log(this.users);
+
+            // console.log(this.users);
             this.$store.commit("SET_SEARCHED_USER", this.users);
+            // console.log(this.$store.state.searchedUser);
 
-            this.$router.push("/gallery");
+            // this.$router.push("/gallery");
+            this.$router.push(`/users/${this.users.userId}/photos`)
             this.username = "";
-
-
-            console.log(this.$store.state.searchedUser);
 
           }
         })
         .catch(error => {
-          alert("User not found.");
+          alert("User not found. " + error);
         });
     },
 

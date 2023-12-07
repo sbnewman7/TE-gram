@@ -11,7 +11,6 @@
 import UserDetails from "../components/UserDetails.vue";
 import PhotoCard from "../components/PhotoCard.vue"
 import photoService from "../services/PhotosGateway"
-// import AuthService from "./services/AuthService";
 
 export default {
     name: "Gallery",
@@ -21,11 +20,14 @@ export default {
     },
     data() {
         return {
+            users: [],
             photos: []
         }
     },
     created() {
-        photoService.getPhotosByUserId("1")
+        // console.log(this.$store.state.searchedUser.id);
+        photoService
+            .getPhotosByUserId(this.$store.state.searchedUser.id)
             .then(response => {
                 this.photos = response.data;
             })

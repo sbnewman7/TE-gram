@@ -1,6 +1,6 @@
 <template>
     <div class="info">
-        <img v-bind:src="user.picUrl" alt="user photo">
+        <img v-bind:src="user.picUrl" alt="user photo" v-if="photoExists">
         <div>
             <h1>{{ user.name }}</h1>
             <h2>{{ user.email }}</h2>
@@ -13,11 +13,15 @@ export default {
     data() {
         return {
             user: {
-                name: "Joe Mama",
-                email: "jm@gmail.com",
-                picUrl: "https://cdn.pixabay.com/photo/2021/11/30/11/04/login-6835087_640.png"
+                name: this.$store.state.searchedUser.username,
+                email: this.$store.state.searchedUser.email,
+                picUrl: this.$store.state.searchedUser.picUrl
             },
-
+        }
+    },
+    computed: {
+        photoExists() {
+            return this.user.picUrl && this.user.picUrl.length > 0;
         }
     }
 };
