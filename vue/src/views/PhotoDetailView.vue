@@ -9,7 +9,9 @@
     <section id="left-half">
       <div id="comment" v-for="comment in photo.comments" :key="comment.id">
         <h3>{{ comment.commentBody }}</h3>
-        <p>{{ comment.timestamp }}</p>
+        <!-- <p>{{ comment.timestamp }} - {{ comment.userId }}</p> -->
+        <p>{{ comment.timestamp }} - {{ getUserById(comment.userId) }}</p>
+
       </div>
     </section>
   </div>
@@ -17,17 +19,33 @@
 
 <script>
 import PhotosGateway from "../services/PhotosGateway";
+import UserGateway from "../services/UserGateway";
 
 export default {
   data() {
     return {
       photo: {},
+      comment: {},
+      user: ""
     };
   },
+  methods: {
+    getUserById(userId) {
+      UserGateway
+        .getUserById(userId)
+        .then((response) => {
+          console.log(response.data.username);
+          this.user = response.data.username;
+        })
+      return this.user;
+    }
+  },
   created() {
-    PhotosGateway.getPhotoByPhotoId(this.$route.params.id).then((response) => {
-      this.photo = response.data;
-    });
+    PhotosGateway
+      .getPhotoByPhotoId(this.$route.params.id)
+      .then((response) => {
+        this.photo = response.data;
+      });
   },
 };
 </script>
