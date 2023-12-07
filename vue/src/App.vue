@@ -11,7 +11,8 @@
       <section>
         <router-link class="active-link" v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp;
         <router-link class="active-link" v-bind:to="{ name: 'login' }" v-if="$store.state.token == ''">Log in
-        </router-link> &nbsp;|&nbsp;
+        </router-link>
+        <!-- &nbsp;|&nbsp; -->
         <router-link class="active-link" v-bind:to="{ name: 'user', params: this.$store.state.user.id }"
           v-if="$store.state.token != ''">User</router-link> &nbsp;|&nbsp;
         <router-link class="active-link" v-bind:to="{ name: 'photoupload' }">Photo Upload</router-link>&nbsp;|&nbsp;
@@ -124,4 +125,5 @@ body {
 #search {
   width: 20vw;
   margin: 6px 10px 6px 10px;
-}</style>
+}
+</style>
