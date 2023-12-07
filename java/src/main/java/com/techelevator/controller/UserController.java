@@ -11,7 +11,6 @@ import java.security.Principal;
 
 @RestController
 @CrossOrigin
-@PreAuthorize("isAuthenticated()")
 public class UserController {
 
     private final UserDao userDao;

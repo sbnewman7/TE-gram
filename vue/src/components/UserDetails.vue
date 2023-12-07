@@ -1,6 +1,8 @@
 <template>
     <div class="info">
-        <img v-bind:src="user.picUrl" alt="user photo" v-if="photoExists">
+        <profile-picture :profilePic="user.picUrl" id="profile-picture" v-if="photoExists" class="profile-picture" />
+    
+        <img v-else :src="'https://media.istockphoto.com/id/1341046662/vector/picture-profile-icon-human-or-people-sign-and-symbol-for-template-design.jpg?s=612x612&w=0&k=20&c=A7z3OK0fElK3tFntKObma-3a7PyO8_2xxW0jtmjzT78='" class="profile-picture">
         <div>
             <h1>{{ user.name }}</h1>
             <h2>{{ user.email }}</h2>
@@ -9,7 +11,13 @@
 </template>
 
 <script>
+
+import ProfilePicture from './ProfilePicture.vue';
+
 export default {
+    components:{
+        ProfilePicture
+    },
     data() {
         return {
             userId: this.$route.params.id,
@@ -46,10 +54,10 @@ h2 {
     color: #555;
 }
 
-img {
-    max-width: 200px;
-    /* height: auto; */
-    border-radius: 50%;
-    margin-right: 40px;
+.profile-picture {
+  height: 200px;
+  width: 200px;
+  margin-right: 40px;
+  border-radius: 50%;
 }
 </style>
