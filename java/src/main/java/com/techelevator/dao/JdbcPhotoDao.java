@@ -77,6 +77,32 @@ public class JdbcPhotoDao implements PhotoDao {
     }
 
     @Override
+    public Photo getPhotoByPhotoId(int photoId) {
+
+        final String sql = "SELECT caption, pic_url FROM photo_feed WHERE photo_id = ?";
+
+        final Photo photo = new Photo();
+        try {
+
+            final SqlRowSet results = this.jdbcTemplate.queryForRowSet(sql, photoId);
+            if (results.next()) {
+
+                photo.setId(photoId);
+                photo.setCaption(results.getString("caption"));
+                photo.setPhotoUrl(results.getString("pic_url"));
+                photo.setDatePublished(LocalDateTime.now());
+                photo.setComments(getCommentsByPhotoId(photoId));
+
+
+            }
+
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        }
+        return photo;
+    }
+
+    @Override
     public ArrayList<Comment> getCommentsByPhotoId(int id) {
 
         final ArrayList<Comment> comments = new ArrayList<>();
@@ -111,12 +137,10 @@ public class JdbcPhotoDao implements PhotoDao {
         int photoID = 0;
         try {
             photoID = jdbcTemplate.queryForObject(sql, int.class, photo.getUserId(), photo.getDatePublished(), photo.getCaption(), photo.getPhotoUrl());
-        }
-        catch (CannotGetJdbcConnectionException e) {
+        } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
-        }
-        catch (DataIntegrityViolationException e) {
-                throw new DaoException("Data integrity violation");
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation");
         }
         return photoID;
     }

@@ -12,6 +12,8 @@ public interface PhotoDao {
 
     List<Comment> getCommentsByPhotoId(int id);
 
+    Photo getPhotoByPhotoId(int photoId);
+
     int addPhoto (Photo photo);
 
 }

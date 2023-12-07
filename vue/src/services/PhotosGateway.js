@@ -12,5 +12,8 @@ export default {
 
     addPhoto(photo) {
         return axios.post("/photos", photo);
+    },
+    getPhotoByPhotoId(photoId) {
+        return axios.get(`/photos/${photoId}`);
     }
 }
