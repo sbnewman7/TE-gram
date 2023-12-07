@@ -7,9 +7,10 @@
       <h1>{{ photo.caption }}</h1>
     </section>
     <section id="left-half">
-      <h3 v-for="comment in photo.comments" :key="comment.id">
-        {{ comment.commentBody }}
-      </h3>
+      <div id="comment" v-for="comment in photo.comments" :key="comment.id">
+        <h3>{{ comment.commentBody }}</h3>
+        <p>{{ comment.timestamp }}</p>
+      </div>
     </section>
   </div>
 </template>
@@ -42,22 +43,34 @@ section {
   border: #7c93c3 15px solid;
   border-radius: 5px;
 }
+
 .container {
   display: flex;
   margin: 15px;
 }
 
-h3{
-    background-color: #9EB8D9;
-    padding: 15px;
-    width: 37vw;
-    margin: 7px;
+#comment {
+  background-color: #9EB8D9;
+  width: 37vw;
+  margin: 7px;
 }
+
+#comment>h3 {
+  margin: 0;
+  padding: 10px 0 8px 15px;
+}
+
+#comment>p {
+  color: white;
+  font-size: 12px;
+  margin: 0;
+  padding: 0 0 5px 15px;
+}
+
 .photo {
   width: 100%;
   height: 100%;
   object-fit: cover;
   overflow: hidden;
 }
-
 </style>

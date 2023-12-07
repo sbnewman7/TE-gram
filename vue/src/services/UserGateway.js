@@ -6,7 +6,7 @@ export default {
         return axios.put(`/users/${user.id}`, user);
     },
     getUser(username) {
-        return axios.get(`/users/${username}`);
+        return axios.get(`/user/${username}`);
     }
 
 }
