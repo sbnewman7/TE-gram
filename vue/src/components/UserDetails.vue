@@ -12,6 +12,7 @@
 export default {
     data() {
         return {
+            userId: this.$route.params.id,
             user: {
                 name: this.$store.state.searchedUser.username,
                 email: this.$store.state.searchedUser.email,

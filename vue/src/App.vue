@@ -49,7 +49,7 @@ export default {
             // console.log(this.$store.state.searchedUser);
 
             // this.$router.push("/gallery");
-            this.$router.push(`/users/${this.users.userId}/photos`)
+            this.$router.push(`/users/${this.users.id}/photos`)
             this.username = "";
 
           }
@@ -125,4 +125,3 @@ body {
   margin: 6px 10px 6px 10px;
 }
 </style>
-

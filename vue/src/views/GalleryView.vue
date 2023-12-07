@@ -13,6 +13,8 @@ import PhotoCard from "../components/PhotoCard.vue"
 import photoService from "../services/PhotosGateway"
 
 export default {
+    // import AuthService from "./services/AuthService";
+
     name: "Gallery",
     components: {
         UserDetails,
@@ -25,7 +27,11 @@ export default {
         }
     },
     created() {
-        // console.log(this.$store.state.searchedUser.id);
+        if (this.$route.params.id == this.$store.state.searchedUser.id) {
+            console.log("ids match: param.id=" + this.$route.params.id + ", searchedUser.id=" + this.$store.state.searchedUser.id);
+        } else {
+            console.log("ids don't match: param.id=" + this.$route.params.id + ", searchedUser.id=" + this.$store.state.searchedUser.id);
+        }
         photoService
             .getPhotosByUserId(this.$store.state.searchedUser.id)
             .then(response => {
