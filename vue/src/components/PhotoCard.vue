@@ -1,5 +1,5 @@
 <template>
-    <article>
+    <article @click="goToDetails">
         <img :src="photo.photoUrl">
         <h2>{{ photo.caption }}</h2>
         <div v-if="hasComments">
@@ -17,6 +17,11 @@ export default {
     computed: {
         hasComments() {
             return this.photo.comments && this.photo.comments.length != 0;
+        }
+    },
+    methods: {
+        goToDetails() {
+            this.$router.push('/photo/'+this.photo.id)
         }
     }
 
