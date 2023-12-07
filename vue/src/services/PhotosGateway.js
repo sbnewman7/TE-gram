@@ -7,6 +7,6 @@ export default {
     },
 
     addPhoto(photo) {
-        return axios.post("/photos");
+        return axios.post("/photos", photo);
     }
 }

@@ -2,7 +2,9 @@ package com.techelevator.controller;
 
 import com.techelevator.dao.PhotoDao;
 import com.techelevator.model.Photo;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -23,9 +25,11 @@ public class PhotosController {
     }
 
     @PostMapping("/photos")
-    public void addphoto(@RequestBody Photo photo) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public int addPhoto(@RequestBody Photo photo) {
         photo.setDatePublished(LocalDateTime.now());
-        photoDao.addPhoto(photo);
+        return photoDao.addPhoto(photo);
+
     }
 
 }
