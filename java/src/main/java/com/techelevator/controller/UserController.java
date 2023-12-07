@@ -46,13 +46,13 @@ public class UserController {
         return retrieveUser;
     }
 
-//    @GetMapping(path = "/users/{id}")
-//    public User getUserById(@PathVariable int id) {
-//        User user = this.userDao.getUserById(id);
-//        if (user == null) {
-//            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User NOT found");
-//        }
-//        return user;
-//    }
+    @GetMapping(path = "/user/{id}")
+    public User getUserById(@PathVariable int id) {
+        User user = this.userDao.getUserById(id);
+        if (user == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User NOT found");
+        }
+        return user;
+    }
 
 }
