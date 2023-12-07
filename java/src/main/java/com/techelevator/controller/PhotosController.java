@@ -32,4 +32,11 @@ public class PhotosController {
 
     }
 
+    @GetMapping("/users/{userId}/photos")
+//    public List<Photo> getPhotosByUserId(@RequestParam int userId) {
+    public List<Photo> getPhotosByUserId(@PathVariable int userId) {
+        return photoDao.getPhotosByUserId(userId);
+    }
+
+
 }

@@ -1,7 +1,13 @@
 <template>
   <div id="capstone-app">
     <div id="nav">
-      <img class="logo" :src="'https://www.diabetes.ie/wp-content/uploads/2021/05/logo-Placeholder.jpg'">
+      <button @click="goToHome" class="logo-button">
+        <img class="logo" :src="'img/Telogo_2.gif'" alt="Home">
+      </button>
+      <div id="searchControl">
+        <img src="../img/magnifyingGlass.png" alt="magnifying glass" id="magGlass" @click="search">
+        <input type="text" id="search" maxlength="50" v-model="username" v-on:keyup.enter="search">
+      </div>
       <section>
         <router-link class="active-link" v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp;
         <router-link class="active-link" v-bind:to="{ name: 'login' }" v-if="$store.state.token == ''">Log
@@ -17,8 +23,49 @@
   </div>
 </template>
 
+<script>
+import AuthService from "./services/AuthService";
 
+export default {
+  data() {
+    return {
+      username: "",
+      users: []
+    };
+  },
+  methods: {
+    search() {
+      if (this.username === "") {
+        alert("Please type in a valid username.");
+        return;
+      }
+      AuthService
+        .getUsersByUsername(this.username)
+        .then(response => {
+          if (response.status == 200) {
+            this.users = response.data;
 
+            // console.log(this.users);
+            this.$store.commit("SET_SEARCHED_USER", this.users);
+            // console.log(this.$store.state.searchedUser);
+
+            // this.$router.push("/gallery");
+            this.$router.push(`/users/${this.users.id}/photos`)
+            this.username = "";
+
+          }
+        })
+        .catch(error => {
+          alert("User not found. " + error);
+        });
+    },
+
+    goToHome() {
+      this.$router.push({ name: 'home' });
+    }
+  }
+};
+</script>
 
 <style>
 * {
@@ -27,12 +74,12 @@
 
 .active-link {
   text-decoration: none;
-  color: #ffffff;
+  color: #FFFFFF;
   font-weight: bold;
 }
 
 .active-link:hover {
-  color: #abb9c8;
+  color: #ABB9C8;
 }
 
 body {
@@ -52,6 +99,30 @@ body {
   padding: 0px 3vh 0px 3vh;
 }
 
+.logo-button {
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+}
+
 .logo {
-  height: 5vh;
-}</style>
+  height: 7vh;
+}
+
+#searchControl {
+  display: flex;
+  justify-content: center;
+}
+
+#magGlass {
+  width: 25px;
+  height: 25px;
+  margin-top: 4px;
+}
+
+#search {
+  width: 20vw;
+  margin: 6px 10px 6px 10px;
+}
+</style>

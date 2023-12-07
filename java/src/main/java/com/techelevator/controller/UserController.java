@@ -36,6 +36,24 @@ public class UserController {
         userToUpdate.setEmail(updatedUser.getEmail());
         userToUpdate.setPicUrl(updatedUser.getPicUrl());
         return this.userDao.updateUser(userToUpdate);
-
     }
+
+    @RequestMapping(path = "/users/{username}", method = RequestMethod.GET)
+    public User getUser(@PathVariable String username) {
+    User retrieveUser = this.userDao.getUserByUsername(username);
+    if (retrieveUser == null) {
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User NOT found");
+    }
+        return retrieveUser;
+    }
+
+//    @GetMapping(path = "/users/{id}")
+//    public User getUserById(@PathVariable int id) {
+//        User user = this.userDao.getUserById(id);
+//        if (user == null) {
+//            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User NOT found");
+//        }
+//        return user;
+//    }
+
 }

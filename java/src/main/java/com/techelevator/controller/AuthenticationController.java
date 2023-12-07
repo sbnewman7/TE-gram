@@ -7,6 +7,7 @@ import com.techelevator.model.*;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
@@ -68,5 +69,18 @@ public class AuthenticationController {
         }
     }
 
-}
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping(path = "/users")
+    public User getUserByUsername(@RequestParam String username) {
+        try {
+            User user = userDao.getUserByUsername(username);
+            if (user == null) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User " + username + " not found.");
+            }
+            return user;
+        } catch (DaoException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "User lookup for " + username + "  failed.");
+        }
+    }
 
+}

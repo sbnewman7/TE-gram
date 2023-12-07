@@ -6,6 +6,7 @@ import HomeView from '../views/HomeView.vue';
 import LoginView from '../views/LoginView.vue';
 import LogoutView from '../views/LogoutView.vue';
 import RegisterView from '../views/RegisterView.vue';
+import GalleryView from '../views/GalleryView.vue';
 import UserView from '../views/UserView.vue';
 import PhotoUploadView from '../views/PhotoUploadView.vue';
 
@@ -46,6 +47,15 @@ const routes = [
     path: "/register",
     name: "register",
     component: RegisterView,
+    meta: {
+      requiresAuth: false
+    }
+  },
+  {
+    path: "/users/:id/photos",
+    // path: "/gallery",
+    name: "gallery",
+    component: GalleryView,
     meta: {
       requiresAuth: false
     }

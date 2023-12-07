@@ -8,6 +8,8 @@ import java.util.List;
 public interface PhotoDao {
     List<Photo> getAll();
 
+    List<Photo> getPhotosByUserId(int userId);
+
     List<Comment> getCommentsByPhotoId(int id);
 
     int addPhoto (Photo photo);
