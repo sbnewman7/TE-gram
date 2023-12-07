@@ -50,12 +50,14 @@ export default {
         like() {
             if (this.$store.state.token !== '') {
                 this.liked = true;
+                this.likeCount++;
                 LikesGateway.addLike(this.photo.id, this.$store.state.user.id)
             }
         },
         unlike() {
             if (this.$store.state.token !== '') {
                 this.liked = false;
+                this.likeCount--;
                 LikesGateway.removeLike(this.photo.id, this.$store.state.user.id)
             }
 
