@@ -2,8 +2,8 @@
   <div class="pic">
     <div class="currentPic">
       <button v-on:click="switchCloudinaryForm" class="edit">Edit</button>
-       <span>Current Profile Pic:</span>
-      <profile-picture :profilePic="user.picUrl" id="profile-picture"/>
+      <span>Current Profile Pic:</span>
+      <profile-picture :profilePic="user.picUrl" id="profile-picture" />
     </div>
     <cloudinary-upload v-if="showCloudinaryForm" @uploaded="onUpload" v-model:pictureUrl="pictureUrl" />
 
@@ -15,7 +15,8 @@
     <section>
       <div class="form-input-group">
         <button v-on:click="switchUserForm" class="edit">Edit</button>
-        <input v-if="showUserForm" type="text" id="username" v-model="changeUser.username" required autofocus class="input" />
+        <input v-if="showUserForm" type="text" id="username" v-model="changeUser.username" required autofocus
+          class="input" />
         <span v-if="!showUserForm">User Name: {{ user.username }}
         </span>
       </div>
@@ -62,8 +63,8 @@ export default {
       showCloudinaryForm: false,
       showUpdated: false,
       showError: false,
-      showRequired: false   
-     };
+      showRequired: false
+    };
   },
   components: {
     CloudinaryUpload,
@@ -72,8 +73,8 @@ export default {
   props: ['user'],
   created() {
     this.$store.commit('SET_PIC_URL', null);
-    console.log(this.user.id);
-    console.log('User object:', this.changeUser);
+    // console.log(this.user.id);
+    // console.log('User object:', this.changeUser);
   },
 
   methods: {
@@ -97,36 +98,36 @@ export default {
       else if (!boo2 && !boo3) this.showSubmit = false;
     },
     onSubmit() {
-      if(this.changeUser.email&&this.changeUser.username){
-      this.$store.commit('UPDATE_USER', this.changeUser);
-      console.log(this.changeUser);
-      this.changeUser.picUrl = this.pictureUrl || this.changeUser.picUrl;
-      this.changeUser.id = this.user.id;
-      UserGateway.updateUser(this.changeUser).then(response => {
-        if (response.status == 200){
-          this.showUpdated = true;
-          window.setTimeout(() => {
-      this.showUpdated = false;
-    }, 2500);
-        }
-      }).catch(error => {
-        if(error.response||error.request){
-          this.showUpdated = false;
-          this.showError = true;
-          window.setTimeout(() => {
-      this.showError = false;
-    }, 4000)
-        }
-      });
-      this.showEmailForm = false;
-      this.showUserForm = false;
-      this.showSubmit = false;
-    }
-      else{
+      if (this.changeUser.email && this.changeUser.username) {
+        this.$store.commit('UPDATE_USER', this.changeUser);
+        // console.log(this.changeUser);
+        this.changeUser.picUrl = this.pictureUrl || this.changeUser.picUrl;
+        this.changeUser.id = this.user.id;
+        UserGateway.updateUser(this.changeUser).then(response => {
+          if (response.status == 200) {
+            this.showUpdated = true;
+            window.setTimeout(() => {
+              this.showUpdated = false;
+            }, 2500);
+          }
+        }).catch(error => {
+          if (error.response || error.request) {
+            this.showUpdated = false;
+            this.showError = true;
+            window.setTimeout(() => {
+              this.showError = false;
+            }, 4000)
+          }
+        });
+        this.showEmailForm = false;
+        this.showUserForm = false;
+        this.showSubmit = false;
+      }
+      else {
         this.showRequired = true;
         window.setTimeout(() => {
-      this.showRequired = false;
-    }, 2500)
+          this.showRequired = false;
+        }, 2500)
       }
 
     }
@@ -137,32 +138,32 @@ export default {
 </script>
 
 <style scoped>
-
-*{
+* {
   color: aliceblue;
   font-size: 1.5rem;
 }
 
-#profile-picture{
+#profile-picture {
   height: 200px;
   width: 200px;
 }
 
-.edit{
+.edit {
   background-color: #7C93C3;
   border: #6d87bf 2px solid;
   border-radius: 3px;
   margin-right: 6px;
   padding: 2px 9px;
 }
-.input{
-  color:#5e75a8;
+
+.input {
+  color: #5e75a8;
   padding-left: 6px;
   border-radius: 5px;
   border: #6d87bf 2px solid;
 }
 
-.edit:hover{
+.edit:hover {
   background-color: #91a5cd;
   border: #93a6d0 2px solid;
 
@@ -211,29 +212,29 @@ section {
 
 }
 
-.form-input-group{
+.form-input-group {
   display: flex;
   align-items: center;
   margin: 8px
 }
 
-.updated{
-  border:none;
+.updated {
+  border: none;
   position: absolute;
-    top: 44%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    max-width: 300px;
-    width: 100%;
-    text-align: center;
+  top: 44%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  width: 100%;
+  text-align: center;
   background-color: green;
 }
 
-.error{
+.error {
   background-color: rgb(225, 42, 42);
 }
 </style>

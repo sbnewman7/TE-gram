@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public class Photo {
     private int id;
+    private int userId;
     private String caption;
     private String photoUrl;
     private LocalDateTime datePublished;
@@ -17,6 +18,14 @@ public class Photo {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getCaption() {

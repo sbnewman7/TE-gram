@@ -6,7 +6,9 @@ import HomeView from '../views/HomeView.vue';
 import LoginView from '../views/LoginView.vue';
 import LogoutView from '../views/LogoutView.vue';
 import RegisterView from '../views/RegisterView.vue';
+import GalleryView from '../views/GalleryView.vue';
 import UserView from '../views/UserView.vue';
+import PhotoUploadView from '../views/PhotoUploadView.vue';
 
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -50,13 +52,33 @@ const routes = [
     }
   },
   {
+    path: "/users/:id/photos",
+    // path: "/gallery",
+    name: "gallery",
+    component: GalleryView,
+    meta: {
+      requiresAuth: false
+    }
+  },
+  {
     path: '/user/{id}',
     name: 'user',
     component: UserView,
     meta: {
       requiresAuth: true
     }
+  },
+
+
+  {
+    path: "/photoupload",
+    name: "photoupload",
+    component: PhotoUploadView,
+    meta: {
+      requiresAuth: false
+    }
   }
+
 ];
 
 // Create the router
