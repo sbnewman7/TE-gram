@@ -23,7 +23,6 @@ public class JdbcPhotoDaoTests extends BaseDaoTests {
     @Test
     public void addPhoto_should_add_photo(){
         Photo photoToAdd = new Photo();
-        photoToAdd.setId(3);
         photoToAdd.setDatePublished(LocalDateTime.now());
         photoToAdd.setCaption("test");
         photoToAdd.setPhotoUrl("testUrl");
