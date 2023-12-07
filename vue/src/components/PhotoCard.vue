@@ -97,7 +97,8 @@ div {
 }
 
 .likeCount {
-    justify-content: start;
+    padding-top: 5px;
+    align-content: center;
 }
 
 .like-caption {
