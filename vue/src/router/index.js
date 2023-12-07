@@ -75,7 +75,7 @@ const routes = [
     name: "photoupload",
     component: PhotoUploadView,
     meta: {
-      requiresAuth: false
+      requiresAuth: true
     }
   }
 

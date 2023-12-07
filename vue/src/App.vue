@@ -2,7 +2,7 @@
   <div id="capstone-app">
     <div id="nav">
       <button @click="goToHome" class="logo-button">
-        <img class="logo" :src="'img/Telogo_2.gif'" alt="Home">
+        <img class="logo" src="../img/Telogo_2.gif" alt="Home">
       </button>
       <div id="searchControl">
         <img src="../img/magnifyingGlass.png" alt="magnifying glass" id="magGlass" @click="search">
@@ -14,7 +14,7 @@
           in</router-link> &nbsp;|&nbsp;
         <router-link class="active-link" v-bind:to="{ name: 'user' }" v-if="$store.state.token != ''">User</router-link>
         &nbsp;|&nbsp;
-<router-link class="active-link" v-bind:to="{ name: 'photoupload' }">Photo Upload</router-link>&nbsp;|&nbsp;
+        <router-link class="active-link" v-bind:to="{ name: 'photoupload' }">Photo Upload</router-link>&nbsp;|&nbsp;
         <router-link class="active-link" v-bind:to="{ name: 'logout' }"
           v-if="$store.state.token != ''">Logout</router-link>
       </section>
@@ -67,7 +67,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 * {
   font-family: Roboto;
 }
