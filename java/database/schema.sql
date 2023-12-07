@@ -2,6 +2,7 @@ ROLLBACK;
 BEGIN TRANSACTION;
 
 DROP TABLE IF EXISTS comments;
+DROP TABLE IF EXISTS photo_likes;
 DROP TABLE IF EXISTS photo_feed;
 DROP TABLE IF EXISTS users;
 
@@ -28,6 +29,15 @@ CREATE TABLE photo_feed (
 	FOREIGN KEY (user_id) REFERENCES users(user_id)
 	
 );
+
+CREATE TABLE photo_likes (
+    photo_id int NOT NULL,
+    user_id int NOT NULL,
+
+    FOREIGN KEY (photo_id) REFERENCES photo_feed(photo_id),
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+
 CREATE TABLE comments (
 	comment_id serial PRIMARY KEY, 
 	user_id int NOT NULL,
@@ -37,7 +47,7 @@ CREATE TABLE comments (
 	
 	FOREIGN KEY (user_id) REFERENCES users(user_id),
 	FOREIGN KEY (photo_id) REFERENCES photo_feed(photo_id)
-	);
+);
 	
 	
 

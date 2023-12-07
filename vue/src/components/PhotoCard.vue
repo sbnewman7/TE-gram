@@ -1,7 +1,14 @@
 <template>
     <article @click="goToDetails">
         <img :src="photo.photoUrl">
-        <h2>{{ photo.caption }}</h2>
+        <div class="like-caption">
+            <img v-if="liked" v-on:click="unlike" class="heart"
+                src="https://upload.wikimedia.org/wikipedia/commons/3/35/Red-simple-heart-symbol-only.png" alt="">
+            <img v-if="!liked" v-on:click="like" class="heart-dark"
+                src="https://upload.wikimedia.org/wikipedia/commons/3/35/Red-simple-heart-symbol-only.png" alt="">
+            <p class="likeCount">{{ likeCount }}</p>
+            <h2>{{ photo.caption }}</h2>
+        </div>
         <div v-if="hasComments">
             <span>
                 {{ photo.comments[0].commentBody }}
@@ -11,8 +18,28 @@
 </template>
 
 <script>
+import LikesGateway from '../services/LikesGateway';
 
 export default {
+    data() {
+        return {
+            liked: false,
+            likeCount: 0
+        }
+    },
+    created() {
+        if (this.$store.state.token !== '') {
+            LikesGateway.getLiked(this.$store.state.user.id, this.photo.id)
+                .then((response) => {
+                    if (response.data) this.liked = true;
+                });
+            LikesGateway.getLikeCount(this.photo.id)
+                .then((response) => {
+                    if (response.data)
+                        this.likeCount = response.data;
+                })
+        }
+    },
     props: ['photo'],
     computed: {
         hasComments() {
@@ -21,7 +48,22 @@ export default {
     },
     methods: {
         goToDetails() {
-            this.$router.push('/photos/'+this.photo.id)
+            this.$router.push('/photos/' + this.photo.id)
+        },
+        like() {
+            if (this.$store.state.token !== '') {
+                this.liked = true;
+                this.likeCount++;
+                LikesGateway.addLike(this.photo.id, this.$store.state.user.id)
+            }
+        },
+        unlike() {
+            if (this.$store.state.token !== '') {
+                this.liked = false;
+                this.likeCount--;
+                LikesGateway.removeLike(this.photo.id, this.$store.state.user.id)
+            }
+
         }
     }
 
@@ -43,6 +85,28 @@ article {
 div {
     display: flex;
     justify-content: center;
+}
+
+
+.heart {
+    max-width: 50px;
+    border: none;
+}
+
+.heart-dark {
+    max-width: 50px;
+    opacity: 30%;
+    border: none;
+}
+
+.likeCount {
+    padding-top: 5px;
+    align-content: center;
+}
+
+.like-caption {
+    display: flex;
+    align-items: center;
 }
 
 img {

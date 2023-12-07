@@ -2,7 +2,7 @@
   <div id="capstone-app">
     <div id="nav">
       <button @click="goToHome" class="logo-button">
-        <img class="logo" :src="'img/Telogo_2.gif'" alt="Home">
+        <img class="logo" src="../img/Telogo_2.gif" alt="Home">
       </button>
       <div id="searchControl">
         <img src="../img/magnifyingGlass.png" alt="magnifying glass" id="magGlass" @click="search">
@@ -10,10 +10,13 @@
       </div>
       <section>
         <router-link class="active-link" v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp;
-        <router-link class="active-link" v-bind:to="{ name: 'login' }" v-if="$store.state.token == ''">Log in </router-link> &nbsp;|&nbsp;
-        <router-link class="active-link" v-bind:to="{ name: 'user', params: this.$store.state.user.id }" v-if="$store.state.token != ''">User</router-link> &nbsp;|&nbsp;
+        <router-link class="active-link" v-bind:to="{ name: 'login' }" v-if="$store.state.token == ''">Log in
+        </router-link> &nbsp;|&nbsp;
+        <router-link class="active-link" v-bind:to="{ name: 'user', params: this.$store.state.user.id }"
+          v-if="$store.state.token != ''">User</router-link> &nbsp;|&nbsp;
         <router-link class="active-link" v-bind:to="{ name: 'photoupload' }">Photo Upload</router-link>&nbsp;|&nbsp;
-        <router-link class="active-link" v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link>
+        <router-link class="active-link" v-bind:to="{ name: 'logout' }"
+          v-if="$store.state.token != ''">Logout</router-link>
       </section>
     </div>
     <router-view />
@@ -64,7 +67,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 * {
   font-family: Roboto;
 }
@@ -121,5 +124,4 @@ body {
 #search {
   width: 20vw;
   margin: 6px 10px 6px 10px;
-}
-</style>
+}</style>
