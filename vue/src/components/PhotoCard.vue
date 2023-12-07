@@ -31,7 +31,7 @@ export default {
         if (this.$store.state.token !== '') {
             LikesGateway.getLiked(this.$store.state.user.id, this.photo.id)
                 .then((response) => {
-                    if (response.data) this.like();
+                    if (response.data) this.liked = true;
                 });
             LikesGateway.getLikeCount(this.photo.id)
                 .then((response) => {
@@ -54,7 +54,11 @@ export default {
             }
         },
         unlike() {
-            this.liked = false;
+            if (this.$store.state.token !== '') {
+                this.liked = false;
+                LikesGateway.removeLike(this.photo.id, this.$store.state.user.id)
+            }
+
         }
     }
 

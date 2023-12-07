@@ -25,4 +25,8 @@ public class LikesController {
     public void addLike(@PathVariable int userId, @PathVariable int photoId){
         likeDao.addLike(userId, photoId);
     }
+    @DeleteMapping("/unlike/{photoId}/{userId}")
+    public void removeLike(@PathVariable int photoId, @PathVariable int userId){
+        likeDao.removeLike(photoId,userId);
+    }
 }

@@ -8,4 +8,6 @@ public interface LikeDao {
 
     void addLike(int userId, int photoId);
 
+    void removeLike(int photoId, int userId);
+
 }

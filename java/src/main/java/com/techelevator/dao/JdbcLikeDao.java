@@ -57,4 +57,18 @@ public class JdbcLikeDao implements LikeDao {
             throw new DaoException("Data integrity violation");
         }
     }
+
+    @Override
+    public void removeLike(int photoId, int userId) {
+        final String sql = "DELETE FROM photo_likes" +
+                " WHERE user_id = ? AND photo_id = ?;";
+        try{
+            this.jdbcTemplate.update(sql, userId, photoId);
+
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (DataIntegrityViolationException e){
+            throw new DaoException("Data integrity violation");
+        }
+    }
 }

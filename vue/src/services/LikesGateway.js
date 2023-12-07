@@ -10,6 +10,10 @@ export default {
     },
     addLike(photoId, userId) {
         return axios.post(`/likes/${photoId}/${userId}`);
+    },
+    removeLike(photoId, userId) {
+        return axios.delete(`/unlike/${photoId}/${userId}`);
+
     }
 
 }
