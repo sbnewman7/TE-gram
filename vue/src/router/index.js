@@ -71,7 +71,7 @@ const routes = [
     }
   },
   {
-    path: '/photo/:id',
+    path: '/photos/:id',
     name: 'photo-detail',
     component: PhotoDetailView,
     meta: {

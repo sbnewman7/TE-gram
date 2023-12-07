@@ -21,7 +21,7 @@ export default {
     },
     methods: {
         goToDetails() {
-            this.$router.push('/photo/'+this.photo.id)
+            this.$router.push('/photos/'+this.photo.id)
         }
     }
 
