@@ -9,8 +9,7 @@
     <section id="left-half">
       <div id="comment" v-for="comment in photo.comments" :key="comment.id">
         <h3>{{ comment.commentBody }}</h3>
-        <!-- <p>{{ comment.timestamp }} - {{ comment.userId }}</p> -->
-        <p>{{ comment.timestamp }} - {{ getUserById(comment.userId) }}</p>
+        <p>{{ formatDateTime(comment.timestamp) }} - {{ getUserById(comment.userId) }}</p>
 
       </div>
     </section>
@@ -34,11 +33,28 @@ export default {
       UserGateway
         .getUserById(userId)
         .then((response) => {
-          console.log(response.data.username);
           this.user = response.data.username;
         })
       return this.user;
+    },
+
+    formatDateTime(dateTimeString) {
+      const date = new Date(dateTimeString);
+
+      const month = (date.getMonth() + 1).toString().padStart(2, '0');
+      const day = date.getDate().toString().padStart(2, '0');
+      const year = date.getFullYear().toString();
+
+      let hours = date.getHours();
+      const ampm = hours >= 12 ? 'pm' : 'am';
+      hours = hours % 12;
+      hours = hours ? hours : 12; // Convert 0 to 12
+      const minutes = date.getMinutes().toString().padStart(2, '0');
+
+      const formattedDateTime = `${month}-${day}-${year} ${hours}:${minutes} ${ampm}`;
+      return formattedDateTime;
     }
+
   },
   created() {
     PhotosGateway
@@ -74,13 +90,15 @@ section {
 }
 
 #comment>h3 {
+  color: white;
   margin: 0;
   padding: 10px 0 8px 15px;
 }
 
 #comment>p {
-  color: white;
+  color: rgb(55, 55, 157);
   font-size: 12px;
+  font-weight: bold;
   margin: 0;
   padding: 0 0 5px 15px;
 }
