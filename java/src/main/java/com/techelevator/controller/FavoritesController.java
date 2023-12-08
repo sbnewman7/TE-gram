@@ -13,17 +13,17 @@ public class FavoritesController {
         this.favoriteDao = favoriteDao;
     }
 
-    @GetMapping("/favorited/{userId}/{photoId}")
-    public boolean getFavorited(@PathVariable int userId, @PathVariable int photoId ){
-        return favoriteDao.getUserFavorited(userId, photoId);
+    @GetMapping("/favorited/{photoId}/{userId}")
+    public boolean getFavorited(@PathVariable int photoId, @PathVariable int userId ){
+        return favoriteDao.getUserFavorited(photoId, userId);
     }
 
     @PostMapping("/favorites/{photoId}/{userId}")
-    public void addFavorite(@PathVariable int userId, @PathVariable int photoId){
-        favoriteDao.addFavorite(userId, photoId);
+    public void addFavorite(@PathVariable int photoId, @PathVariable int userId){
+        favoriteDao.addFavorite(photoId, userId);
     }
     @DeleteMapping("/unfavorite/{photoId}/{userId}")
     public void removeFavorite(@PathVariable int photoId, @PathVariable int userId){
-        favoriteDao.removeFavorite(photoId,userId);
+        favoriteDao.removeFavorite(photoId, userId);
     }
 }

@@ -16,11 +16,11 @@ public class JdbcFavoriteDao implements FavoriteDao {
     }
 
     @Override
-    public boolean getUserFavorited(int userId, int photoId) {
-        final String sql = "SELECT COUNT(*) FROM photo_favorites WHERE user_id = ? AND photo_id = ?;";
+    public boolean getUserFavorited(int photoId, int userid) {
+        final String sql = "SELECT COUNT(*) FROM photo_favorites WHERE photo_id = ? AND user_id = ?;";
         int numOfRows;
         try{
-            numOfRows = this.jdbcTemplate.queryForObject(sql, int.class, userId,photoId);
+            numOfRows = this.jdbcTemplate.queryForObject(sql, int.class, photoId, userid);
 
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
@@ -31,12 +31,12 @@ public class JdbcFavoriteDao implements FavoriteDao {
 
 
     @Override
-    public void addFavorite(int userId, int photoId) {
+    public void addFavorite(int photoId, int userId) {
         final String sql = "INSERT INTO photo_favorites(" +
                 " photo_id, user_id)" +
                 " VALUES (?, ?);";
         try{
-            this.jdbcTemplate.update(sql, userId, photoId);
+            this.jdbcTemplate.update(sql, photoId, userId);
 
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
@@ -48,9 +48,9 @@ public class JdbcFavoriteDao implements FavoriteDao {
     @Override
     public void removeFavorite(int photoId, int userId) {
         final String sql = "DELETE FROM photo_favorites" +
-                " WHERE user_id = ? AND photo_id = ?;";
+                " WHERE photo_id = ? AND user_id = ?;";
         try{
-            this.jdbcTemplate.update(sql, userId, photoId);
+            this.jdbcTemplate.update(sql, photoId, userId);
 
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);

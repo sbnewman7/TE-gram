@@ -7,8 +7,12 @@
             <img v-if="!liked" v-on:click="like" class="heart-dark"
                 src="https://upload.wikimedia.org/wikipedia/commons/3/35/Red-simple-heart-symbol-only.png" alt="">
             <p class="likeCount">{{ likeCount }}</p>
-            <img v-if="favorited" v-on:click="unfavorite" class="star" src="img/star.png" alt="star">
-            <img v-if="!favorited" v-on:click="favorite" class="star-dark" src="img/star.png" alt="darkstar">
+            <img v-if="favorited" v-on:click="unfavorite" class="star"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Orange_star.svg/300px-Orange_star.svg.png"
+                alt="star">
+            <img v-if="!favorited" v-on:click="favorite" class="star-dark"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Orange_star.svg/300px-Orange_star.svg.png"
+                alt="dark star">
 
 
             <h2>{{ photo.caption }}</h2>
@@ -44,7 +48,7 @@ export default {
                     if (response.data)
                         this.likeCount = response.data;
                 })
-            FavoritesGateway.getFavorited(this.$store.state.user.id, this.photo.id)
+            FavoritesGateway.getFavorited(this.photo.id, this.$store.state.user.id)
                 .then((response) => {
                     if (response.data) this.favorited = true;
                 })
@@ -75,22 +79,19 @@ export default {
             }
         },
         favorite() {
-            if (this.$store.state.favorite.token !== '') {
+            if (this.$store.state.token !== '') {
                 this.favorited = true;
                 FavoritesGateway.addFavorite(this.photo.id, this.$store.state.user.id)
             }
         },
         unfavorite() {
-            if (this.$store.state.favorite.token !== '') {
+            if (this.$store.state.token !== '') {
                 this.favorited = false;
                 FavoritesGateway.removeFavorite(this.photo.id, this.$store.state.user.id)
             }
         }
     }
 }
-
-
-
 
 </script>
 
@@ -138,12 +139,12 @@ div {
 }
 
 .star {
-    max-width: 36.5px;
+    max-width: 43px;
     border: none;
 }
 
 .star-dark {
-    max-width: 36.5px;
+    max-width: 43px;
     opacity: 30%;
     border: none;
 }
