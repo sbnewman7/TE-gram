@@ -26,7 +26,7 @@
     <section id="left-half">
       <div id="comment" v-for="comment in photo.comments" :key="comment.id">
         <h3>{{ comment.commentBody }}</h3>
-        <!-- <p>{{ formatDateTime(comment.timestamp) }} - {{ getUserById(comment.userId) }}</p> -->
+        <p>{{ formatDateTime(comment.timestamp) }} - {{ getUserById(comment.userId) }}</p>
 
       </div>
     </section>
