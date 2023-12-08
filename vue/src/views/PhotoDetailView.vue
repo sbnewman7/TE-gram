@@ -13,12 +13,20 @@
         <p class="likeCount">{{ likeCount }}</p>
         <h1>{{ photo.caption }}</h1>
       </div>
+      <form v-on:submit.prevent="addComment">
+        <textarea class="comment" v-model="newComment.commentBody" rows="4" cols="50"
+          placeholder="add comment"></textarea>
+        <br>
+        <button id="submit" type="submit">Add Comment</button>
+        <button v-if="showError" class="edit updated error">Limit one comment per photo.</button>
+
+      </form>
 
     </section>
     <section id="left-half">
       <div id="comment" v-for="comment in photo.comments" :key="comment.id">
         <h3>{{ comment.commentBody }}</h3>
-        <p>{{ formatDateTime(comment.timestamp) }} - {{ getUserById(comment.userId) }}</p>
+        <!-- <p>{{ formatDateTime(comment.timestamp) }} - {{ getUserById(comment.userId) }}</p> -->
 
       </div>
     </section>
@@ -29,6 +37,7 @@
 import PhotosGateway from "../services/PhotosGateway";
 import UserGateway from "../services/UserGateway";
 import LikesGateway from '../services/LikesGateway';
+import CommentGateway from "../services/CommentGateway";
 
 export default {
   data() {
@@ -41,7 +50,12 @@ export default {
       likeCount: 0,
 
       comment: {},
-      commentUser: ""
+      commentUser: "",
+      newComment: {
+        commentBody: '',
+        userId: this.$store.state.user.id,
+      },
+      showError: false
     };
   },
   methods: {
@@ -58,6 +72,20 @@ export default {
         this.likeCount--;
         LikesGateway.removeLike(this.photo.id, this.$store.state.user.id)
       }
+    },
+    addComment() {
+      CommentGateway.getUserCommented(this.$store.state.user.id, this.photo.id)
+        .then(response => {
+          if (!response.data) {
+            CommentGateway.addComment(this.photo.id, this.newComment);
+          }
+          else {
+            this.showError = true;
+            window.setTimeout(() => {
+              this.showError = false;
+            }, 3000)
+          }
+        })
     },
 
     getUserById(userId) {
@@ -140,6 +168,10 @@ section {
   padding: 10px 0 8px 15px;
 }
 
+.comment {
+  font-size: 16px;
+}
+
 #comment>p {
   color: rgb(55, 55, 157);
   font-size: 12px;
@@ -185,5 +217,41 @@ section {
 .like-caption {
   display: flex;
   align-items: center;
+}
+
+.edit {
+  background-color: #7C93C3;
+  border: #6d87bf 2px solid;
+  border-radius: 3px;
+  margin-right: 6px;
+  padding: 2px 9px;
+}
+
+.updated {
+  border: none;
+  position: absolute;
+  top: 44%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  width: 100%;
+  text-align: center;
+  background-color: green;
+}
+
+.error {
+  background-color: rgb(225, 42, 42);
+}
+
+#submit {
+  border: #7C93C3 3px solid;
+  border-radius: 4px;
+  padding: 5px 2vw 5px 2vw;
+  background-color: #9EB8D9;
+  margin-top: 10px;
 }
 </style>
