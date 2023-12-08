@@ -10,6 +10,8 @@
       </div>
       <section>
         <router-link class="active-link" v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp;
+        <router-link class="active-link"
+          v-bind:to="{ name: 'favorites-page', params: { id: this.$store.state.user.id } }">Favorites</router-link>&nbsp;|&nbsp;
         <router-link class="active-link" v-bind:to="{ name: 'login' }" v-if="$store.state.token == ''">Log in
         </router-link>
         <!-- &nbsp;|&nbsp; -->
@@ -63,7 +65,12 @@ export default {
 
     goToHome() {
       this.$router.push({ name: 'home' });
-    }
+    },
+    // goToFavorites() {
+    //   this.$store.commit('PAGE_FILTER', true);
+    //   console.log(this.$store.state.user.id);
+    //   this.$router.push({ name: 'favorites-page', params: { id: this.$store.state.user.id } });
+    // }
   }
 };
 </script>

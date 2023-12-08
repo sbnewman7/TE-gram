@@ -9,6 +9,7 @@
 
 <script>
 import PhotoCard from "../components/PhotoCard.vue"
+import FavoritesGateway from "../services/FavoritesGateway";
 import photoService from "../services/PhotosGateway"
 
 
@@ -19,7 +20,8 @@ export default {
   },
   data() {
     return {
-      photos: []
+      photos: [],
+      favorites: []
     }
   },
   created() {

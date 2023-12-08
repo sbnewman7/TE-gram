@@ -10,7 +10,7 @@ import GalleryView from '../views/GalleryView.vue';
 import UserView from '../views/UserView.vue';
 import PhotoUploadView from '../views/PhotoUploadView.vue';
 import PhotoDetailView from '../views/PhotoDetailView.vue';
-
+import FavoritesView from '../views/FavoritesView.vue';
 
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -84,6 +84,14 @@ const routes = [
     path: "/photoupload",
     name: "photoupload",
     component: PhotoUploadView,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: "/{userId}/favorites",
+    name: "favorites-page",
+    component: FavoritesView,
     meta: {
       requiresAuth: true
     }

@@ -10,8 +10,7 @@ export function createStore(currentToken, currentUser) {
       user: currentUser || {},
       pictureUrl: '',
       notification: null,
-
-      searchedUser: {}
+      searchedUser: {},
 
     },
     mutations: {
@@ -40,7 +39,7 @@ export function createStore(currentToken, currentUser) {
       },
       SET_SEARCHED_USER(state, user) {
         state.searchedUser = user;
-      }
+      },
 
 
     },
