@@ -38,5 +38,9 @@ public class PhotosController {
         return photoDao.getPhotosByUserId(userId);
     }
 
+    @GetMapping("/photos/{photoId}")
+    public Photo getPhotoByPhotoId(@PathVariable int photoId){
+        return photoDao.getPhotoByPhotoId(photoId);
+    }
 
 }

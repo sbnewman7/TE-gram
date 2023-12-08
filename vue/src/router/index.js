@@ -9,6 +9,8 @@ import RegisterView from '../views/RegisterView.vue';
 import GalleryView from '../views/GalleryView.vue';
 import UserView from '../views/UserView.vue';
 import PhotoUploadView from '../views/PhotoUploadView.vue';
+import PhotoDetailView from '../views/PhotoDetailView.vue';
+
 
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -64,6 +66,14 @@ const routes = [
     path: '/user/{id}',
     name: 'user',
     component: UserView,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/photos/:id',
+    name: 'photo-detail',
+    component: PhotoDetailView,
     meta: {
       requiresAuth: true
     }

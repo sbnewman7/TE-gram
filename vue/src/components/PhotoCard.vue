@@ -1,6 +1,6 @@
 <template>
     <article>
-        <img :src="photo.photoUrl">
+        <img :src="photo.photoUrl" @click="goToDetails">
         <div class="like-caption">
             <img v-if="liked" v-on:click="unlike" class="heart"
                 src="https://upload.wikimedia.org/wikipedia/commons/3/35/Red-simple-heart-symbol-only.png" alt="">
@@ -47,6 +47,9 @@ export default {
         }
     },
     methods: {
+        goToDetails() {
+            this.$router.push('/photos/' + this.photo.id)
+        },
         like() {
             if (this.$store.state.token !== '') {
                 this.liked = true;

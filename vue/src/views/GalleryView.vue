@@ -37,6 +37,13 @@ export default {
             .then(response => {
                 this.photos = response.data;
             })
+    },
+    beforeRouteUpdate(to, from, next) {
+        console.log("in beforeRouteUpdate event");
+        // the 'to' param is a route object for the route we want to navigate to
+        // this.loadLandmarks(to.query.username);
+        // console.log(to.query);
+        // next();
     }
 };
 </script>
