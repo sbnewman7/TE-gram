@@ -116,6 +116,7 @@ body {
 
 .logo {
   height: 7vh;
+  margin-top: 4px;
 }
 
 #searchControl {

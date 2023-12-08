@@ -7,6 +7,14 @@
             <img v-if="!liked" v-on:click="like" class="heart-dark"
                 src="https://upload.wikimedia.org/wikipedia/commons/3/35/Red-simple-heart-symbol-only.png" alt="">
             <p class="likeCount">{{ likeCount }}</p>
+            <img v-if="favorited" v-on:click="unfavorite" class="star"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Orange_star.svg/300px-Orange_star.svg.png"
+                alt="star">
+            <img v-if="!favorited" v-on:click="favorite" class="star-dark"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Orange_star.svg/300px-Orange_star.svg.png"
+                alt="dark star">
+
+
             <h2>{{ photo.caption }}</h2>
         </div>
         <div v-if="hasComments">
@@ -18,13 +26,15 @@
 </template>
 
 <script>
+import FavoritesGateway from '../services/FavoritesGateway';
 import LikesGateway from '../services/LikesGateway';
 
 export default {
     data() {
         return {
             liked: false,
-            likeCount: 0
+            likeCount: 0,
+            favorited: false
         }
     },
     created() {
@@ -37,6 +47,10 @@ export default {
                 .then((response) => {
                     if (response.data)
                         this.likeCount = response.data;
+                })
+            FavoritesGateway.getFavorited(this.photo.id, this.$store.state.user.id)
+                .then((response) => {
+                    if (response.data) this.favorited = true;
                 })
         }
     },
@@ -63,11 +77,22 @@ export default {
                 this.likeCount--;
                 LikesGateway.removeLike(this.photo.id, this.$store.state.user.id)
             }
-
+        },
+        favorite() {
+            if (this.$store.state.token !== '') {
+                this.favorited = true;
+                FavoritesGateway.addFavorite(this.photo.id, this.$store.state.user.id)
+            }
+        },
+        unfavorite() {
+            if (this.$store.state.token !== '') {
+                this.favorited = false;
+                FavoritesGateway.removeFavorite(this.photo.id, this.$store.state.user.id)
+            }
         }
     }
-
 }
+
 </script>
 
 <style scoped>
@@ -91,22 +116,37 @@ div {
 .heart {
     max-width: 50px;
     border: none;
+    margin-right: 0;
 }
 
 .heart-dark {
     max-width: 50px;
     opacity: 30%;
     border: none;
+    margin-right: 0;
 }
 
 .likeCount {
-    padding-top: 5px;
+    padding: 5px 5px 5px 0;
+
     align-content: center;
+
 }
 
 .like-caption {
     display: flex;
     align-items: center;
+}
+
+.star {
+    max-width: 43px;
+    border: none;
+}
+
+.star-dark {
+    max-width: 43px;
+    opacity: 30%;
+    border: none;
 }
 
 img {
