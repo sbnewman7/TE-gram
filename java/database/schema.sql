@@ -38,6 +38,14 @@ CREATE TABLE photo_likes (
     FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
+CREATE TABLE photo_favorites (
+    photo_id int NOT NULL,
+    user_id int NOT NULL,
+
+    FOREIGN KEY (photo_id) REFERENCES photo_feed(photo_id),
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+
 CREATE TABLE comments (
 	comment_id serial PRIMARY KEY, 
 	user_id int NOT NULL,

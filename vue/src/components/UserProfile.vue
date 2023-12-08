@@ -3,7 +3,11 @@
     <div class="currentPic">
       <button v-on:click="switchCloudinaryForm" class="edit">Edit</button>
       <span>Current Profile Pic:</span>
-      <profile-picture :profilePic="user.picUrl" id="profile-picture" />
+      <profile-picture :profilePic="user.picUrl" id="profile-picture" v-if="photoExists" />
+      <img v-else
+        :src="'https://media.istockphoto.com/id/1341046662/vector/picture-profile-icon-human-or-people-sign-and-symbol-for-template-design.jpg?s=612x612&w=0&k=20&c=A7z3OK0fElK3tFntKObma-3a7PyO8_2xxW0jtmjzT78='"
+        class="profile-picture">
+
     </div>
     <cloudinary-upload v-if="showCloudinaryForm" @uploaded="onUpload" v-model:pictureUrl="pictureUrl" />
 
@@ -69,6 +73,11 @@ export default {
   components: {
     CloudinaryUpload,
     ProfilePicture
+  },
+  computed: {
+    photoExists() {
+      return this.user.picUrl && this.user.picUrl.length > 0;
+    }
   },
   props: ['user'],
   created() {
@@ -232,6 +241,13 @@ section {
   width: 100%;
   text-align: center;
   background-color: green;
+}
+
+.profile-picture {
+  height: 200px;
+  width: 200px;
+  margin-right: 40px;
+  border-radius: 50%;
 }
 
 .error {
