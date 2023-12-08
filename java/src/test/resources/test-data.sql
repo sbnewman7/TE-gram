@@ -6,6 +6,7 @@ INSERT INTO users (username,password_hash,email,profile_pic_url,role) VALUES ('u
 
 INSERT INTO photo_feed (user_id, date_time, caption, pic_url) VALUES (1,'2023-12-07 12:00:00','caption1','url1');
 INSERT INTO photo_likes (user_id, photo_id) VALUES (1,1);
+INSERT INTO photo_favorites (user_id, photo_id) VALUES (1,1);
 
 
 COMMIT TRANSACTION;
