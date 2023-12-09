@@ -18,7 +18,6 @@ INSERT INTO comments (user_id, photo_id, comment_text) VALUES (1, 1, 'i am a com
 INSERT INTO comments (user_id, photo_id, comment_text) VALUES (1, 2, 'i am a comment2');
 INSERT INTO comments (user_id, photo_id, comment_text) VALUES (1, 3, 'i am a comment3');
 INSERT INTO comments (user_id, photo_id, comment_text) VALUES (1, 6, 'i am a comment4');
-INSERT INTO comments (user_id, photo_id, comment_text) VALUES (1, 1, 'i am a comment I am testing the comments');
 
 
 

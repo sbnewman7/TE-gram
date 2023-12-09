@@ -34,7 +34,6 @@
     <section id="left-half">
       <div id="comment" v-for="comment in photo.comments" :key="comment.id">
         <h3>{{ comment.commentBody }}</h3>
-        <!-- <p>{{ formatDateTime(comment.timestamp) }} - {{ getUserById(comment.userId) }}</p> -->
         <p>{{ formatDateTime(comment.timestamp) }} - {{ comment.username }}</p>
 
       </div>
@@ -101,6 +100,13 @@ export default {
         .then(response => {
           if (!response.data) {
             CommentGateway.addComment(this.photo.id, this.newComment);
+            this.newComment.timestamp = new Date();
+            UserGateway
+              .getUserById(this.$store.state.user.id)
+              .then((response) => {
+                this.newComment.username = response.data.username;
+              })
+            this.photo.comments.unshift(this.newComment);
           }
           else {
             this.showError = true;
@@ -270,6 +276,7 @@ section {
   border-radius: 3px;
   margin-right: 6px;
   padding: 2px 9px;
+  font-size: 1.5rem;
 }
 
 .updated {
