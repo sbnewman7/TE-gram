@@ -5,7 +5,7 @@ import java.util.List;
 public interface FollowDao {
 
 
-    List<Integer> getFollowers(int followerUserId);
+    List<Integer> getFollowed(int followerUserId);
 
     boolean getUserFollowed(int followerUserId, int followedUserId);
 

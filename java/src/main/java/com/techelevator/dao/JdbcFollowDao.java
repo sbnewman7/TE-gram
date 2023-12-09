@@ -23,7 +23,7 @@ public class JdbcFollowDao implements FollowDao {
     }
 
     @Override
-    public List<Integer> getFollowers(int followerUserId) {
+    public List<Integer> getFollowed(int followerUserId) {
         List<Integer> followers = new ArrayList<>();
         final String sql = "SELECT followed_user_id " +
                 "FROM followers " +
