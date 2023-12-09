@@ -10,6 +10,17 @@ public class Comment {
     private int commentId;
     private LocalDateTime timestamp;
     private String commentBody;
+    private String username;
+
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
 
     public int getUserId() {
         return userId;

@@ -20,6 +20,7 @@ public class CommentController {
     public boolean addComment(@PathVariable int photoId, @RequestBody Comment comment){
         comment.setPhotoId(photoId);
         comment.setTimestamp(LocalDateTime.now());
+        System.out.println(comment.getCommentBody() + comment.getPhotoId() + comment.getTimestamp() +"  user:"+ comment.getUserId());
         return commentDao.addComment(comment);
     }
     @GetMapping("/comments/{userId}/{photoId}")

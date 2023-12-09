@@ -34,7 +34,7 @@
     <section id="left-half">
       <div id="comment" v-for="comment in photo.comments" :key="comment.id">
         <h3>{{ comment.commentBody }}</h3>
-        <p>{{ formatDateTime(comment.timestamp) }} - {{ getUserById(comment.userId) }}</p>
+        <p>{{ formatDateTime(comment.timestamp) }} - {{ comment.username }}</p>
 
       </div>
     </section>
@@ -140,6 +140,7 @@ export default {
       .getPhotoByPhotoId(this.photo.id)
       .then((response) => {
         this.photo = response.data;
+        console.log(this.photo);
       });
 
     if (this.$store.state.token !== '') {
@@ -266,6 +267,7 @@ section {
   border-radius: 3px;
   margin-right: 6px;
   padding: 2px 9px;
+  font-size: 1.5rem;
 }
 
 .updated {
