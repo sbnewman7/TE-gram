@@ -100,6 +100,13 @@ export default {
         .then(response => {
           if (!response.data) {
             CommentGateway.addComment(this.photo.id, this.newComment);
+            this.newComment.timestamp = new Date();
+            UserGateway
+              .getUserById(this.$store.state.user.id)
+              .then((response) => {
+                this.newComment.username = response.data.username;
+              })
+            this.photo.comments.unshift(this.newComment);
           }
           else {
             this.showError = true;
@@ -140,7 +147,6 @@ export default {
       .getPhotoByPhotoId(this.photo.id)
       .then((response) => {
         this.photo = response.data;
-        console.log(this.photo);
       });
 
     if (this.$store.state.token !== '') {

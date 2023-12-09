@@ -79,7 +79,7 @@ public class JdbcPhotoDao implements PhotoDao {
     @Override
     public Photo getPhotoByPhotoId(int photoId) {
 
-        final String sql = "SELECT caption, pic_url FROM photo_feed WHERE photo_id = ?";
+        final String sql = "SELECT caption, pic_url, date_time FROM photo_feed WHERE photo_id = ?";
 
         final Photo photo = new Photo();
         try {
@@ -90,7 +90,7 @@ public class JdbcPhotoDao implements PhotoDao {
                 photo.setId(photoId);
                 photo.setCaption(results.getString("caption"));
                 photo.setPhotoUrl(results.getString("pic_url"));
-//                photo.setDatePublished(LocalDateTime.now());
+                photo.setDatePublished(results.getTimestamp("date_time").toLocalDateTime());
                 photo.setComments(getCommentsByPhotoId(photoId));
 
 
@@ -107,9 +107,9 @@ public class JdbcPhotoDao implements PhotoDao {
 
         final ArrayList<Comment> comments = new ArrayList<>();
 
-        final String sql = "SELECT user_id, photo_id, date_time, comment_id, comment_text FROM comments WHERE photo_id = ? ORDER BY date_time DESC;";
+//        final String sql = "SELECT user_id, photo_id, date_time, comment_id, comment_text FROM comments WHERE photo_id = ? ORDER BY date_time DESC;";
 
-        final String sqlWithUsername = "SELECT username, u.user_id, photo_id, date_time, comment_id, comment_text FROM comments c INNER JOIN users u ON u.user_id = c.user_id WHERE u.user_id = ? ORDER BY date_time DESC;";
+        final String sqlWithUsername = "SELECT username, u.user_id, photo_id, date_time, comment_id, comment_text FROM comments c INNER JOIN users u ON u.user_id = c.user_id WHERE photo_id = ? ORDER BY date_time DESC;";
         try {
 
             final SqlRowSet results = this.jdbcTemplate.queryForRowSet(sqlWithUsername, id);
