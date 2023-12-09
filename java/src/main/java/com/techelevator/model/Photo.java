@@ -10,7 +10,7 @@ public class Photo {
     private String photoUrl;
     private LocalDateTime datePublished;
 
-    private ArrayList<Comment> comments;
+    private ArrayList<CommentDto> comments;
 
     public int getId() {
         return id;
@@ -52,11 +52,11 @@ public class Photo {
         this.datePublished = datePublished;
     }
 
-    public ArrayList<Comment> getComments() {
+    public ArrayList<CommentDto> getComments() {
         return comments;
     }
 
-    public void setComments(ArrayList<Comment> comments) {
+    public void setComments(ArrayList<CommentDto> comments) {
         this.comments = comments;
     }
 }

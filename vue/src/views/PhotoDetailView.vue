@@ -34,7 +34,8 @@
     <section id="left-half">
       <div id="comment" v-for="comment in photo.comments" :key="comment.id">
         <h3>{{ comment.commentBody }}</h3>
-        <p>{{ formatDateTime(comment.timestamp) }} - {{ getUserById(comment.userId) }}</p>
+        <!-- <p>{{ formatDateTime(comment.timestamp) }} - {{ getUserById(comment.userId) }}</p> -->
+        <p>{{ formatDateTime(comment.timestamp) }} - {{ comment.username }}</p>
 
       </div>
     </section>
@@ -66,7 +67,7 @@ export default {
         userId: this.$store.state.user.id,
       },
       showError: false
-    };
+    }
   },
   methods: {
     like() {
@@ -110,14 +111,17 @@ export default {
         })
     },
 
-    getUserById(userId) {
-      UserGateway
-        .getUserById(userId)
-        .then((response) => {
-          this.commentUser = response.data.username;
-        })
-      return this.commentUser;
-    },
+    // this method caused a bug where the username was flickering and changing
+    // I think b/c it was doing an async db call repeatedly within a for loop.
+    // I solved it by creating a dto that included username.
+    // getUserById(userId) {
+    //   UserGateway
+    //     .getUserById(userId)
+    //     .then((response) => {
+    //       this.commentUser = response.data.username;
+    //     })
+    //   return this.commentUser;
+    // },
 
     formatDateTime(dateTimeString) {
       const date = new Date(dateTimeString);

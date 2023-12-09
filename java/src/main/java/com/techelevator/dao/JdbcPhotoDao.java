@@ -1,7 +1,7 @@
 package com.techelevator.dao;
 
 import com.techelevator.exception.DaoException;
-import com.techelevator.model.Comment;
+import com.techelevator.model.CommentDto;
 import com.techelevator.model.Photo;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
@@ -103,22 +103,25 @@ public class JdbcPhotoDao implements PhotoDao {
     }
 
     @Override
-    public ArrayList<Comment> getCommentsByPhotoId(int id) {
+    public ArrayList<CommentDto> getCommentsByPhotoId(int id) {
 
-        final ArrayList<Comment> comments = new ArrayList<>();
+        final ArrayList<CommentDto> comments = new ArrayList<>();
 
-        final String sql = "SELECT user_id, photo_id, comment_id, comment_text FROM comments WHERE photo_id = ? ORDER BY date_time DESC;";
+        final String sql = "SELECT c.user_id, photo_id, comment_id, comment_text, username " +
+                "FROM comments c JOIN users u ON c.user_id = u.user_id " +
+                "WHERE photo_id = ? ORDER BY date_time DESC;";
 
         try {
 
             final SqlRowSet results = this.jdbcTemplate.queryForRowSet(sql, id);
             while (results.next()) {
-                final Comment comment = new Comment();
+                final CommentDto comment = new CommentDto();
                 comment.setCommentId(results.getInt("comment_id"));
                 comment.setPhotoId(results.getInt("photo_id"));
                 comment.setUserId(results.getInt("user_id"));
                 comment.setTimestamp(LocalDateTime.now());
                 comment.setCommentBody(results.getString("comment_text"));
+                comment.setUsername(results.getString("username"));
 
                 comments.add(comment);
             }

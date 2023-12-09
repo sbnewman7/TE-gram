@@ -1,6 +1,6 @@
 package com.techelevator.dao;
 
-import com.techelevator.model.Comment;
+import com.techelevator.model.CommentDto;
 import com.techelevator.model.Photo;
 
 import java.util.List;
@@ -10,7 +10,7 @@ public interface PhotoDao {
 
     List<Photo> getPhotosByUserId(int userId);
 
-    List<Comment> getCommentsByPhotoId(int id);
+    List<CommentDto> getCommentsByPhotoId(int id);
 
     Photo getPhotoByPhotoId(int photoId);
 
