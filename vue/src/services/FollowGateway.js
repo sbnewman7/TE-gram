@@ -11,7 +11,7 @@ export default {
     },
 
     addFollower(followerUserId, followedUserId) {
-        return axios.addFollower(`/follow/${followerUserId}/${followedUserId}`);
+        return axios.post(`/follow/${followerUserId}/${followedUserId}`);
     },
 
     removeFollower(followerUserId, followedUserId) {

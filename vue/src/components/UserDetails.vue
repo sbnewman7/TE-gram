@@ -8,8 +8,10 @@
         <div>
             <h1>{{ user.name }}</h1>
             <h2>{{ user.email }}</h2>
-            <button id="follow" v-if="following" v-on:click="unfollow">Follow</button>
-            <button id="unfollow" v-if="!following" v-on:click="follow">Unfollow</button>
+            <!-- <button id="follow" v-if="!following" v-on:click="follow">Follow</button> -->
+
+            <button id="follow" v-if="!following" v-on:click="follow">Follow</button>
+            <button id="unfollow" v-if="following" v-on:click="unfollow">Unfollow</button>
 
         </div>
     </div>
@@ -42,14 +44,16 @@ export default {
     methods: {
         follow() {
             if (this.$store.state.token !== '') {
-                this.following = true;
+                console.log("in follow(), ids = " + this.$store.state.user.id + ", " + this.userId);
                 FollowGateway.addFollower(this.$store.state.user.id, this.userId);
+                this.following = true;
             }
         },
         unfollow() {
-            this.following = false;
-            FollowGateway.removeFollower(this.$store.state.user.id, this.userId);
-
+            if (this.$store.state.token !== '') {
+                FollowGateway.removeFollower(this.$store.state.user.id, this.userId);
+                this.following = false;
+            }
         }
     },
     created() {
