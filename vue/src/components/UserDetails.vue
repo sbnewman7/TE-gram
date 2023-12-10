@@ -8,7 +8,9 @@
         <div>
             <h1>{{ user.name }}</h1>
             <h2>{{ user.email }}</h2>
-            <button v-on:click="">Follow</button>
+            <button id="follow" v-if="following" v-on:click="unfollow">Follow</button>
+            <button id="unfollow" v-if="!following" v-on:click="follow">Unfollow</button>
+
         </div>
     </div>
 </template>
@@ -36,8 +38,30 @@ export default {
         photoExists() {
             return this.user.picUrl && this.user.picUrl.length > 0;
         }
+    },
+    methods: {
+        follow() {
+            if (this.$store.state.token !== '') {
+                this.following = true;
+                FollowGateway.addFollower(this.$store.state.user.id, this.userId);
+            }
+        },
+        unfollow() {
+            this.following = false;
+            FollowGateway.removeFollower(this.$store.state.user.id, this.userId);
+
+        }
+    },
+    created() {
+        if (this.$store.state.token !== '') {
+            FollowGateway.getUserFollowed(this.$store.state.user.id, this.userId)
+                .then((response) => {
+                    // if (response.data) this.following = true;
+                    this.following = response.data;
+                })
+        }
     }
-};
+}
 </script>
 
 <style scoped>
