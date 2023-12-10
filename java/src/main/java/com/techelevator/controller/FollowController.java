@@ -24,11 +24,11 @@ public class FollowController {
         return followDao.getFollowed(followerUserId);
     }
     @GetMapping("/follows/{followerUserId}/{followedUserId}")
-    public boolean getFollowed(@PathVariable int followerUserId, @PathVariable int followedUserId){
+    public boolean getUserFollowed(@PathVariable int followerUserId, @PathVariable int followedUserId){
         return followDao.getUserFollowed(followerUserId, followedUserId);
     }
     @PostMapping("/follow/{followerUserId}/{followedUserId}")
-    public void addFollow(@PathVariable int followerUserId, @PathVariable int followedUserId){
+    public void addFollower(@PathVariable int followerUserId, @PathVariable int followedUserId){
         followDao.addFollower(followerUserId, followedUserId);
     }
     @DeleteMapping("/unfollow/{followerUserId}/{followedUserId}")

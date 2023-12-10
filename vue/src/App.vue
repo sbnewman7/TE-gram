@@ -6,6 +6,7 @@
       </button>
       <div id="searchControl">
         <img src="../img/magnifyingGlass.png" alt="magnifying glass" id="magGlass" @click="search">
+        <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
         <input type="text" id="search" maxlength="50" v-model="username" v-on:keyup.enter="search">
       </div>
       <section>
@@ -80,6 +81,11 @@ export default {
   font-family: Roboto;
 }
 
+i.fa-magnifying-glass {
+  font-size: 4em;
+}
+
+
 .active-link {
   text-decoration: none;
   color: #FFFFFF;
@@ -105,6 +111,7 @@ body {
   align-items: center;
   color: azure;
   padding: 0px 3vh 0px 3vh;
+  min-height: 50px;
 }
 
 .logo-button {
@@ -116,6 +123,7 @@ body {
 
 .logo {
   height: 7vh;
+  min-height: 40px;
   margin-top: 4px;
 }
 

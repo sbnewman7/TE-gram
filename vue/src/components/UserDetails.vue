@@ -1,21 +1,24 @@
 <template>
     <div class="info">
         <profile-picture :profilePic="user.picUrl" id="profile-picture" v-if="photoExists" class="profile-picture" />
-    
-        <img v-else :src="'https://media.istockphoto.com/id/1341046662/vector/picture-profile-icon-human-or-people-sign-and-symbol-for-template-design.jpg?s=612x612&w=0&k=20&c=A7z3OK0fElK3tFntKObma-3a7PyO8_2xxW0jtmjzT78='" class="profile-picture">
+
+        <img v-else
+            :src="'https://media.istockphoto.com/id/1341046662/vector/picture-profile-icon-human-or-people-sign-and-symbol-for-template-design.jpg?s=612x612&w=0&k=20&c=A7z3OK0fElK3tFntKObma-3a7PyO8_2xxW0jtmjzT78='"
+            class="profile-picture">
         <div>
             <h1>{{ user.name }}</h1>
             <h2>{{ user.email }}</h2>
+            <button v-on:click="">Follow</button>
         </div>
     </div>
 </template>
 
 <script>
-
 import ProfilePicture from './ProfilePicture.vue';
+import FollowGateway from '../services/FollowGateway';
 
 export default {
-    components:{
+    components: {
         ProfilePicture
     },
     data() {
@@ -26,6 +29,7 @@ export default {
                 email: this.$store.state.searchedUser.email,
                 picUrl: this.$store.state.searchedUser.picUrl
             },
+            following: false
         }
     },
     computed: {
@@ -55,9 +59,9 @@ h2 {
 }
 
 .profile-picture {
-  height: 200px;
-  width: 200px;
-  margin-right: 40px;
-  border-radius: 50%;
+    height: 200px;
+    width: 200px;
+    margin-right: 40px;
+    border-radius: 50%;
 }
 </style>
