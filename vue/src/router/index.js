@@ -79,8 +79,6 @@ const routes = [
       requiresAuth: true
     }
   },
-
-
   {
     path: "/photoupload",
     name: "photoupload",
@@ -98,7 +96,7 @@ const routes = [
     }
   },
   {
-    path: "/following/{followerUserId}/photos",
+    path: "/following/:followerUserId/photos",
     name: "following-page",
     component: FollowingView,
     meta: {

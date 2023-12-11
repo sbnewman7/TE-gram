@@ -25,7 +25,8 @@ export default {
         }
     },
     created() {
-        FollowGateway.getFollowing(this.$store.state.user.id)
+        // could get this from the $route.parameter
+        FollowGateway.getPhotosByFollowerUserId(this.$store.state.user.id)
             .then(response => {
                 this.following = response.data;
             })
