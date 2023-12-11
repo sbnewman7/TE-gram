@@ -25,14 +25,9 @@ export default {
         }
     },
     created() {
-        // could get this from the $route.parameter
-        FollowGateway.getPhotosByFollowerUserId(this.$store.state.user.id)
+        FollowGateway.getPhotosByFollowerUserId(this.$route.params.followerUserId)
             .then(response => {
-                this.following = response.data;
-            })
-        photoService.getAll()
-            .then(response => {
-                this.photos = response.data.filter((photo) => { return this.following.includes(photo.id) });
+                this.photos = response.data;
             })
     }
 };

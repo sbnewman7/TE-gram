@@ -32,6 +32,7 @@ export default {
         photoService.getAll()
             .then(response => {
                 this.photos = response.data.filter((photo) => { return this.favorites.includes(photo.id) });
+                console.log(this.photos);
             })
     }
 };
