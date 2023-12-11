@@ -31,7 +31,10 @@
     </section>
   </div>
   <form class="comment-form" v-on:submit.prevent="addComment">
-    <textarea class="comment" v-model="newComment.commentBody" rows="4" cols="50" placeholder="Add a comment"></textarea>
+    <textarea class="comment" @input="update" v-model="newComment.commentBody" rows="4" cols="50"
+      placeholder="Add a comment"></textarea>
+    <div class="output" :rendered="rendered"></div>
+    <p v-html="converted"></p>
     <br>
     <button id="submit" type="submit">Submit</button>
     <button v-if="showError" class="edit updated error">Limit one comment per photo.</button>
@@ -44,6 +47,10 @@ import UserGateway from "../services/UserGateway";
 import LikesGateway from '../services/LikesGateway';
 import CommentGateway from "../services/CommentGateway";
 import FavoritesGateway from "../services/FavoritesGateway";
+// import marked from 'marked';
+// import { debounce } from 'lodash-es';
+// import { ref, computed } from 'vue';
+import markdownit from 'markdown-it'
 
 export default {
   data() {
@@ -62,7 +69,9 @@ export default {
         commentBody: '',
         userId: this.$store.state.user.id,
       },
-      showError: false
+      showError: false,
+      htmlText: '',
+      rendered: ''
     }
   },
   methods: {
@@ -143,6 +152,14 @@ export default {
       return formattedDateTime;
     }
 
+  },
+  computed: {
+    converted() {
+      const md = markdownit();
+      this.rendered = md.render('**bold test** _italics_');
+      console.log(this.rendered);
+      return this.rendered;
+    }
   },
   created() {
     this.photo.id = this.$route.params.id;
