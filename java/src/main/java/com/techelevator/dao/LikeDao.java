@@ -1,6 +1,6 @@
 package com.techelevator.dao;
 
-public interface LikeDao {
+public interface  LikeDao {
 
     boolean getUserLiked(int userId, int photoId);
 
