@@ -1,6 +1,6 @@
 <template>
     <div class="gallery">
-        <user-details v-model:user="users" />
+        <user-details :user="user" />
         <section class="photo-list">
             <photo-card class="photo" :photo="photo" v-for="photo in photos" :key="photo.id" />
         </section>
@@ -22,7 +22,7 @@ export default {
     },
     data() {
         return {
-            users: [],
+            user: {},
             photos: []
         }
     },
@@ -32,29 +32,26 @@ export default {
         } else {
             console.log("ids don't match: param.id=" + this.$route.params.id + ", searchedUser.id=" + this.$store.state.searchedUser.id);
         }
-        photoService
-            .getPhotosByUserId(this.$store.state.searchedUser.id)
-            .then(response => {
-                this.photos = response.data;
-            })
+        this.loadUserData(this.$route.params.id);
     },
     beforeRouteUpdate(to, from, next) {
-        // the 'to' param is a route object for the route we want to navigate to
         console.log('Before route update:', to.params.id);
         console.log(to.query);
-        UserGateway.getUserById(to.params.id)
-            .then(response => {
-                this.users = response.data;
-            })
-
-        // this.users[0].id = to.params.id;
-        // this.$store.commit('SET_SEARCHED_USER', )
-        photoService
-            .getPhotosByUserId(to.params.id)
-            .then(response => {
-                this.photos = response.data;
-            })
+        this.loadUserData(to.params.id);
         next();
+    },
+    methods: {
+        loadUserData(id) {
+            UserGateway.getUserById(id)
+                .then(response => {
+                    this.user = response.data;
+                })
+            photoService
+                .getPhotosByUserId(id)
+                .then(response => {
+                    this.photos = response.data;
+                })
+        }
     }
 };
 </script>
