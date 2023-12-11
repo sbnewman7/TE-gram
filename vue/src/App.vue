@@ -1,5 +1,4 @@
 <template>
-
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
   <div id="navbar">
@@ -19,20 +18,19 @@
       <div class="dropdown-content">
         <router-link class="active-link" v-bind:to="{ name: 'home' }">Home</router-link>
         <router-link class="active-link"
-        v-bind:to="{ name: 'favorites-page', params: { id: this.$store.state.user.id } }">Favorites</router-link>
+          v-bind:to="{ name: 'favorites-page', params: { id: this.$store.state.user.id } }">Favorites</router-link>
         <router-link class="active-link" v-bind:to="{ name: 'login' }" v-if="$store.state.token == ''">Log in
         </router-link>
         <router-link class="active-link" v-bind:to="{ name: 'user', params: this.$store.state.user.id }"
-        v-if="$store.state.token != ''">User</router-link>
+          v-if="$store.state.token != ''">User</router-link>
         <router-link class="active-link" v-bind:to="{ name: 'photoupload' }">Photo Upload</router-link>
         <router-link class="active-link" v-bind:to="{ name: 'logout' }"
-        v-if="$store.state.token != ''">Logout</router-link>
+          v-if="$store.state.token != ''">Logout</router-link>
       </div>
-    </div> 
+    </div>
 
   </div>
   <router-view />
-
 </template>
 
 <script>
@@ -57,9 +55,7 @@ export default {
           if (response.status == 200) {
             this.users = response.data;
 
-            // console.log(this.users);
             this.$store.commit("SET_SEARCHED_USER", this.users);
-            // console.log(this.$store.state.searchedUser);
 
             // this.$router.push("/gallery");
             this.$router.push(`/users/${this.users.id}/photos`)
@@ -85,7 +81,6 @@ export default {
 </script>
 
 <style scoped>
-
 * {
   font-family: Roboto;
   --nav-color: #A25772;
@@ -133,7 +128,7 @@ export default {
 #search {
   width: 20vw;
   margin: 6px 10px 6px 10px;
-} 
+}
 
 /* Drop down menu bar  */
 .active-link {
@@ -158,6 +153,7 @@ export default {
   font-family: inherit;
   margin: 0;
 }
+
 .dropdown {
   font-size: 1.3rem;
   border: none;
@@ -174,7 +170,7 @@ export default {
   position: absolute;
   background-color: var(--nav-color);
   min-width: 80px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.4);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.4);
   z-index: 1;
 }
 
@@ -193,5 +189,4 @@ export default {
 .dropdown:hover .dropdown-content {
   display: block;
 }
-
 </style>
