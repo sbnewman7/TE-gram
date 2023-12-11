@@ -24,7 +24,7 @@
     </section>
     <section id="left-half">
       <div id="comment" v-for="comment in photo.comments" :key="comment.id">
-        <p v-html="converted(comment.commentBody)"></p>
+        <div v-html="renderMarkdown(comment.commentBody)"></div>
         <p>{{ formatDateTime(comment.timestamp) }} - {{ comment.username }}</p>
 
       </div>
@@ -35,6 +35,7 @@
     <br>
     <button id="submit" type="submit">Submit</button>
     <button v-if="showError" class="edit updated error">Limit one comment per photo.</button>
+    <!-- <p v-html="converted"></p> -->
   </form>
 </template>
 
@@ -64,7 +65,6 @@ export default {
         userId: this.$store.state.user.id,
       },
       showError: false,
-      rendered: ''
     }
   },
   methods: {
@@ -105,7 +105,9 @@ export default {
               .then((response) => {
                 this.newComment.username = response.data.username;
               })
-            this.photo.comments.unshift(this.newComment);
+            const originalObject = this.newComment;
+            const newComment = Object.assign({}, originalObject);
+            this.photo.comments.unshift(newComment);
           }
           else {
             this.showError = true;
@@ -118,18 +120,6 @@ export default {
     clearForm() {
       this.newComment.commentBody = '';
     },
-
-    // this method caused a bug where the username was flickering and changing
-    // I think b/c it was doing an async db call repeatedly within a for loop.
-    // I solved it by creating a dto that included username.
-    // getUserById(userId) {
-    //   UserGateway
-    //     .getUserById(userId)
-    //     .then((response) => {
-    //       this.commentUser = response.data.username;
-    //     })
-    //   return this.commentUser;
-    // },
 
     formatDateTime(dateTimeString) {
       const date = new Date(dateTimeString);
@@ -144,21 +134,20 @@ export default {
       const formattedDateTime = `${month}-${day}-${year} ${hours}:${minutes} ${ampm}`;
       return formattedDateTime;
     },
-    converted(commentBody) {
+    renderMarkdown(commentBody) {
       const md = markdownit();
-      this.rendered = md.render(commentBody);
-      console.log(this.rendered);
-      return this.rendered;
+      console.log(md.render(commentBody));
+      return md.render(commentBody);
     }
 
   },
-  computed: {
-    // converted(commentBody) {
-    //   const md = markdownit();
-    //   this.rendered = md.render(commentBody);
-    //   return this.rendered;
-    // }
-  },
+  // computed: {
+  //   converted() {
+  //     const md = markdownit();
+  //     this.rendered = md.render("**bold**");
+  //     return this.rendered;
+  //   }
+  // },
   created() {
     this.photo.id = this.$route.params.id;
     PhotosGateway
