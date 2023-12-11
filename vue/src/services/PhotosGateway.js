@@ -16,4 +16,6 @@ export default {
     getPhotoByPhotoId(photoId) {
         return axios.get(`/photos/${photoId}`);
     }
+
+
 }

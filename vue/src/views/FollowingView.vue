@@ -14,7 +14,7 @@ import photoService from "../services/PhotosGateway"
 
 
 export default {
-    name: "Home",
+    name: "Following",
     components: {
         PhotoCard
     },

@@ -24,6 +24,7 @@
         <router-link class="active-link" v-bind:to="{ name: 'home' }">Home</router-link>
         <router-link class="active-link"
           v-bind:to="{ name: 'favorites-page', params: { id: this.$store.state.user.id } }">Favorites</router-link>
+        <router-link class="active-link" v-bind:to="{ name: 'following-page' }">Following</router-link>
         <router-link class="active-link" v-bind:to="{ name: 'login' }" v-if="$store.state.token == ''">Log in
         </router-link>
         <router-link class="active-link" v-bind:to="{ name: 'user', params: this.$store.state.user.id }"
@@ -40,6 +41,7 @@
 
 <script>
 import AuthService from "./services/AuthService";
+
 
 export default {
   data() {

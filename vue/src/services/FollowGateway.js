@@ -16,6 +16,10 @@ export default {
 
     removeFollower(followerUserId, followedUserId) {
         return axios.delete(`/unfollow/${followerUserId}/${followedUserId}`);
+    },
+
+    getPhotosByFollowerUserId(followerUserId) {
+        return axios.get(`/following/${followerUserId}/photos`);
     }
 
 }
