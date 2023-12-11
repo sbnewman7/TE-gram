@@ -4,10 +4,14 @@
       <button @click="goToHome" class="logo-button">
         <img class="logo" src="../img/Telogo_2.gif" alt="Home">
       </button>
-      <div id="searchControl">
-        <img src="../img/magnifyingGlass.png" alt="magnifying glass" id="magGlass" @click="search">
-        <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
+      <div id="search-control">
+        <!-- <img src="../img/magnifyingGlass.png" alt="magnifying glass" id="magGlass" @click="search"> -->
+        <i class="fa-solid fa-magnifying-glass" @click="search"></i>
         <input type="text" id="search" maxlength="50" v-model="username" v-on:keyup.enter="search">
+      </div>
+      <div id="user-message">
+        <p v-if="emptySearch">Please type in a valid username.</p>
+        <p v-if="userNotFound">User not found.</p>
       </div>
       <section>
         <router-link class="active-link" v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp;
@@ -34,13 +38,19 @@ export default {
   data() {
     return {
       username: "",
-      users: []
+      users: [],
+      emptySearch: false,
+      userNotFound: false
     };
   },
   methods: {
     search() {
       if (this.username === "") {
-        alert("Please type in a valid username.");
+        // alert("Please type in a valid username.");
+        this.emptySearch = true;
+        window.setTimeout(() => {
+          this.emptySearch = false;
+        }, 2000);
         return;
       }
       AuthService
@@ -48,19 +58,19 @@ export default {
         .then(response => {
           if (response.status == 200) {
             this.users = response.data;
-
-            // console.log(this.users);
             this.$store.commit("SET_SEARCHED_USER", this.users);
-            // console.log(this.$store.state.searchedUser);
-
             // this.$router.push("/gallery");
             this.$router.push(`/users/${this.users.id}/photos`)
             this.username = "";
-
           }
         })
         .catch(error => {
-          alert("User not found. " + error);
+          // alert("User not found. " + error);
+          this.userNotFound = true;
+          window.setTimeout(() => {
+            this.userNotFound = false;
+          }, 2000);
+          this.username = "";
         });
     },
 
@@ -80,11 +90,6 @@ export default {
 * {
   font-family: Roboto;
 }
-
-i.fa-magnifying-glass {
-  font-size: 4em;
-}
-
 
 .active-link {
   text-decoration: none;
@@ -127,19 +132,37 @@ body {
   margin-top: 4px;
 }
 
-#searchControl {
+#search-control {
   display: flex;
   justify-content: center;
 }
 
-#magGlass {
+/* #magGlass {
   width: 25px;
   height: 25px;
   margin-top: 4px;
+} */
+
+.fa-magnifying-glass {
+  font-size: 1em;
+  color: white;
 }
 
 #search {
+  height: 22px;
   width: 20vw;
   margin: 6px 10px 6px 10px;
+}
+
+#user-message {
+  position: absolute;
+  width: 30vw;
+  top: 50px;
+  left: 35vw;
+  background-color: #4f6;
+  color: white;
+  font-size: 20px;
+  padding-left: 20px;
+  border-radius: 5px;
 }
 </style>

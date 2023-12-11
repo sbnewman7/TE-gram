@@ -27,11 +27,11 @@ export default {
         }
     },
     created() {
-        if (this.$route.params.id == this.$store.state.searchedUser.id) {
-            console.log("ids match: param.id=" + this.$route.params.id + ", searchedUser.id=" + this.$store.state.searchedUser.id);
-        } else {
-            console.log("ids don't match: param.id=" + this.$route.params.id + ", searchedUser.id=" + this.$store.state.searchedUser.id);
-        }
+        // if (this.$route.params.id == this.$store.state.searchedUser.id) {
+        //     console.log("ids match: param.id=" + this.$route.params.id + ", searchedUser.id=" + this.$store.state.searchedUser.id);
+        // } else {
+        //     console.log("ids don't match: param.id=" + this.$route.params.id + ", searchedUser.id=" + this.$store.state.searchedUser.id);
+        // }
         photoService
             .getPhotosByUserId(this.$store.state.searchedUser.id)
             .then(response => {

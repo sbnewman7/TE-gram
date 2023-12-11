@@ -43,7 +43,6 @@ export default {
     methods: {
         follow() {
             if (this.$store.state.token !== '') {
-                console.log("in follow(), ids = " + this.$store.state.user.id + ", " + this.userId);
                 FollowGateway.addFollower(this.$store.state.user.id, this.userId);
                 this.following = true;
             }
@@ -59,7 +58,6 @@ export default {
         if (this.$store.state.token !== '') {
             FollowGateway.getUserFollowed(this.$store.state.user.id, this.userId)
                 .then((response) => {
-                    // if (response.data) this.following = true;
                     this.following = response.data;
                 })
         }
