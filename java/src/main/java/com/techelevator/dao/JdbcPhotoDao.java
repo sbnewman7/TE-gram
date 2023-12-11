@@ -76,6 +76,36 @@ public class JdbcPhotoDao implements PhotoDao {
         return photos;
     }
 
+
+    @Override
+    public List<Photo> getPhotosByFollowerUserId(int followerUserId) {
+
+        final String sql = "SELECT photo_id, caption, pic_url " +
+                "FROM followers INNER JOIN photo_feed ON followed_user_id = user_id " +
+                "WHERE follower_user_id = ?;";
+
+        final List<Photo> photos = new ArrayList<>();
+
+        try {
+
+            final SqlRowSet results = this.jdbcTemplate.queryForRowSet(sql, followerUserId);
+            while (results.next()) {
+                final Photo photo = new Photo();
+                photo.setId(results.getInt("photo_id"));
+                photo.setCaption(results.getString("caption"));
+                photo.setPhotoUrl(results.getString("pic_url"));
+                photo.setDatePublished(LocalDateTime.now());
+                photo.setComments(getCommentsByPhotoId(results.getInt("photo_id")));
+
+                photos.add(photo);
+            }
+
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        }
+        return photos;
+    }
+
     @Override
     public Photo getPhotoByPhotoId(int photoId) {
 
@@ -147,4 +177,6 @@ public class JdbcPhotoDao implements PhotoDao {
         }
         return photoID;
     }
+
+
 }

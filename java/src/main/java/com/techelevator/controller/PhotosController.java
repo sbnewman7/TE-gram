@@ -43,4 +43,9 @@ public class PhotosController {
         return photoDao.getPhotoByPhotoId(photoId);
     }
 
+    @GetMapping("/following/{followerUserId}/photos")
+    public List<Photo> getPhotosByFollowerId(@PathVariable int followerUserId){
+        return photoDao.getPhotosByFollowerUserId(followerUserId);
+    }
+
 }

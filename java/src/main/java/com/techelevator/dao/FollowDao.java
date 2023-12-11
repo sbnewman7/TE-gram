@@ -7,6 +7,7 @@ public interface FollowDao {
 
     List<Integer> getFollowed(int followerUserId);
 
+
     boolean getUserFollowed(int followerUserId, int followedUserId);
 
     void addFollower(int followerUserId, int followedUserId);
