@@ -1,6 +1,6 @@
 <template>
     <div class="gallery">
-        <user-details />
+        <user-details v-model:user="users" />
         <section class="photo-list">
             <photo-card class="photo" :photo="photo" v-for="photo in photos" :key="photo.id" />
         </section>
@@ -11,9 +11,9 @@
 import UserDetails from "../components/UserDetails.vue";
 import PhotoCard from "../components/PhotoCard.vue"
 import photoService from "../services/PhotosGateway"
+import UserGateway from "../services/UserGateway";
 
 export default {
-    // import AuthService from "./services/AuthService";
 
     name: "Gallery",
     components: {
@@ -39,11 +39,22 @@ export default {
             })
     },
     beforeRouteUpdate(to, from, next) {
-        console.log("in beforeRouteUpdate event");
         // the 'to' param is a route object for the route we want to navigate to
-        // this.loadLandmarks(to.query.username);
-        // console.log(to.query);
-        // next();
+        console.log('Before route update:', to.params.id);
+        console.log(to.query);
+        UserGateway.getUserById(to.params.id)
+            .then(response => {
+                this.users = response.data;
+            })
+
+        // this.users[0].id = to.params.id;
+        // this.$store.commit('SET_SEARCHED_USER', )
+        photoService
+            .getPhotosByUserId(to.params.id)
+            .then(response => {
+                this.photos = response.data;
+            })
+        next();
     }
 };
 </script>
