@@ -21,15 +21,6 @@
 
         <h1>{{ photo.caption }}</h1>
       </div>
-      <form v-on:submit.prevent="addComment">
-        <textarea class="comment" v-model="newComment.commentBody" rows="4" cols="50"
-          placeholder="add comment"></textarea>
-        <br>
-        <button id="submit" type="submit">Add Comment</button>
-        <button v-if="showError" class="edit updated error">Limit one comment per photo.</button>
-
-      </form>
-
     </section>
     <section id="left-half">
       <div id="comment" v-for="comment in photo.comments" :key="comment.id">
@@ -39,6 +30,12 @@
       </div>
     </section>
   </div>
+  <form class="comment-form" v-on:submit.prevent="addComment">
+    <textarea class="comment" v-model="newComment.commentBody" rows="4" cols="50" placeholder="Add a comment"></textarea>
+    <br>
+    <button id="submit" type="submit">Submit</button>
+    <button v-if="showError" class="edit updated error">Limit one comment per photo.</button>
+  </form>
 </template>
 
 <script>
@@ -115,6 +112,9 @@ export default {
             }, 3000)
           }
         })
+    },
+    clearForm() {
+      this.newComment.commentBody = '';
     },
 
     // this method caused a bug where the username was flickering and changing
@@ -206,9 +206,37 @@ section {
   padding: 10px 0 8px 15px;
 }
 
+.comment-form {
+  display: flex;
+  margin-left: 30px;
+  align-content: space-between;
+
+}
+
 .comment {
   font-size: 16px;
+  background-color: #9EB8D9;
+  color: white;
+  margin-right: 40px;
+  width: 80vw;
+  font-size: 18px;
+  border: #7c93c3 3px solid;
+
 }
+
+#submit {
+  margin-top: 20px;
+  font-size: 14px;
+  max-height: 40px;
+
+}
+
+
+::placeholder {
+  color: white;
+  font-size: 18px;
+}
+
 
 #comment>p {
   color: rgb(55, 55, 157);
@@ -299,7 +327,7 @@ section {
   background-color: rgb(225, 42, 42);
 }
 
-#submit {
+button {
   border: #7C93C3 3px solid;
   border-radius: 4px;
   padding: 5px 2vw 5px 2vw;

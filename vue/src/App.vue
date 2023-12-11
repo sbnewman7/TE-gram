@@ -1,34 +1,41 @@
 <template>
-  <div id="capstone-app">
-    <div id="nav">
-      <button @click="goToHome" class="logo-button">
-        <img class="logo" src="../img/Telogo_2.gif" alt="Home">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <div id="navbar">
+    <button @click="goToHome" class="logo-button">
+      <img class="logo" src="../img/Telogo_2.gif" alt="Home">
+    </button>
+    <div id="search-control">
+      <!-- <img src="../img/magnifyingGlass.png" alt="magnifying glass" id="magGlass" @click="search"> -->
+      <i class="fa-solid fa-magnifying-glass" @click="search"></i>
+      <input type="text" id="search" maxlength="50" v-model="username" v-on:keyup.enter="search">
+    </div>
+    <div id="user-message">
+      <p v-if="emptySearch">Please type in a valid username.</p>
+      <p v-if="userNotFound">User not found.</p>
+    </div>
+
+    <div class="dropdown">
+      <button class="dropbtn">
+        <!-- <i class="fa fa-caret-down"></i> -->
+        <i class="fa-solid fa-bars"></i>
       </button>
-      <div id="search-control">
-        <!-- <img src="../img/magnifyingGlass.png" alt="magnifying glass" id="magGlass" @click="search"> -->
-        <i class="fa-solid fa-magnifying-glass" @click="search"></i>
-        <input type="text" id="search" maxlength="50" v-model="username" v-on:keyup.enter="search">
-      </div>
-      <div id="user-message">
-        <p v-if="emptySearch">Please type in a valid username.</p>
-        <p v-if="userNotFound">User not found.</p>
-      </div>
-      <section>
-        <router-link class="active-link" v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp;
+      <div class="dropdown-content">
+        <router-link class="active-link" v-bind:to="{ name: 'home' }">Home</router-link>
         <router-link class="active-link"
-          v-bind:to="{ name: 'favorites-page', params: { id: this.$store.state.user.id } }">Favorites</router-link>&nbsp;|&nbsp;
+          v-bind:to="{ name: 'favorites-page', params: { id: this.$store.state.user.id } }">Favorites</router-link>
         <router-link class="active-link" v-bind:to="{ name: 'login' }" v-if="$store.state.token == ''">Log in
         </router-link>
-        <!-- &nbsp;|&nbsp; -->
         <router-link class="active-link" v-bind:to="{ name: 'user', params: this.$store.state.user.id }"
-          v-if="$store.state.token != ''">User</router-link> &nbsp;|&nbsp;
-        <router-link class="active-link" v-bind:to="{ name: 'photoupload' }">Photo Upload</router-link>&nbsp;|&nbsp;
+          v-if="$store.state.token != ''">User</router-link>
+        <router-link class="active-link" v-bind:to="{ name: 'photoupload' }">Photo Upload</router-link>
         <router-link class="active-link" v-bind:to="{ name: 'logout' }"
           v-if="$store.state.token != ''">Logout</router-link>
-      </section>
+      </div>
     </div>
-    <router-view />
+
   </div>
+  <router-view />
 </template>
 
 <script>
@@ -89,36 +96,25 @@ export default {
 <style scoped>
 * {
   font-family: Roboto;
+  --nav-color: #A25772;
+  --font-size: 2rem;
 }
 
-.active-link {
-  text-decoration: none;
-  color: #FFFFFF;
-  font-weight: bold;
-}
-
-.active-link:hover {
-  color: #ABB9C8;
-}
-
-body {
-  background-color: #EEF5FF;
-  margin: 0;
-  padding: 0;
-}
-
-#nav {
-  background-color: #A25772;
-  height: 7vh;
-  font-size: 2rem;
+/* Navigation bar */
+#navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: azure;
+  background-color: var(--nav-color);
+  overflow: hidden;
+  height: 7vh;
+  font-size: var(--font-size);
   padding: 0px 3vh 0px 3vh;
-  min-height: 50px;
+  /* min-height: 50px; */
+  border: 0;
 }
 
+/* fancy Home button */
 .logo-button {
   border: none;
   background: none;
@@ -133,6 +129,7 @@ body {
 }
 
 #search-control {
+  /* Search control - mag glass and input */
   display: flex;
   justify-content: center;
 }
@@ -154,6 +151,40 @@ body {
   margin: 6px 10px 6px 10px;
 }
 
+/* Drop down menu bar  */
+.active-link {
+  float: left;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 10px 5px 10px;
+}
+
+.dropdown {
+  float: right;
+  overflow: hidden;
+}
+
+.dropbtn {
+  font-size: var(--font-size);
+  border: none;
+  outline: none;
+  color: white;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.dropdown {
+  font-size: 1.3rem;
+  border: none;
+  outline: none;
+  color: white;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
 #user-message {
   position: absolute;
   width: 30vw;
@@ -164,5 +195,31 @@ body {
   font-size: 20px;
   padding-left: 20px;
   border-radius: 5px;
+}
+
+.dropdown-content {
+  right: 0;
+  display: none;
+  position: absolute;
+  background-color: var(--nav-color);
+  min-width: 80px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: white;
+  text-decoration: none;
+  display: block;
+  text-align: right;
+}
+
+.dropdown-content a:hover {
+  color: #ABB9C8;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
 }
 </style>
