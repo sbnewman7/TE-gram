@@ -1,6 +1,8 @@
 <template>
     <article>
-        <img :src="photo.photoUrl" @click="goToDetails">
+        <div class="photo-container">
+        <img :src="photo.photoUrl" @click="goToDetails" class="photo">
+        </div>
         <div class="like-caption">
             <img v-if="liked" v-on:click="unlike" class="heart"
                 src="https://upload.wikimedia.org/wikipedia/commons/3/35/Red-simple-heart-symbol-only.png" alt="">
@@ -97,6 +99,7 @@ export default {
 
 <style scoped>
 article {
+    max-width: 400px;
     display: flex;
     background-color: #9eb8d9;
     flex-direction: column;
@@ -136,17 +139,21 @@ div {
 .like-caption {
     display: flex;
     align-items: center;
+    width:350px;
 }
 
 .star {
     max-width: 43px;
     border: none;
+    margin-right: 5px;
 }
 
 .star-dark {
     max-width: 43px;
     opacity: 30%;
     border: none;
+    margin-right: 5px;
+
 }
 
 img {
@@ -157,8 +164,9 @@ img {
 }
 
 h2 {
-    margin: 0 10px;
     width: 30vh;
+    word-wrap: break-word;
+    padding-right: 15px;
 }
 
 span {
@@ -167,6 +175,14 @@ span {
     width: 30vh;
     box-sizing: border-box;
     padding: 1vh 1vh 3vh 1vh;
+}
 
+.photo-container{
+height:250px;
+width:400px;
+}
+.photo{
+  object-fit: cover;
+  overflow: hidden;
 }
 </style>
