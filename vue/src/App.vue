@@ -1,13 +1,12 @@
 <template>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
   <div id="navbar">
     <button @click="goToHome" class="logo-button">
       <img class="logo" src="../img/Telogo_2.gif" alt="Home">
     </button>
     <div id="search-control">
-      <!-- <img src="../img/magnifyingGlass.png" alt="magnifying glass" id="magGlass" @click="search"> -->
-      <i class="fa-solid fa-magnifying-glass" @click="search"></i>
+      <button @click="search" class="search-button">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
       <input type="text" id="search" maxlength="50" v-model="username" v-on:keyup.enter="search">
     </div>
     <div id="user-message">
@@ -17,33 +16,29 @@
 
     <div class="dropdown">
       <button class="dropbtn">
-        <!-- <i class="fa fa-caret-down"></i> -->
         <i class="fa-solid fa-bars"></i>
       </button>
       <div class="dropdown-content">
         <router-link class="active-link" v-bind:to="{ name: 'home' }">Home</router-link>
         <router-link class="active-link"
-          v-bind:to="{ name: 'favorites-page', params: { id: this.$store.state.user.id } }">Favorites</router-link>
+          v-bind:to="{ name: 'favorites-page', params: { id: $store.state.user.id } }">Favorites</router-link>
         <router-link class="active-link"
-          v-bind:to="{ name: 'following-page', params: { followerUserId: this.$store.state.user.id } }">Following</router-link>
-        <!-- <div v-on:click="this.$router.push(`/following/${this.$store.state.user.id}/photos`)">Following</div> -->
-        <router-link class="active-link" v-bind:to="{ name: 'login' }" v-if="$store.state.token == ''">Log in
-        </router-link>
-        <router-link class="active-link" v-bind:to="{ name: 'user', params: this.$store.state.user.id }"
+          v-bind:to="{ name: 'following-page', params: { followerUserId: $store.state.user.id } }">Following</router-link>
+        <router-link class="active-link" v-bind:to="{ name: 'login' }" v-if="$store.state.token == ''">Log
+          in</router-link>
+        <router-link class="active-link" v-bind:to="{ name: 'user', params: { id: $store.state.user.id } }"
           v-if="$store.state.token != ''">User</router-link>
         <router-link class="active-link" v-bind:to="{ name: 'photoupload' }">Photo Upload</router-link>
         <router-link class="active-link" v-bind:to="{ name: 'logout' }"
           v-if="$store.state.token != ''">Logout</router-link>
       </div>
     </div>
-
   </div>
   <router-view />
 </template>
 
 <script>
 import AuthService from "./services/AuthService";
-
 
 export default {
   data() {
@@ -57,7 +52,6 @@ export default {
   methods: {
     search() {
       if (this.username === "") {
-        // alert("Please type in a valid username.");
         this.emptySearch = true;
         window.setTimeout(() => {
           this.emptySearch = false;
@@ -70,13 +64,11 @@ export default {
           if (response.status == 200) {
             this.users = response.data;
             this.$store.commit("SET_SEARCHED_USER", this.users);
-            // this.$router.push("/gallery");
-            this.$router.push(`/users/${this.users.id}/photos`)
+            this.$router.push(`/users/${this.users.id}/photos`);
             this.username = "";
           }
         })
         .catch(error => {
-          // alert("User not found. " + error);
           this.userNotFound = true;
           window.setTimeout(() => {
             this.userNotFound = false;
@@ -88,11 +80,6 @@ export default {
     goToHome() {
       this.$router.push({ name: 'home' });
     },
-    // goToFavorites() {
-    //   this.$store.commit('PAGE_FILTER', true);
-    //   console.log(this.$store.state.user.id);
-    //   this.$router.push({ name: 'favorites-page', params: { id: this.$store.state.user.id } });
-    // }
   }
 };
 </script>
@@ -104,7 +91,6 @@ export default {
   --font-size: 2rem;
 }
 
-/* Navigation bar */
 #navbar {
   display: flex;
   justify-content: space-between;
@@ -114,11 +100,8 @@ export default {
   height: 7vh;
   font-size: var(--font-size);
   padding: 0px 3vh 0px 3vh;
-  /* min-height: 50px; */
-  border: 0;
 }
 
-/* fancy Home button */
 .logo-button {
   border: none;
   background: none;
@@ -133,16 +116,15 @@ export default {
 }
 
 #search-control {
-  /* Search control - mag glass and input */
   display: flex;
   justify-content: center;
 }
 
-/* #magGlass {
-  width: 25px;
-  height: 25px;
-  margin-top: 4px;
-} */
+.search-button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
 
 .fa-magnifying-glass {
   font-size: 1em;
@@ -155,13 +137,16 @@ export default {
   margin: 6px 10px 6px 10px;
 }
 
-/* Drop down menu bar  */
-.active-link {
-  float: left;
+#user-message {
+  position: absolute;
+  width: 30vw;
+  top: 50px;
+  left: 35vw;
+  background-color: #4f6;
   color: white;
-  text-align: center;
-  text-decoration: none;
-  margin: 5px 10px 5px 10px;
+  font-size: 20px;
+  padding-left: 20px;
+  border-radius: 5px;
 }
 
 .dropdown {
@@ -177,28 +162,6 @@ export default {
   background-color: inherit;
   font-family: inherit;
   margin: 0;
-}
-
-.dropdown {
-  font-size: 1.3rem;
-  border: none;
-  outline: none;
-  color: white;
-  background-color: inherit;
-  font-family: inherit;
-  margin: 0;
-}
-
-#user-message {
-  position: absolute;
-  width: 30vw;
-  top: 50px;
-  left: 35vw;
-  background-color: #4f6;
-  color: white;
-  font-size: 20px;
-  padding-left: 20px;
-  border-radius: 5px;
 }
 
 .dropdown-content {
@@ -226,4 +189,5 @@ export default {
 .dropdown:hover .dropdown-content {
   display: block;
 }
-</style>
+
+/* ... (your existing styles) ... */</style>
