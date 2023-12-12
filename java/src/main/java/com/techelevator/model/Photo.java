@@ -10,7 +10,17 @@ public class Photo {
     private String photoUrl;
     private LocalDateTime datePublished;
 
+    private boolean isPrivate;
+
     private ArrayList<CommentDto> comments;
+
+    public boolean isPrivate() {
+        return isPrivate;
+    }
+
+    public void setPrivate(boolean aPrivate) {
+        isPrivate = aPrivate;
+    }
 
     public int getId() {
         return id;

@@ -23,17 +23,16 @@
       </button>
       <div class="dropdown-content">
         <router-link class="active-link" v-bind:to="{ name: 'home' }">Home</router-link>
-        <router-link class="active-link"
-          v-bind:to="{ name: 'favorites-page', params: { id: this.$store.state.user.id } }">Favorites</router-link>
-        <router-link class="active-link"
-          v-bind:to="{ name: 'following-page', params: { followerUserId: this.$store.state.user.id } }">Following</router-link>
-        <router-link class="active-link" v-bind:to="{ name: 'login' }" v-if="$store.state.token == ''">Log in
+        <router-link class="active-link" v-if="!loggedIn" v-bind:to="{ name: 'login' }">Log in
         </router-link>
-        <router-link class="active-link" v-bind:to="{ name: 'user', params: this.$store.state.user.id }"
-          v-if="$store.state.token != ''">User</router-link>
-        <router-link class="active-link" v-bind:to="{ name: 'photoupload' }">Photo Upload</router-link>
-        <router-link class="active-link" v-bind:to="{ name: 'logout' }"
-          v-if="$store.state.token != ''">Logout</router-link>
+        <router-link class="active-link" v-if="loggedIn"
+          v-bind:to="{ name: 'favorites-page', params: { id: this.$store.state.user.id } }">Favorites</router-link>
+        <router-link class="active-link" v-if="loggedIn"
+          v-bind:to="{ name: 'following-page', params: { followerUserId: this.$store.state.user.id } }">Following</router-link>
+        <router-link class="active-link" v-if="loggedIn"
+          v-bind:to="{ name: 'user', params: this.$store.state.user.id }">User</router-link>
+        <router-link class="active-link" v-if="loggedIn" v-bind:to="{ name: 'photoupload' }">Photo Upload</router-link>
+        <router-link class="active-link" v-if="loggedIn" v-bind:to="{ name: 'logout' }">Logout</router-link>
       </div>
     </div>
 
@@ -44,7 +43,6 @@
 <script>
 import AuthService from "./services/AuthService";
 
-
 export default {
   data() {
     return {
@@ -54,6 +52,12 @@ export default {
       userNotFound: false
     };
   },
+  computed: {
+    loggedIn() {
+      return this.$store.state.token != '';
+    }
+  },
+
   methods: {
     search() {
       if (this.username === "") {
@@ -111,7 +115,7 @@ export default {
   height: 7vh;
   font-size: var(--font-size);
   padding: 0px 3vh 0px 3vh;
-  /* min-height: 50px; */
+  min-height: 50px;
   border: 0;
 }
 

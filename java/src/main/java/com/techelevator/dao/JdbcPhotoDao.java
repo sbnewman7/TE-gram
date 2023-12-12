@@ -25,7 +25,7 @@ public class JdbcPhotoDao implements PhotoDao {
     @Override
     public List<Photo> getAll() {
 
-        final String sql = "SELECT photo_id, caption, pic_url FROM photo_feed";
+        final String sql = "SELECT photo_id, caption, pic_url, is_private, date_time FROM photo_feed";
 
         final List<Photo> photos = new ArrayList<>();
 
@@ -33,13 +33,7 @@ public class JdbcPhotoDao implements PhotoDao {
 
             final SqlRowSet results = this.jdbcTemplate.queryForRowSet(sql);
             while (results.next()) {
-                final Photo photo = new Photo();
-                photo.setId(results.getInt("photo_id"));
-                photo.setCaption(results.getString("caption"));
-                photo.setPhotoUrl(results.getString("pic_url"));
-                photo.setDatePublished(LocalDateTime.now());
-                photo.setComments(getCommentsByPhotoId(results.getInt("photo_id")));
-
+                final Photo photo = mapRowToPhoto(results);
                 photos.add(photo);
             }
 
@@ -49,10 +43,12 @@ public class JdbcPhotoDao implements PhotoDao {
         return photos;
     }
 
+
+
     @Override
     public List<Photo> getPhotosByUserId(int userId) {
 
-        final String sql = "SELECT photo_id, caption, pic_url FROM photo_feed WHERE user_id = ?";
+        final String sql = "SELECT photo_id, caption, pic_url, date_time, is_private FROM photo_feed WHERE user_id = ?";
 
         final List<Photo> photos = new ArrayList<>();
 
@@ -60,13 +56,7 @@ public class JdbcPhotoDao implements PhotoDao {
 
             final SqlRowSet results = this.jdbcTemplate.queryForRowSet(sql, userId);
             while (results.next()) {
-                final Photo photo = new Photo();
-                photo.setId(results.getInt("photo_id"));
-                photo.setCaption(results.getString("caption"));
-                photo.setPhotoUrl(results.getString("pic_url"));
-                photo.setDatePublished(LocalDateTime.now());
-                photo.setComments(getCommentsByPhotoId(results.getInt("photo_id")));
-
+                final Photo photo = mapRowToPhoto(results);
                 photos.add(photo);
             }
 
@@ -110,20 +100,14 @@ public class JdbcPhotoDao implements PhotoDao {
     @Override
     public Photo getPhotoByPhotoId(int photoId) {
 
-        final String sql = "SELECT caption, pic_url, date_time FROM photo_feed WHERE photo_id = ?";
+        final String sql = "SELECT photo_id, caption, pic_url, date_time, is_private FROM photo_feed WHERE photo_id = ?";
 
-        final Photo photo = new Photo();
+        Photo photo = new Photo();
         try {
 
             final SqlRowSet results = this.jdbcTemplate.queryForRowSet(sql, photoId);
             if (results.next()) {
-
-                photo.setId(photoId);
-                photo.setCaption(results.getString("caption"));
-                photo.setPhotoUrl(results.getString("pic_url"));
-                photo.setDatePublished(results.getTimestamp("date_time").toLocalDateTime());
-                photo.setComments(getCommentsByPhotoId(photoId));
-
+                photo = mapRowToPhoto(results);
 
             }
 
@@ -166,11 +150,11 @@ public class JdbcPhotoDao implements PhotoDao {
 
     @Override
     public int addPhoto(Photo photo) {
-        final String sql = "INSERT INTO photo_feed(user_id, date_time, caption, pic_url) " +
-                "VALUES (?, ?, ?, ?) RETURNING photo_id;";
+        final String sql = "INSERT INTO photo_feed(user_id, date_time, caption, pic_url, is_private) " +
+                "VALUES (?, ?, ?, ?, ?) RETURNING photo_id;";
         int photoID = 0;
         try {
-            photoID = jdbcTemplate.queryForObject(sql, int.class, photo.getUserId(), photo.getDatePublished(), photo.getCaption(), photo.getPhotoUrl());
+            photoID = jdbcTemplate.queryForObject(sql, int.class, photo.getUserId(), photo.getDatePublished(), photo.getCaption(), photo.getPhotoUrl(), photo.isPrivate());
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
         } catch (DataIntegrityViolationException e) {
@@ -179,5 +163,15 @@ public class JdbcPhotoDao implements PhotoDao {
         return photoID;
     }
 
+    private Photo mapRowToPhoto(SqlRowSet results) {
+        final Photo photo = new Photo();
+        photo.setPrivate(results.getBoolean("is_private"));
+        photo.setId(results.getInt("photo_id"));
+        photo.setCaption(results.getString("caption"));
+        photo.setPhotoUrl(results.getString("pic_url"));
+        photo.setDatePublished(results.getTimestamp("date_time").toLocalDateTime());
+        photo.setComments(getCommentsByPhotoId(results.getInt("photo_id")));
+        return photo;
+    }
 
 }
