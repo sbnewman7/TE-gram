@@ -24,6 +24,7 @@ CREATE TABLE photo_feed (
 	date_time timestamp DEFAULT current_timestamp,
 	caption varchar(50) NOT NULL,
 	pic_url varchar(300) NOT NULL,
+	is_private boolean NOT NULL DEFAULT false,
 	-- private varchar(10) DEFAULT 'public'
 	
 	FOREIGN KEY (user_id) REFERENCES users(user_id)
