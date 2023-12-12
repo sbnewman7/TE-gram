@@ -2,9 +2,12 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
   <div id="navbar">
-    <button @click="goToHome" class="logo-button">
-      <img class="logo" src="../img/Telogo_2.gif" alt="Home">
-    </button>
+    <div id="logo-container">
+      <button @click="goToHome" class="logo-button">
+        <img class="logo" src="../img/Telogo_2.gif" alt="Home">
+      </button>
+      <p id="logo-title">TE-gram</p>
+    </div>
     <div id="search-control">
       <span @click="search">
         <i class="fa-solid fa-magnifying-glass"></i>
@@ -103,6 +106,16 @@ export default {
   font-family: Roboto;
   --nav-color: #A25772;
   --font-size: 2rem;
+}
+
+#logo-container {
+  display: flex;
+}
+
+#logo-title {
+  color: #bcd9ff;
+  font-family: Kanit;
+  font-size: 2.2rem;
 }
 
 /* Navigation bar */
