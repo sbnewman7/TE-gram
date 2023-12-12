@@ -137,7 +137,6 @@ export default {
     },
     renderMarkdown(commentBody) {
       const md = markdownit();
-      console.log(md.render(commentBody));
       return md.render(commentBody);
     },
     deletePhoto() {

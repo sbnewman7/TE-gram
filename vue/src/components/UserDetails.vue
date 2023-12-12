@@ -56,7 +56,6 @@ export default {
         }
     },
     created() {
-        console.log("user prop = " + this.user);
         if (this.$store.state.token !== '') {
             FollowGateway.getUserFollowed(this.$store.state.user.id, this.userId)
                 .then((response) => {

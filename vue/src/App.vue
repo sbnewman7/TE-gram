@@ -111,6 +111,7 @@ export default {
 <style>
 * {
   font-family: Roboto;
+  margin: 0;
   --nav-color: #A25772;
   --font-size: 2rem;
 }
@@ -185,11 +186,6 @@ export default {
   margin: 5px 10px 5px 10px;
 }
 
-.dropdown {
-  float: right;
-  overflow: hidden;
-}
-
 .dropbtn {
   font-size: var(--font-size);
   border: none;
@@ -201,6 +197,8 @@ export default {
 }
 
 .dropdown {
+  float: right;
+  overflow: hidden;
   font-size: 1.3rem;
   border: none;
   outline: none;
@@ -227,6 +225,7 @@ export default {
   display: none;
   position: absolute;
   background-color: var(--nav-color);
+  border-radius: 3px;
   min-width: 80px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.4);
   z-index: 1;

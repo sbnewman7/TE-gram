@@ -47,7 +47,6 @@ export default {
       photo.caption = this.caption;
       photo.photoUrl = this.imgUrl;
       photo.private = this.isPrivate;
-      console.log(photo);
       PhotosGateway
         .addPhoto(photo)
         .then(response => {
