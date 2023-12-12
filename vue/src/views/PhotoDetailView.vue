@@ -30,12 +30,13 @@
       </div>
     </section>
   </div>
+  <button v-if="$store.state.user.id == photo.userId" class="delete" v-on:click="deletePhoto">Delete Photo</button>
+
   <form class="comment-form" v-on:submit.prevent="addComment">
     <textarea class="comment" v-model="newComment.commentBody" rows="4" cols="50" placeholder="Add a comment"></textarea>
     <br>
     <button id="submit" type="submit">Submit</button>
     <button v-if="showError" class="edit updated error">Limit one comment per photo.</button>
-    <!-- <p v-html="converted"></p> -->
   </form>
 </template>
 
@@ -138,6 +139,16 @@ export default {
       const md = markdownit();
       console.log(md.render(commentBody));
       return md.render(commentBody);
+    },
+    deletePhoto() {
+      let text = "Are you sure you would like to delete this photo?";
+      if (confirm(text) == true) {
+        PhotosGateway.deletePhoto(this.photo.id);
+        this.$router.push("/");
+      } else {
+        alert("Delete canceled!");
+      }
+
     }
 
   },
@@ -186,6 +197,13 @@ section {
   margin: 15px;
 }
 
+.delete {
+  background-color: var(--nav-color);
+  color: white;
+  margin-bottom: 10px;
+  margin-left: 30px;
+}
+
 .photo-container {
   height: 50vh;
   width: 50vw;
@@ -196,6 +214,7 @@ section {
 .container {
   display: flex;
   margin: 15px;
+  margin-bottom: 0px;
 }
 
 #comment {

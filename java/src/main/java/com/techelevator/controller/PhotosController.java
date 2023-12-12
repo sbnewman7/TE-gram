@@ -42,6 +42,10 @@ public class PhotosController {
     public Photo getPhotoByPhotoId(@PathVariable int photoId){
         return photoDao.getPhotoByPhotoId(photoId);
     }
+    @DeleteMapping("/photo/{photoId}")
+    public int deletePhoto(@PathVariable int photoId){
+        return photoDao.deletePhoto(photoId);
+    }
 
     @GetMapping("/following/{followerUserId}/photos")
     public List<Photo> getPhotosByFollowerId(@PathVariable int followerUserId){

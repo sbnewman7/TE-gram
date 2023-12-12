@@ -100,7 +100,7 @@ public class JdbcPhotoDao implements PhotoDao {
     @Override
     public Photo getPhotoByPhotoId(int photoId) {
 
-        final String sql = "SELECT photo_id, caption, pic_url, date_time, is_private FROM photo_feed WHERE photo_id = ?";
+        final String sql = "SELECT user_id, photo_id, caption, pic_url, date_time, is_private FROM photo_feed WHERE photo_id = ?";
 
         Photo photo = new Photo();
         try {
@@ -108,6 +108,7 @@ public class JdbcPhotoDao implements PhotoDao {
             final SqlRowSet results = this.jdbcTemplate.queryForRowSet(sql, photoId);
             if (results.next()) {
                 photo = mapRowToPhoto(results);
+                photo.setUserId(results.getInt("user_id"));
 
             }
 
@@ -161,6 +162,27 @@ public class JdbcPhotoDao implements PhotoDao {
             throw new DaoException("Data integrity violation");
         }
         return photoID;
+    }
+
+    @Override
+    public int deletePhoto(int photoId) {
+        final String sql1 = "DELETE FROM comments WHERE photo_id = ?;";
+        final String sql2 = "DELETE FROM photo_favorites WHERE photo_id = ?;";
+        final String sql3 = "DELETE FROM photo_likes WHERE photo_id = ?;";
+        final String sql4 = "DELETE FROM photo_feed WHERE photo_id = ?;";
+        int rowsAffected;
+        try{
+            rowsAffected = jdbcTemplate.update(sql1, photoId);
+            rowsAffected += jdbcTemplate.update(sql2, photoId);
+            rowsAffected += jdbcTemplate.update(sql3, photoId);
+            rowsAffected += jdbcTemplate.update(sql4, photoId);
+
+        }  catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation");
+        }
+        return rowsAffected;
     }
 
     private Photo mapRowToPhoto(SqlRowSet results) {

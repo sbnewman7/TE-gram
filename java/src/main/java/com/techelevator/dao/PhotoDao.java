@@ -18,4 +18,6 @@ public interface PhotoDao {
 
     int addPhoto (Photo photo);
 
+    int deletePhoto(int photoId);
+
 }
