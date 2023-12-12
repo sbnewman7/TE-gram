@@ -25,7 +25,7 @@ public class JdbcPhotoDao implements PhotoDao {
     @Override
     public List<Photo> getAll() {
 
-        final String sql = "SELECT photo_id, caption, pic_url, is_private date_time FROM photo_feed";
+        final String sql = "SELECT photo_id, caption, pic_url, is_private, date_time FROM photo_feed";
 
         final List<Photo> photos = new ArrayList<>();
 
@@ -69,7 +69,7 @@ public class JdbcPhotoDao implements PhotoDao {
     @Override
     public Photo getPhotoByPhotoId(int photoId) {
 
-        final String sql = "SELECT caption, pic_url, date_time, is_private FROM photo_feed WHERE photo_id = ?";
+        final String sql = "SELECT photo_id, caption, pic_url, date_time, is_private FROM photo_feed WHERE photo_id = ?";
 
         Photo photo = new Photo();
         try {

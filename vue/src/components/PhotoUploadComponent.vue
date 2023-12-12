@@ -9,6 +9,10 @@
         <label for="caption">Caption:&nbsp;</label>
         <input class="textBox" v-model="caption" type="text" id="caption" name="caption" size="50">
       </div>
+      <div>
+        <label for="private">Private:</label>
+        <input type="checkbox" name="private" id="private" v-model="isPrivate">
+      </div>
     </form>
     <div class="buttons">
       <button class="control" v-on:click="upload">Upload</button><br />
@@ -30,6 +34,7 @@ export default {
       picUploaded: false,
       imgUrl: "",
       caption: "",
+      isPrivate: false,
       showUpdated: false,
       showError: false
     }
@@ -41,6 +46,7 @@ export default {
       photo.userId = this.$store.state.user.id;
       photo.caption = this.caption;
       photo.photoUrl = this.imgUrl;
+      photo.private = this.isPrivate;
       console.log(photo);
       PhotosGateway
         .addPhoto(photo)
