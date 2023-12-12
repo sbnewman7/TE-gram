@@ -18,14 +18,14 @@ INSERT INTO photo_feed (user_id, caption, pic_url) VALUES (2, 'banana.', 'https:
 INSERT INTO photo_feed (user_id, caption, pic_url) VALUES (2, 'you cant come in unless you know the password!', 'https://www.thedesignwork.com/wp-content/uploads/2011/10/Random-Pictures-of-Conceptual-and-Creative-Ideas-02.jpg');
 INSERT INTO photo_feed (user_id, caption, pic_url) VALUES (1, 'brethren, we revolt at dawn!', 'https://i.redd.it/jeuusd992wd41.jpg');
 INSERT INTO photo_feed (user_id, caption, pic_url) VALUES (1, 'Zoom!!!', 'https://media.istockphoto.com/id/157402340/photo/left-behind.jpg?s=612x612&w=0&k=20&c=ttF1xIAwRdL2v0UoL6Y_xdbpSQJzdVIokVdBBrM2I3Q=');
-INSERT INTO comments (user_id, photo_id, comment_text) VALUES (1, 4, 'Wow! What beautiful scenery!');
+INSERT INTO comments (user_id, photo_id, comment_text) VALUES (1, 4, '**Wow**! What beautiful scenery!');
 INSERT INTO comments (user_id, photo_id, comment_text) VALUES (1, 5, 'That silhouette against the sunset looks so amazing... :)');
-INSERT INTO comments (user_id, photo_id, comment_text) VALUES (1, 6, 'I had so much fun working on this project with you!');
+INSERT INTO comments (user_id, photo_id, comment_text) VALUES (1, 6, 'I had *so much* **fun** working on this project with you!');
 INSERT INTO comments (user_id, photo_id, comment_text) VALUES (1, 9, 'Wish I was there!');
-INSERT INTO comments (user_id, photo_id, comment_text) VALUES (1, 1, 'Omg they totally are...');
+INSERT INTO comments (user_id, photo_id, comment_text) VALUES (1, 1, 'Omg they *totally* are...');
 INSERT INTO comments (user_id, photo_id, comment_text) VALUES (1, 2, 'Arent we all?');
 INSERT INTO comments (user_id, photo_id, comment_text) VALUES (1, 3, 'Save some for me!');
-INSERT INTO comments (user_id, photo_id, comment_text) VALUES (2, 4, 'Take me with you on your next road trip!');
+INSERT INTO comments (user_id, photo_id, comment_text) VALUES (2, 4, 'Take *me* with you on your next road trip!');
 INSERT INTO comments (user_id, photo_id, comment_text) VALUES (2, 5, 'Sunsets are my faaaavooooriiiiite XD');
 INSERT INTO comments (user_id, photo_id, comment_text) VALUES (1, 10, 'banana.');
 INSERT INTO comments (user_id, photo_id, comment_text) VALUES (2, 10, 'banana.');
