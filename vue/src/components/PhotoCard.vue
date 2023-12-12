@@ -1,7 +1,7 @@
 <template>
     <article>
         <div class="photo-container">
-        <img :src="photo.photoUrl" @click="goToDetails" class="photo">
+            <img :src="photo.photoUrl" @click="goToDetails" class="photo">
         </div>
         <div class="like-caption">
             <img v-if="liked" v-on:click="unlike" class="heart"
@@ -20,8 +20,8 @@
             <h2>{{ photo.caption }}</h2>
         </div>
         <div v-if="hasComments">
-            <span>
-                {{ photo.comments[0].commentBody }}
+            <span v-html="renderMarkdown(photo.comments[0].commentBody)">
+
             </span>
         </div>
     </article>
@@ -30,6 +30,7 @@
 <script>
 import FavoritesGateway from '../services/FavoritesGateway';
 import LikesGateway from '../services/LikesGateway';
+import markdownit from 'markdown-it'
 
 export default {
     data() {
@@ -91,6 +92,11 @@ export default {
                 this.favorited = false;
                 FavoritesGateway.removeFavorite(this.photo.id, this.$store.state.user.id)
             }
+        },
+        renderMarkdown(commentBody) {
+            const md = markdownit();
+            console.log(md.render(commentBody));
+            return md.render(commentBody);
         }
     }
 }
@@ -139,7 +145,7 @@ div {
 .like-caption {
     display: flex;
     align-items: center;
-    width:350px;
+    width: 350px;
 }
 
 .star {
@@ -177,12 +183,13 @@ span {
     padding: 1vh 1vh 3vh 1vh;
 }
 
-.photo-container{
-height:250px;
-width:400px;
+.photo-container {
+    height: 250px;
+    width: 400px;
 }
-.photo{
-  object-fit: cover;
-  overflow: hidden;
+
+.photo {
+    object-fit: cover;
+    overflow: hidden;
 }
 </style>

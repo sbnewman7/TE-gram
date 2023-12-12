@@ -24,7 +24,7 @@
     </section>
     <section id="left-half">
       <div id="comment" v-for="comment in photo.comments" :key="comment.id">
-        <div v-html="renderMarkdown(comment.commentBody)"></div>
+        <div class="comment-body" v-html="renderMarkdown(comment.commentBody)"></div>
         <p>{{ formatDateTime(comment.timestamp) }} - {{ comment.username }}</p>
 
       </div>
@@ -204,7 +204,7 @@ section {
   margin: 7px;
 }
 
-#comment>h3 {
+.comment-body {
   color: white;
   margin: 0;
   padding: 10px 0 8px 15px;
@@ -218,7 +218,6 @@ section {
 }
 
 .comment {
-  font-size: 16px;
   background-color: #9EB8D9;
   color: white;
   margin-right: 40px;

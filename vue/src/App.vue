@@ -80,7 +80,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 * {
   font-family: Roboto;
   --nav-color: #A25772;
