@@ -33,4 +33,9 @@ public class JdbcPhotoDaoTests extends BaseDaoTests {
         Assert.assertEquals("Add photo should add photo",numBefore+1, numAfter);
 
     }
+    @Test
+    public void delete_photo_should_delete_photo(){
+        int rowsAffected = sut.deletePhoto(1);
+        Assert.assertTrue("Delete photo should remove photo",rowsAffected > 0);
+    }
 }
