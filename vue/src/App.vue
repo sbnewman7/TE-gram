@@ -6,7 +6,6 @@
       <img class="logo" src="../img/Telogo_2.gif" alt="Home">
     </button>
     <div id="search-control">
-
       <span @click="search">
         <i class="fa-solid fa-magnifying-glass"></i>
       </span>
@@ -58,7 +57,6 @@ export default {
   methods: {
     search() {
       if (this.username === "") {
-        // alert("Please type in a valid username.");
         this.emptySearch = true;
         window.setTimeout(() => {
           this.emptySearch = false;
@@ -70,14 +68,12 @@ export default {
         .then(response => {
           if (response.status == 200) {
             this.users = response.data;
-            this.$store.commit("SET_SEARCHED_USER", this.users);
-            // this.$router.push("/gallery");
+            // this.$store.commit("SET_SEARCHED_USER", this.users);
             this.$router.push(`/users/${this.users.id}/photos`)
             this.username = "";
           }
         })
         .catch(error => {
-          // alert("User not found. " + error);
           this.userNotFound = true;
           window.setTimeout(() => {
             this.userNotFound = false;
@@ -98,7 +94,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 * {
   font-family: Roboto;
   --nav-color: #A25772;

@@ -18,11 +18,10 @@
     "@fortawesome/free-regular-svg-icons": "^6.5.1",
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@fortawesome/vue-fontawesome": "^3.0.5",
-    "axios": "^0.21.4",
     "aos": "^2.3.4",
     "axios": "^0.21.4",
     "cloudinary": "^1.41.0",
-    "axios": "^0.21.4",
+    "markdown-it": "^14.0.0",
     "vue": "^3.3.4",
     "vue-router": "^4.2.1",
     "vuex": "^4.1.0"

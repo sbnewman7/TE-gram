@@ -1,6 +1,6 @@
 <template>
     <div class="gallery">
-        <user-details />
+        <user-details :user="user" />
         <section class="photo-list">
             <photo-card class="photo" :photo="photo" v-for="photo in photos" :key="photo.id" />
         </section>
@@ -11,9 +11,9 @@
 import UserDetails from "../components/UserDetails.vue";
 import PhotoCard from "../components/PhotoCard.vue"
 import photoService from "../services/PhotosGateway"
+import UserGateway from "../services/UserGateway";
 
 export default {
-    // import AuthService from "./services/AuthService";
 
     name: "Gallery",
     components: {
@@ -22,28 +22,31 @@ export default {
     },
     data() {
         return {
-            users: [],
+            user: {},
             photos: []
         }
     },
     created() {
-        // if (this.$route.params.id == this.$store.state.searchedUser.id) {
-        //     console.log("ids match: param.id=" + this.$route.params.id + ", searchedUser.id=" + this.$store.state.searchedUser.id);
-        // } else {
-        //     console.log("ids don't match: param.id=" + this.$route.params.id + ", searchedUser.id=" + this.$store.state.searchedUser.id);
-        // }
-        photoService
-            .getPhotosByUserId(this.$store.state.searchedUser.id)
-            .then(response => {
-                this.photos = response.data;
-            })
+        this.loadUserData(this.$route.params.id);
     },
     beforeRouteUpdate(to, from, next) {
-        console.log("in beforeRouteUpdate event");
-        // the 'to' param is a route object for the route we want to navigate to
-        // this.loadLandmarks(to.query.username);
-        // console.log(to.query);
-        // next();
+        console.log('Before route update:', to.params.id);
+        console.log(to.query);
+        this.loadUserData(to.params.id);
+        next();
+    },
+    methods: {
+        loadUserData(id) {
+            UserGateway.getUserById(id)
+                .then(response => {
+                    this.user = response.data;
+                })
+            photoService
+                .getPhotosByUserId(id)
+                .then(response => {
+                    this.photos = response.data;
+                })
+        }
     }
 };
 </script>

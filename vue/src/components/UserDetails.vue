@@ -7,7 +7,7 @@
                 class="profile-picture">
         </div>
         <div>
-            <h1>{{ user.name }}</h1>
+            <h1>{{ user.username }}</h1>
             <h2>{{ user.email }}</h2>
             <button id="follow" class="follow" v-if="!following" v-on:click="follow">Follow</button>
             <button id="unfollow" class="follow" v-if="following" v-on:click="unfollow">Unfollow</button>
@@ -27,14 +27,15 @@ export default {
     data() {
         return {
             userId: this.$route.params.id,
-            user: {
-                name: this.$store.state.searchedUser.username,
-                email: this.$store.state.searchedUser.email,
-                picUrl: this.$store.state.searchedUser.picUrl
-            },
-            following: false
+            following: false,
+            // user: {
+            //     name: this.$store.state.searchedUser.username,
+            //     email: this.$store.state.searchedUser.email,
+            //     picUrl: this.$store.state.searchedUser.picUrl
+            // },
         }
     },
+    props: ['user'],
     computed: {
         photoExists() {
             return this.user.picUrl && this.user.picUrl.length > 0;
@@ -55,6 +56,7 @@ export default {
         }
     },
     created() {
+        console.log("user prop = " + this.user);
         if (this.$store.state.token !== '') {
             FollowGateway.getUserFollowed(this.$store.state.user.id, this.userId)
                 .then((response) => {

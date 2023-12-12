@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export default {
-    addComment(photoId, comment) {
+    postComment(photoId, comment) {
         return axios.post(`/${photoId}/comments`, comment);
     },
     getUserCommented(userId, photoId) {
