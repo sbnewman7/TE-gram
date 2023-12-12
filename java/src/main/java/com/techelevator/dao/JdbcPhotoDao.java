@@ -82,7 +82,8 @@ public class JdbcPhotoDao implements PhotoDao {
 
         final String sql = "SELECT photo_id, caption, pic_url " +
                 "FROM followers INNER JOIN photo_feed ON followed_user_id = user_id " +
-                "WHERE follower_user_id = ?;";
+                "WHERE follower_user_id = ? " +
+                "ORDER BY RANDOM()";
 
         final List<Photo> photos = new ArrayList<>();
 

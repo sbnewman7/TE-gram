@@ -28,7 +28,6 @@
           v-bind:to="{ name: 'favorites-page', params: { id: this.$store.state.user.id } }">Favorites</router-link>
         <router-link class="active-link"
           v-bind:to="{ name: 'following-page', params: { followerUserId: this.$store.state.user.id } }">Following</router-link>
-        <!-- <div v-on:click="this.$router.push(`/following/${this.$store.state.user.id}/photos`)">Following</div> -->
         <router-link class="active-link" v-bind:to="{ name: 'login' }" v-if="$store.state.token == ''">Log in
         </router-link>
         <router-link class="active-link" v-bind:to="{ name: 'user', params: this.$store.state.user.id }"
@@ -196,7 +195,7 @@ export default {
   width: 30vw;
   top: 50px;
   left: 35vw;
-  background-color: #4f6;
+  background-color: #b22;
   color: white;
   font-size: 20px;
   padding-left: 20px;
