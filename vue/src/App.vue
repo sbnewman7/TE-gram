@@ -200,12 +200,14 @@ export default {
 
 #logo-container {
   display: flex;
+  align-items: center;
 }
 
 #logo-title {
   color: #bcd9ff;
   font-family: Kanit;
   font-size: 2.2rem;
+  margin-bottom: 4px;
 }
 
 /* Navigation bar */
