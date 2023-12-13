@@ -6,7 +6,7 @@
       <button @click="goToHome" class="logo-button">
         <img class="logo" src="../img/Telogo_2.gif" alt="Home">
       </button>
-      <p id="logo-title">TE-gram</p>
+      <p id="logo-title">TE<span @click="_s">-</span>gram</p>
     </div>
     <div id="search-control">
       <span @click="search">
@@ -82,7 +82,6 @@ export default {
         .then(response => {
           if (response.status == 200) {
             this.users = response.data;
-            // this.$store.commit("SET_SEARCHED_USER", this.users);
             this.$router.push(`/users/${this.users.id}/photos`)
             this.username = "";
           }
@@ -99,11 +98,94 @@ export default {
     goToHome() {
       this.$router.push({ name: 'home' });
     },
-    // goToFavorites() {
-    //   this.$store.commit('PAGE_FILTER', true);
-    //   console.log(this.$store.state.user.id);
-    //   this.$router.push({ name: 'favorites-page', params: { id: this.$store.state.user.id } });
-    // }
+
+    letItSnow() {
+
+      const maxSnowflakes = 1000,
+        snowflakes = [],
+        container = document.getElementById("lis"); // Let It Snow :)
+
+      const generatesnowFlake = (timeout = 0, init = false) => {
+        const duration = 3000 + Math.random() * 7000,
+          flake = document.createElement("div"),
+          id = crypto.randomUUID(),
+          delay = init ? Math.random() * duration : 0;
+        snowflakes.push(id);
+        setTimeout(() => {
+          flake.setAttribute("id", id);
+          flake.setAttribute(
+            "style",
+            `
+    background: radial-gradient(${this.getRandomColor()}, transparent 66%);
+    animation-delay: -${delay}ms;
+    --fallDuration: ${duration}ms;
+    --fallSlideStrength: ${Math.random()};  
+    --size: ${Math.random() * 0.7 + 0.3};
+    --position: ${Math.random() * 120}%;
+    `
+          );
+          container.appendChild(flake);
+          setTimeout(() => {
+            const index = snowflakes.findIndex((e) => e === id);
+            snowflakes.splice(index, index);
+            container.removeChild(flake);
+          }, duration - delay);
+        }, timeout);
+      };
+
+      container.setAttribute("style", `--cWidth: ${container.clientWidth}px`);
+      addEventListener("resize", () =>
+        container.setAttribute("style", `--cWidth: ${container.clientWidth}px`)
+      );
+
+      const loop = async () => {
+        while (1) {
+          document.body.style.backgroundColor = "#333"; // change b/g color works here
+          await new Promise(async (resolve) => {
+            if (this.isRunning && snowflakes.length < maxSnowflakes && !document.hidden) {
+              requestAnimationFrame(() => {
+                generatesnowFlake(Math.random() * 50);
+                resolve();
+              });
+            } else {
+              setTimeout(resolve, 50);
+              document.body.style.backgroundColor = "#fff"; // change back works here (too soon)
+            }
+          });
+        }
+      },
+        init = () => {
+          for (let i = 0; i < (maxSnowflakes - snowflakes.length) / 2; i++) {
+            generatesnowFlake(Math.random() * 50, false);  // drops snowflakes in a line
+          }
+        };
+
+      init();
+      loop();
+
+    },
+
+    getRandomColor() {
+      const letters = '89ABCDEF'; // limit to brighter colors (all 16 to inc darker)
+      let color = '#';
+      for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 8)]; //chg per #letters
+      }
+      return color;
+    },
+
+    _s() {
+      const container = document.getElementById("lis");
+      container.setAttribute("style", `background: #333;`);
+      this.isRunning = true;
+      this.letItSnow();
+      window.setTimeout(() => {
+        this.isRunning = false;
+      }, 5000);
+
+    }
+
+
   }
 };
 </script>
@@ -162,12 +244,6 @@ export default {
   display: flex;
   justify-content: center;
 }
-
-/* #magGlass {
-  width: 25px;
-  height: 25px;
-  margin-top: 4px;
-} */
 
 .fa-magnifying-glass {
   font-size: 1em;
@@ -248,5 +324,34 @@ export default {
 
 .dropdown:hover .dropdown-content {
   display: block;
+}
+
+#lis {
+  position: relative;
+  /* Defaults */
+  --size: 1;
+  --fallDuration: 10s;
+  --swayDuration: 0.8s;
+  --fallSlideStrength: 0.5;
+  --slideStrength: 0.5;
+  --position: 0;
+}
+
+#lis>div {
+  position: absolute;
+  top: 0;
+  left: calc(var(--position) - 20%);
+
+  width: calc(var(--size) * 15px);
+  aspect-ratio: 1;
+
+  animation: var(--fallDuration) snowFall linear forwards;
+}
+
+@keyframes snowFall {
+  to {
+    top: 100%;
+    transform: translateX(calc(var(--cWidth) * var(--fallSlideStrength) / 8));
+  }
 }
 </style>
