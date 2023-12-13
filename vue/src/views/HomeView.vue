@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home" id="lis">
     <h1>Home</h1>
     <section class="photo-list">
       <photo-card class="photo" :photo="photo" v-for="photo in photos" :key="photo.id" />

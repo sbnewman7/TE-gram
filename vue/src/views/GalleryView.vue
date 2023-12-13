@@ -1,7 +1,7 @@
 <template>
     <div class="gallery">
         <user-details :user="user" />
-        <section class="photo-list">
+        <section class="photo-list" id="lis">
             <photo-card class="photo" :photo="photo" v-for="photo in photos" :key="photo.id" />
         </section>
     </div>
