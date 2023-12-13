@@ -124,6 +124,7 @@ export default {
   color: #bcd9ff;
   font-family: Kanit;
   font-size: 2.2rem;
+  margin-top: 4px;
 }
 
 /* Navigation bar */
