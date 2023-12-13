@@ -26,23 +26,23 @@
       </button>
       <div class="dropdown-content">
         <router-link class="active-link" v-bind:to="{ name: 'home' }"><font-awesome-icon
-            :icon="['fas', 'house-chimney']" />&nbsp;Home</router-link>
+            :icon="['fas', 'house-chimney']" pull="left" />&nbsp;Home</router-link>
         <router-link class="active-link" v-if="!loggedIn" v-bind:to="{ name: 'login' }"><font-awesome-icon
-            :icon="['fas', 'arrow-right-to-bracket']" />&nbsp;Log in
+            :icon="['fas', 'arrow-right-to-bracket']" pull="left" />&nbsp;Log in
         </router-link>
         <router-link class="active-link" v-if="loggedIn"
           v-bind:to="{ name: 'favorites-page', params: { id: this.$store.state.user.id } }"><font-awesome-icon
-            :icon="['fas', 'star']" />&nbsp;Favorites</router-link>
+            :icon="['fas', 'star']" pull="left" />&nbsp;Favorites</router-link>
         <router-link class="active-link" v-if="loggedIn"
           v-bind:to="{ name: 'following-page', params: { followerUserId: this.$store.state.user.id } }"><font-awesome-icon
-            :icon="['fas', 'user-plus']" />&nbsp;Following</router-link>
+            :icon="['fas', 'user-plus']" pull="left" />&nbsp;Following</router-link>
         <router-link class="active-link" v-if="loggedIn"
           v-bind:to="{ name: 'user', params: this.$store.state.user.id }"><font-awesome-icon
-            :icon="['fas', 'user']" />&nbsp;Edit Profile</router-link>
+            :icon="['fas', 'user']" pull="left" />&nbsp;Edit Profile</router-link>
         <router-link class="active-link" v-if="loggedIn" v-bind:to="{ name: 'photoupload' }"><font-awesome-icon
-            :icon="['fas', 'cloud-arrow-up']" />&nbsp;Photo Upload</router-link>
+            :icon="['fas', 'cloud-arrow-up']" pull="left" />&nbsp;Photo Upload</router-link>
         <router-link class="active-link" v-if="loggedIn" v-bind:to="{ name: 'logout' }"><font-awesome-icon
-            :icon="['fas', 'arrow-right-from-bracket']" />&nbsp;Logout</router-link>
+            :icon="['fas', 'arrow-right-from-bracket']" pull="left" />&nbsp;Logout</router-link>
       </div>
     </div>
 
@@ -129,10 +129,13 @@ export default {
 /* Navigation bar */
 #navbar {
   display: flex;
+  position: sticky;
+  top: 0;
+  z-index: 999;
   justify-content: space-between;
   align-items: center;
   background-color: var(--nav-color);
-  overflow: hidden;
+  /* overflow: hidden; */
   height: 7vh;
   font-size: var(--font-size);
   padding: 0px 3vh 0px 3vh;
