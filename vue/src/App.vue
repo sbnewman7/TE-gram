@@ -256,6 +256,7 @@ export default {
   height: 22px;
   width: 20vw;
   margin: 6px 10px 6px 10px;
+  border-radius: 3px;
 }
 
 /* Drop down menu bar  */

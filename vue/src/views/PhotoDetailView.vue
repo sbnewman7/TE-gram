@@ -32,6 +32,8 @@
   </div>
   <button v-if="$store.state.user.id == photo.userId" class="delete" v-on:click="deletePhoto">Delete Photo</button>
 
+  <p id="instructions"># (text) for <b id="para-title">Title</b> (don't forget the space), *text*
+    for <em>italics</em>, **text** for <b>bold</b></p>
   <form class="comment-form" v-on:submit.prevent="addComment">
     <textarea class="comment" v-model="newComment.commentBody" rows="4" cols="50" placeholder="Add a comment"></textarea>
     <br>
@@ -189,6 +191,13 @@ section {
   margin: 15px;
 }
 
+#instructions {
+  color: #aaa;
+  font-size: 15px;
+  margin-left: 30px;
+
+}
+
 .delete {
   background-color: var(--nav-color);
   color: white;
@@ -248,7 +257,7 @@ section {
   color: white;
 }
 
-#submit:hover{
+#submit:hover {
   background-color: #91a5cd;
   border: #93a6d0 2px solid;
 }
