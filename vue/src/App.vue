@@ -82,7 +82,6 @@ export default {
         .then(response => {
           if (response.status == 200) {
             this.users = response.data;
-            // this.$store.commit("SET_SEARCHED_USER", this.users);
             this.$router.push(`/users/${this.users.id}/photos`)
             this.username = "";
           }
@@ -99,12 +98,6 @@ export default {
     goToHome() {
       this.$router.push({ name: 'home' });
     },
-    // goToFavorites() {
-    //   this.$store.commit('PAGE_FILTER', true);
-    //   console.log(this.$store.state.user.id);
-    //   this.$router.push({ name: 'favorites-page', params: { id: this.$store.state.user.id } });
-    // }
-
 
     letItSnow() {
 
@@ -251,12 +244,6 @@ export default {
   display: flex;
   justify-content: center;
 }
-
-/* #magGlass {
-  width: 25px;
-  height: 25px;
-  margin-top: 4px;
-} */
 
 .fa-magnifying-glass {
   font-size: 1em;
