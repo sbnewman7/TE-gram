@@ -25,7 +25,7 @@ public class JdbcPhotoDao implements PhotoDao {
     @Override
     public List<Photo> getAll() {
 
-        final String sql = "SELECT user_id, photo_id, caption, pic_url, is_private, date_time FROM photo_feed";
+        final String sql = "SELECT user_id, photo_id, caption, pic_url, is_private, date_time FROM photo_feed ORDER BY RANDOM()";
 
         final List<Photo> photos = new ArrayList<>();
 
