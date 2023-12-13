@@ -3,6 +3,7 @@ BEGIN TRANSACTION;
 
 INSERT INTO users (username,password_hash,email,role) VALUES ('user','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','email1@gmail.com','ROLE_USER');
 INSERT INTO users (username,password_hash,email,role) VALUES ('admin','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','email2@gmail.com','ROLE_ADMIN');
+INSERT INTO users (username,password_hash,email,role,profile_pic_url) VALUES ('Tommy','$2a$10$D6SYFHbVieC.vWn5oyCR2uT8P6SQrw4thtG7Wq2N5332hzdO8vVOK','tommy@bmail.com','ROLE_USER','http://res.cloudinary.com/dbe3dv8oh/image/upload/v1702505030/ips0v6eapmu41otmraj9.jpg');
 
 INSERT INTO photo_feed (user_id, caption, pic_url) VALUES (1, 'rainy days are the worst', 'https://images.pexels.com/photos/4194850/pexels-photo-4194850.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500');
 INSERT INTO photo_feed (user_id, caption, pic_url) VALUES (1, 'Feeling a little goofy today!', 'https://img.freepik.com/free-photo/portrait-hesitant-man-purses-lips-looks-bewilderment-feels-doubt_273609-16785.jpg');
@@ -18,6 +19,14 @@ INSERT INTO photo_feed (user_id, caption, pic_url) VALUES (2, 'banana.', 'https:
 INSERT INTO photo_feed (user_id, caption, pic_url) VALUES (2, 'you cant come in unless you know the password!', 'https://www.thedesignwork.com/wp-content/uploads/2011/10/Random-Pictures-of-Conceptual-and-Creative-Ideas-02.jpg');
 INSERT INTO photo_feed (user_id, caption, pic_url) VALUES (1, 'brethren, we revolt at dawn!', 'https://i.redd.it/jeuusd992wd41.jpg');
 INSERT INTO photo_feed (user_id, caption, pic_url) VALUES (1, 'Zoom!!!', 'https://media.istockphoto.com/id/157402340/photo/left-behind.jpg?s=612x612&w=0&k=20&c=ttF1xIAwRdL2v0UoL6Y_xdbpSQJzdVIokVdBBrM2I3Q=');
+
+INSERT INTO photo_feed (user_id, caption, pic_url) VALUES (3, 'boom!', 'https://thumbs.dreamstime.com/t/train-fuel-tank-toy-train-burning-dark-background-flames-fire-smoke-sparks-fly-concept-train-crash-car-268520372.jpg');
+INSERT INTO photo_feed (user_id, caption, pic_url) VALUES (3, 'imho about basically everything', 'http://res.cloudinary.com/dbe3dv8oh/image/upload/v1702505445/xzs8wiirexp95pxgke6u.jpg');
+INSERT INTO photo_feed (user_id, caption, pic_url) VALUES (3, 'yeah, you!', 'http://res.cloudinary.com/dbe3dv8oh/image/upload/v1702504293/aj77dw0uabmagwjagnbz.jpg');
+INSERT INTO photo_feed (user_id, caption, pic_url) VALUES (3, 'give it back, mom!', 'http://res.cloudinary.com/dbe3dv8oh/image/upload/v1702504357/aezgiqfrrqgybwznee34.jpg');
+INSERT INTO photo_feed (user_id, caption, pic_url) VALUES (3, 'monty''s squirrel', 'http://res.cloudinary.com/dbe3dv8oh/image/upload/v1702504464/symifqva8clqfatqud1t.jpg');
+INSERT INTO photo_feed (user_id, caption, pic_url) VALUES (3, 'the squad', 'https://m.media-amazon.com/images/M/MV5BNzU2YTY2OTgtZGZjZi00MTAyLThlYjUtMWM5ZmYzOGEyOWJhXkEyXkFqcGdeQXVyNTgyNTA4MjM@._V1_FMjpg_UX1000_.jpg');
+
 INSERT INTO comments (user_id, photo_id, comment_text) VALUES (1, 4, '**Wow**! What beautiful scenery!');
 INSERT INTO comments (user_id, photo_id, comment_text) VALUES (1, 5, 'That silhouette against the sunset looks so amazing... :)');
 INSERT INTO comments (user_id, photo_id, comment_text) VALUES (1, 6, 'I had *so much* **fun** working on this project with you!');
@@ -32,8 +41,5 @@ INSERT INTO comments (user_id, photo_id, comment_text) VALUES (2, 10, 'banana.')
 INSERT INTO comments (user_id, photo_id, comment_text) VALUES (1, 11, 'Is the password "girls have cooties"?');
 INSERT INTO comments (user_id, photo_id, comment_text) VALUES (1, 12, 'ARISE!!!!');
 INSERT INTO comments (user_id, photo_id, comment_text) VALUES (1, 13, 'I want to be that turtle so bad');
-
-
-
 
 COMMIT TRANSACTION;

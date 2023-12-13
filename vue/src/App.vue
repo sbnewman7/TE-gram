@@ -238,7 +238,7 @@ export default {
 .logo {
   height: 7vh;
   min-height: 40px;
-  margin-top: 4px;
+  margin-top: 3px;
 }
 
 #search-control {
