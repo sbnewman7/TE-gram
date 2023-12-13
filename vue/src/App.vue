@@ -25,8 +25,8 @@
         <i class="fa-solid fa-bars"></i>
       </button>
       <div class="dropdown-content">
-        <router-link class="active-link" v-bind:to="{ name: 'home' }"><font-awesome-icon
-            :icon="['fas', 'house-chimney']" pull="left" />&nbsp;Home</router-link>
+        <router-link class="active-link" v-bind:to="{ name: 'home' }"><font-awesome-icon :icon="['fas', 'house-chimney']"
+            pull="left" />&nbsp;Home</router-link>
         <router-link class="active-link" v-if="!loggedIn" v-bind:to="{ name: 'login' }"><font-awesome-icon
             :icon="['fas', 'arrow-right-to-bracket']" pull="left" />&nbsp;Log in
         </router-link>
@@ -37,8 +37,8 @@
           v-bind:to="{ name: 'following-page', params: { followerUserId: this.$store.state.user.id } }"><font-awesome-icon
             :icon="['fas', 'user-plus']" pull="left" />&nbsp;Following</router-link>
         <router-link class="active-link" v-if="loggedIn"
-          v-bind:to="{ name: 'user', params: this.$store.state.user.id }"><font-awesome-icon
-            :icon="['fas', 'user']" pull="left" />&nbsp;Edit Profile</router-link>
+          v-bind:to="{ name: 'user', params: this.$store.state.user.id }"><font-awesome-icon :icon="['fas', 'user']"
+            pull="left" />&nbsp;Edit Profile</router-link>
         <router-link class="active-link" v-if="loggedIn" v-bind:to="{ name: 'photoupload' }"><font-awesome-icon
             :icon="['fas', 'cloud-arrow-up']" pull="left" />&nbsp;Photo Upload</router-link>
         <router-link class="active-link" v-if="loggedIn" v-bind:to="{ name: 'logout' }"><font-awesome-icon

@@ -27,7 +27,10 @@ export default {
     created() {
         FollowGateway.getPhotosByFollowerUserId(this.$route.params.followerUserId)
             .then(response => {
-                this.photos = response.data;
+                this.photos = response.data.filter((photo) => {
+                    return (photo.private == false)
+                        || (photo.userId == this.$store.state.user.id)
+                });
             })
     }
 };

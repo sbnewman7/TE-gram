@@ -9,7 +9,6 @@
 
 <script>
 import PhotoCard from "../components/PhotoCard.vue"
-import FavoritesGateway from "../services/FavoritesGateway";
 import photoService from "../services/PhotosGateway"
 
 
@@ -21,15 +20,14 @@ export default {
   data() {
     return {
       photos: [],
-      favorites: []
     }
   },
   created() {
     photoService.getAll()
       .then(response => {
         this.photos = response.data.filter((photo) => {
-          return photo.private == false
-            || photo.userId == this.$store.state.user.id
+          return (photo.private == false)
+            || (photo.userId == this.$store.state.user.id)
         });
       })
   }
