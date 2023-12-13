@@ -207,11 +207,7 @@ export default {
   color: #bcd9ff;
   font-family: Kanit;
   font-size: 2.2rem;
-<<<<<<< HEAD
-  margin-top: 4px;
-=======
   margin-bottom: 4px;
->>>>>>> 38cc50dfd0fec65ce4c9824682951daae31532ec
 }
 
 /* Navigation bar */
