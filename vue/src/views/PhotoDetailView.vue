@@ -151,13 +151,6 @@ export default {
     }
 
   },
-  // computed: {
-  //   converted() {
-  //     const md = markdownit();
-  //     this.rendered = md.render("**bold**");
-  //     return this.rendered;
-  //   }
-  // },
   created() {
     this.photo.id = this.$route.params.id;
     PhotosGateway

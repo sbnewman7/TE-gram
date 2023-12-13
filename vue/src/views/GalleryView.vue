@@ -30,8 +30,6 @@ export default {
         this.loadUserData(this.$route.params.id);
     },
     beforeRouteUpdate(to, from, next) {
-        // console.log('Before route update:', to.params.id);
-        // console.log(to.query);
         this.loadUserData(to.params.id);
         next();
     },
