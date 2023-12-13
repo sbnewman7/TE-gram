@@ -1,7 +1,7 @@
 <template>
     <div class="gallery">
         <user-details :user="user" />
-        <section class="photo-list">
+        <section class="photo-list" id="lis">
             <photo-card class="photo" :photo="photo" v-for="photo in photos" :key="photo.id" />
         </section>
     </div>
@@ -27,16 +27,9 @@ export default {
         }
     },
     created() {
-        if (this.$route.params.id == this.$store.state.searchedUser.id) {
-            console.log("ids match: param.id=" + this.$route.params.id + ", searchedUser.id=" + this.$store.state.searchedUser.id);
-        } else {
-            console.log("ids don't match: param.id=" + this.$route.params.id + ", searchedUser.id=" + this.$store.state.searchedUser.id);
-        }
         this.loadUserData(this.$route.params.id);
     },
     beforeRouteUpdate(to, from, next) {
-        console.log('Before route update:', to.params.id);
-        console.log(to.query);
         this.loadUserData(to.params.id);
         next();
     },
@@ -49,7 +42,10 @@ export default {
             photoService
                 .getPhotosByUserId(id)
                 .then(response => {
-                    this.photos = response.data;
+                    this.photos = response.data.filter((photo) => {
+                        return photo.private == false
+                            || photo.userId == this.$store.state.user.id
+                    });
                 })
         }
     }

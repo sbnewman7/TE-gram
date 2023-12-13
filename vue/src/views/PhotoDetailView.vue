@@ -24,13 +24,14 @@
     </section>
     <section id="left-half">
       <div id="comment" v-for="comment in photo.comments" :key="comment.id">
-        <p v-html="converted(comment.commentBody)"></p>
-        
+        <div class="comment-body" v-html="renderMarkdown(comment.commentBody)"></div>
         <p>{{ formatDateTime(comment.timestamp) }} - {{ comment.username }}</p>
 
       </div>
     </section>
   </div>
+  <button v-if="$store.state.user.id == photo.userId" class="delete" v-on:click="deletePhoto">Delete Photo</button>
+
   <form class="comment-form" v-on:submit.prevent="addComment">
     <textarea class="comment" v-model="newComment.commentBody" rows="4" cols="50" placeholder="Add a comment"></textarea>
     <br>
@@ -65,7 +66,6 @@ export default {
         userId: this.$store.state.user.id,
       },
       showError: false,
-      rendered: ''
     }
   },
   methods: {
@@ -106,7 +106,9 @@ export default {
               .then((response) => {
                 this.newComment.username = response.data.username;
               })
-            this.photo.comments.unshift(this.newComment);
+            const originalObject = this.newComment;
+            const newComment = Object.assign({}, originalObject);
+            this.photo.comments.unshift(newComment);
           }
           else {
             this.showError = true;
@@ -119,18 +121,6 @@ export default {
     clearForm() {
       this.newComment.commentBody = '';
     },
-
-    // this method caused a bug where the username was flickering and changing
-    // I think b/c it was doing an async db call repeatedly within a for loop.
-    // I solved it by creating a dto that included username.
-    // getUserById(userId) {
-    //   UserGateway
-    //     .getUserById(userId)
-    //     .then((response) => {
-    //       this.commentUser = response.data.username;
-    //     })
-    //   return this.commentUser;
-    // },
 
     formatDateTime(dateTimeString) {
       const date = new Date(dateTimeString);
@@ -145,20 +135,21 @@ export default {
       const formattedDateTime = `${month}-${day}-${year} ${hours}:${minutes} ${ampm}`;
       return formattedDateTime;
     },
-    converted(commentBody) {
+    renderMarkdown(commentBody) {
       const md = markdownit();
-      this.rendered = md.render(commentBody);
-      console.log(this.rendered);
-      return this.rendered;
+      return md.render(commentBody);
+    },
+    deletePhoto() {
+      let text = "Are you sure you would like to delete this photo?";
+      if (confirm(text) == true) {
+        PhotosGateway.deletePhoto(this.photo.id);
+        this.$router.push("/");
+      } else {
+        alert("Delete canceled!");
+      }
+
     }
 
-  },
-  computed: {
-    // converted(commentBody) {
-    //   const md = markdownit();
-    //   this.rendered = md.render(commentBody);
-    //   return this.rendered;
-    // }
   },
   created() {
     this.photo.id = this.$route.params.id;
@@ -198,6 +189,13 @@ section {
   margin: 15px;
 }
 
+.delete {
+  background-color: var(--nav-color);
+  color: white;
+  margin-bottom: 10px;
+  margin-left: 30px;
+}
+
 .photo-container {
   height: 50vh;
   width: 50vw;
@@ -208,6 +206,7 @@ section {
 .container {
   display: flex;
   margin: 15px;
+  margin-bottom: 0px;
 }
 
 #comment {
@@ -216,7 +215,7 @@ section {
   margin: 7px;
 }
 
-#comment>h3 {
+.comment-body {
   color: white;
   margin: 0;
   padding: 10px 0 8px 15px;
@@ -230,7 +229,6 @@ section {
 }
 
 .comment {
-  font-size: 16px;
   background-color: #9EB8D9;
   color: white;
   margin-right: 40px;
@@ -244,7 +242,15 @@ section {
   margin-top: 20px;
   font-size: 14px;
   max-height: 40px;
+  background-color: #7C93C3;
+  border-radius: 3px;
+  border: #6d87bf 2px solid;
+  color: white;
+}
 
+#submit:hover{
+  background-color: #91a5cd;
+  border: #93a6d0 2px solid;
 }
 
 

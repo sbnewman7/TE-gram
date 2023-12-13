@@ -1,6 +1,6 @@
 <template>
-    <div class="home">
-        <h1>Favorites</h1>
+    <div class="home" id="lis">
+        <h1>Following</h1>
         <section class="photo-list">
             <photo-card class="photo" :photo="photo" v-for="photo in photos" :key="photo.id" />
         </section>
@@ -9,33 +9,27 @@
   
 <script>
 import PhotoCard from "../components/PhotoCard.vue"
-import FavoritesGateway from "../services/FavoritesGateway";
+import FollowGateway from "../services/FollowGateway";
 import photoService from "../services/PhotosGateway"
 
 
 export default {
-    name: "Home",
+    name: "Following",
     components: {
         PhotoCard
     },
     data() {
         return {
             photos: [],
-            favorites: []
+            following: []
         }
     },
     created() {
-        FavoritesGateway.getFavorites(this.$store.state.user.id)
-            .then(response => {
-                this.favorites = response.data;
-            })
-        photoService.getAll()
+        FollowGateway.getPhotosByFollowerUserId(this.$route.params.followerUserId)
             .then(response => {
                 this.photos = response.data.filter((photo) => {
-                    return this.favorites.includes(photo.id)
-                    // this.photos = this.photos.filter((photo) => {
-                    //     return photo.private == false
-                    //         || photo.userId == this.$store.state.user.id
+                    return (photo.private == false)
+                        || (photo.userId == this.$store.state.user.id)
                 });
             })
     }

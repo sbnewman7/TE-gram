@@ -11,6 +11,7 @@ import UserView from '../views/UserView.vue';
 import PhotoUploadView from '../views/PhotoUploadView.vue';
 import PhotoDetailView from '../views/PhotoDetailView.vue';
 import FavoritesView from '../views/FavoritesView.vue';
+import FollowingView from '../views/FollowingView.vue';
 
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -55,7 +56,6 @@ const routes = [
   },
   {
     path: "/users/:id/photos",
-    // path: "/gallery",
     name: "gallery",
     component: GalleryView,
     meta: {
@@ -78,8 +78,6 @@ const routes = [
       requiresAuth: true
     }
   },
-
-
   {
     path: "/photoupload",
     name: "photoupload",
@@ -92,6 +90,14 @@ const routes = [
     path: "/{userId}/favorites",
     name: "favorites-page",
     component: FavoritesView,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: "/following/:followerUserId/photos",
+    name: "following-page",
+    component: FollowingView,
     meta: {
       requiresAuth: true
     }

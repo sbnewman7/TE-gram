@@ -10,10 +10,14 @@ public interface PhotoDao {
 
     List<Photo> getPhotosByUserId(int userId);
 
+    List<Photo> getPhotosByFollowerUserId(int followerUserId);
+
     List<CommentDto> getCommentsByPhotoId(int id);
 
     Photo getPhotoByPhotoId(int photoId);
 
     int addPhoto (Photo photo);
+
+    int deletePhoto(int photoId);
 
 }

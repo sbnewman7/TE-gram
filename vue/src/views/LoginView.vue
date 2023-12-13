@@ -46,7 +46,6 @@ export default {
           if (response.status == 200) {
             this.$store.commit("SET_AUTH_TOKEN", response.data.token);
             this.$store.commit("SET_USER", response.data.user);
-            // console.log(response.data.user);
             this.$router.push("/");
           }
         })
@@ -90,6 +89,7 @@ label {
 #title {
   text-align: center;
   margin-bottom: 60px;
+  margin-top: 20px;
 }
 
 #bar {
@@ -115,12 +115,14 @@ label {
 
 #submit {
   padding: 5px 2vw 5px 2vw;
-  background-color: #9EB8D9;
-
+  background-color: #7C93C3;
+  border: #6d87bf 2px solid;
+  border-radius: 3px;
+  color: white;
 }
 
 #submit:hover {
-  background-color: #b8d0f0;
-
+  background-color: #91a5cd;
+  border: #93a6d0 2px solid;
 }
 </style>

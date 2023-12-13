@@ -15,5 +15,10 @@ export default {
     },
     getPhotoByPhotoId(photoId) {
         return axios.get(`/photos/${photoId}`);
+    },
+    deletePhoto(photoId) {
+        return axios.delete(`/photo/${photoId}`);
     }
+
+
 }
