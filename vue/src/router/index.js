@@ -56,7 +56,6 @@ const routes = [
   },
   {
     path: "/users/:id/photos",
-    // path: "/gallery",
     name: "gallery",
     component: GalleryView,
     meta: {

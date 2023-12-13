@@ -1,7 +1,7 @@
 <template>
     <div class="gallery">
         <user-details :user="user" />
-        <section class="photo-list">
+        <section class="photo-list" id="lis">
             <photo-card class="photo" :photo="photo" v-for="photo in photos" :key="photo.id" />
         </section>
     </div>
@@ -30,8 +30,6 @@ export default {
         this.loadUserData(this.$route.params.id);
     },
     beforeRouteUpdate(to, from, next) {
-        // console.log('Before route update:', to.params.id);
-        // console.log(to.query);
         this.loadUserData(to.params.id);
         next();
     },

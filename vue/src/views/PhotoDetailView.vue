@@ -151,13 +151,6 @@ export default {
     }
 
   },
-  // computed: {
-  //   converted() {
-  //     const md = markdownit();
-  //     this.rendered = md.render("**bold**");
-  //     return this.rendered;
-  //   }
-  // },
   created() {
     this.photo.id = this.$route.params.id;
     PhotosGateway
@@ -249,7 +242,15 @@ section {
   margin-top: 20px;
   font-size: 14px;
   max-height: 40px;
+  background-color: #7C93C3;
+  border-radius: 3px;
+  border: #6d87bf 2px solid;
+  color: white;
+}
 
+#submit:hover{
+  background-color: #91a5cd;
+  border: #93a6d0 2px solid;
 }
 
 

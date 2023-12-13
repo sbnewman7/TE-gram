@@ -106,14 +106,14 @@ export default {
 .control {
   padding: 5px;
   margin: 10px;
-  background-color: #9EB8D9;
-  border: #7C93C3 3px solid;
+  background-color: #7C93C3;
+  border: #6d87bf 2px solid;
   border-radius: 3px;
 }
 
 .control:hover {
-  background-color: #b8d0f0;
-
+  background-color: #91a5cd;
+  border: #93a6d0 2px solid;
 }
 
 label {

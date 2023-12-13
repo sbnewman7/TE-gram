@@ -1,5 +1,5 @@
 <template>
-    <div class="home">
+    <div class="home" id="lis">
         <h1>Following</h1>
         <section class="photo-list">
             <photo-card class="photo" :photo="photo" v-for="photo in photos" :key="photo.id" />
@@ -27,7 +27,10 @@ export default {
     created() {
         FollowGateway.getPhotosByFollowerUserId(this.$route.params.followerUserId)
             .then(response => {
-                this.photos = response.data;
+                this.photos = response.data.filter((photo) => {
+                    return (photo.private == false)
+                        || (photo.userId == this.$store.state.user.id)
+                });
             })
     }
 };

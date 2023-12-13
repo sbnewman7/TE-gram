@@ -211,7 +211,7 @@ export default {
   margin-top: 4px;
 =======
   margin-bottom: 4px;
->>>>>>> 38cc50dfd0fec65ce4c9824682951daae31532ec
+>>>>>>> c7c39e2c73716c8e74bebdf8d29d984c1f9b9bc3
 }
 
 /* Navigation bar */

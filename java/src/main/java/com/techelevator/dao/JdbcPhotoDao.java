@@ -25,7 +25,7 @@ public class JdbcPhotoDao implements PhotoDao {
     @Override
     public List<Photo> getAll() {
 
-        final String sql = "SELECT photo_id, caption, pic_url, is_private, date_time FROM photo_feed";
+        final String sql = "SELECT user_id, photo_id, caption, pic_url, is_private, date_time FROM photo_feed";
 
         final List<Photo> photos = new ArrayList<>();
 
@@ -48,7 +48,7 @@ public class JdbcPhotoDao implements PhotoDao {
     @Override
     public List<Photo> getPhotosByUserId(int userId) {
 
-        final String sql = "SELECT photo_id, caption, pic_url, date_time, is_private FROM photo_feed WHERE user_id = ?";
+        final String sql = "SELECT user_id, photo_id, caption, pic_url, date_time, is_private FROM photo_feed WHERE user_id = ?";
 
         final List<Photo> photos = new ArrayList<>();
 
@@ -70,7 +70,7 @@ public class JdbcPhotoDao implements PhotoDao {
     @Override
     public List<Photo> getPhotosByFollowerUserId(int followerUserId) {
 
-        final String sql = "SELECT photo_id, caption, pic_url " +
+        final String sql = "SELECT user_id, photo_id, caption, pic_url, is_private, date_time " +
                 "FROM followers INNER JOIN photo_feed ON followed_user_id = user_id " +
                 "WHERE follower_user_id = ? " +
                 "ORDER BY RANDOM()";
@@ -81,12 +81,13 @@ public class JdbcPhotoDao implements PhotoDao {
 
             final SqlRowSet results = this.jdbcTemplate.queryForRowSet(sql, followerUserId);
             while (results.next()) {
-                final Photo photo = new Photo();
-                photo.setId(results.getInt("photo_id"));
-                photo.setCaption(results.getString("caption"));
-                photo.setPhotoUrl(results.getString("pic_url"));
-                photo.setDatePublished(LocalDateTime.now());
-                photo.setComments(getCommentsByPhotoId(results.getInt("photo_id")));
+                Photo photo = mapRowToPhoto(results);
+//                photo.setUserId(results.getInt("user_id"));
+//                photo.setId(results.getInt("photo_id"));
+//                photo.setCaption(results.getString("caption"));
+//                photo.setPhotoUrl(results.getString("pic_url"));
+//                photo.setDatePublished(LocalDateTime.now());
+//                photo.setComments(getCommentsByPhotoId(results.getInt("photo_id")));
 
                 photos.add(photo);
             }
@@ -187,6 +188,7 @@ public class JdbcPhotoDao implements PhotoDao {
 
     private Photo mapRowToPhoto(SqlRowSet results) {
         final Photo photo = new Photo();
+        photo.setUserId(results.getInt("user_id"));
         photo.setPrivate(results.getBoolean("is_private"));
         photo.setId(results.getInt("photo_id"));
         photo.setCaption(results.getString("caption"));
