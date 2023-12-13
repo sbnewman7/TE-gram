@@ -28,11 +28,6 @@ export default {
         return {
             userId: this.$route.params.id,
             following: false,
-            // user: {
-            //     name: this.$store.state.searchedUser.username,
-            //     email: this.$store.state.searchedUser.email,
-            //     picUrl: this.$store.state.searchedUser.picUrl
-            // },
         }
     },
     props: ['user'],

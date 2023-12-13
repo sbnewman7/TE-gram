@@ -82,8 +82,6 @@ export default {
   props: ['user'],
   created() {
     this.$store.commit('SET_PIC_URL', null);
-    // console.log(this.user.id);
-    // console.log('User object:', this.changeUser);
   },
 
   methods: {
@@ -109,7 +107,6 @@ export default {
     onSubmit() {
       if (this.changeUser.email && this.changeUser.username) {
         this.$store.commit('UPDATE_USER', this.changeUser);
-        // console.log(this.changeUser);
         this.changeUser.picUrl = this.pictureUrl || this.changeUser.picUrl;
         this.changeUser.id = this.user.id;
         UserGateway.updateUser(this.changeUser).then(response => {
