@@ -5,6 +5,18 @@ INSERT INTO users (username,password_hash,email,role) VALUES ('user','$2a$08$UkV
 INSERT INTO users (username,password_hash,email,role) VALUES ('admin','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','email2@gmail.com','ROLE_ADMIN');
 INSERT INTO users (username,password_hash,email,role,profile_pic_url) VALUES ('Tommy','$2a$10$D6SYFHbVieC.vWn5oyCR2uT8P6SQrw4thtG7Wq2N5332hzdO8vVOK','tommy@bmail.com','ROLE_USER','http://res.cloudinary.com/dbe3dv8oh/image/upload/v1702505030/ips0v6eapmu41otmraj9.jpg');
 
+INSERT INTO users(username,password_hash, email, role) VALUES ('new1','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkABCD','new1@gmail.com','ROLE_USER');
+INSERT INTO users(username,password_hash, email, role) VALUES ('new2','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkEFGH','new2@gmail.com','ROLE_USER');
+INSERT INTO users(username,password_hash, email, role) VALUES ('new3','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkIJKL','new3@gmail.com','ROLE_USER');
+INSERT INTO users(username,password_hash, email, role) VALUES ('new4','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkMNOP','new4@gmail.com','ROLE_USER');
+INSERT INTO users(username,password_hash, email, role) VALUES ('new5','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkQRST','new5@gmail.com','ROLE_USER');
+INSERT INTO users(username,password_hash, email, role) VALUES ('new6','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkUVWX','new6@gmail.com','ROLE_USER');
+INSERT INTO users(username,password_hash, email, role) VALUES ('new7','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkYZAB','new7@gmail.com','ROLE_USER');
+INSERT INTO users(username,password_hash, email, role) VALUES ('new8','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkCDEF','new8@gmail.com','ROLE_USER');
+INSERT INTO users(username,password_hash, email, role) VALUES ('new9','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkGHIJ','new9@gmail.com','ROLE_USER');
+INSERT INTO users(username,password_hash, email, role) VALUES ('new10','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkKLMN','new10@gmail.com','ROLE_USER');
+
+
 INSERT INTO photo_feed (user_id, caption, pic_url) VALUES (1, 'rainy days are the worst', 'https://images.pexels.com/photos/4194850/pexels-photo-4194850.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500');
 INSERT INTO photo_feed (user_id, caption, pic_url) VALUES (1, 'Feeling a little goofy today!', 'https://img.freepik.com/free-photo/portrait-hesitant-man-purses-lips-looks-bewilderment-feels-doubt_273609-16785.jpg');
 INSERT INTO photo_feed (user_id, caption, pic_url) VALUES (2, 'Eating a healthy breakfast is good for you!', 'https://penntoday.upenn.edu/sites/default/files/2018-07/istock-476953638.jpg');
@@ -23,9 +35,60 @@ INSERT INTO photo_feed (user_id, caption, pic_url) VALUES (1, 'Zoom!!!', 'https:
 INSERT INTO photo_feed (user_id, caption, pic_url) VALUES (3, 'boom!', 'https://thumbs.dreamstime.com/t/train-fuel-tank-toy-train-burning-dark-background-flames-fire-smoke-sparks-fly-concept-train-crash-car-268520372.jpg');
 INSERT INTO photo_feed (user_id, caption, pic_url) VALUES (3, 'imho about basically everything', 'http://res.cloudinary.com/dbe3dv8oh/image/upload/v1702505445/xzs8wiirexp95pxgke6u.jpg');
 INSERT INTO photo_feed (user_id, caption, pic_url) VALUES (3, 'yeah, you!', 'http://res.cloudinary.com/dbe3dv8oh/image/upload/v1702504293/aj77dw0uabmagwjagnbz.jpg');
-INSERT INTO photo_feed (user_id, caption, pic_url) VALUES (3, 'give it back, mom!', 'http://res.cloudinary.com/dbe3dv8oh/image/upload/v1702504357/aezgiqfrrqgybwznee34.jpg');
 INSERT INTO photo_feed (user_id, caption, pic_url) VALUES (3, 'monty''s squirrel', 'http://res.cloudinary.com/dbe3dv8oh/image/upload/v1702504464/symifqva8clqfatqud1t.jpg');
 INSERT INTO photo_feed (user_id, caption, pic_url) VALUES (3, 'the squad', 'https://m.media-amazon.com/images/M/MV5BNzU2YTY2OTgtZGZjZi00MTAyLThlYjUtMWM5ZmYzOGEyOWJhXkEyXkFqcGdeQXVyNTgyNTA4MjM@._V1_FMjpg_UX1000_.jpg');
+
+
+INSERT INTO photo_likes (user_id, photo_id) VALUES (4,1);
+INSERT INTO photo_likes (user_id, photo_id) VALUES (4,2);
+INSERT INTO photo_likes (user_id, photo_id) VALUES (4,3);
+INSERT INTO photo_likes (user_id, photo_id) VALUES (4,4);
+INSERT INTO photo_likes (user_id, photo_id) VALUES (4,5);
+INSERT INTO photo_likes (user_id, photo_id) VALUES (4,6);
+INSERT INTO photo_likes (user_id, photo_id) VALUES (4,7);
+INSERT INTO photo_likes (user_id, photo_id) VALUES (4,8);
+INSERT INTO photo_likes (user_id, photo_id) VALUES (4,9);
+INSERT INTO photo_likes (user_id, photo_id) VALUES (4,10);
+INSERT INTO photo_likes (user_id, photo_id) VALUES (4,11);
+INSERT INTO photo_likes (user_id, photo_id) VALUES (4,12);
+INSERT INTO photo_likes (user_id, photo_id) VALUES (4,13);
+INSERT INTO photo_likes (user_id, photo_id) VALUES (5,1);
+INSERT INTO photo_likes (user_id, photo_id) VALUES (5,3);
+INSERT INTO photo_likes (user_id, photo_id) VALUES (5,5);
+INSERT INTO photo_likes (user_id, photo_id) VALUES (5,7);
+INSERT INTO photo_likes (user_id, photo_id) VALUES (5,9);
+INSERT INTO photo_likes (user_id, photo_id) VALUES (5,10);
+INSERT INTO photo_likes (user_id, photo_id) VALUES (6,1);
+INSERT INTO photo_likes (user_id, photo_id) VALUES (6,2);
+INSERT INTO photo_likes (user_id, photo_id) VALUES (6,4);
+INSERT INTO photo_likes (user_id, photo_id) VALUES (6,7);
+INSERT INTO photo_likes (user_id, photo_id) VALUES (6,9);
+INSERT INTO photo_likes (user_id, photo_id) VALUES (7,1);
+INSERT INTO photo_likes (user_id, photo_id) VALUES (7,2);
+INSERT INTO photo_likes (user_id, photo_id) VALUES (7,8);
+INSERT INTO photo_likes (user_id, photo_id) VALUES (7,9);
+INSERT INTO photo_likes (user_id, photo_id) VALUES (7,10);
+INSERT INTO photo_likes (user_id, photo_id) VALUES (7,11);
+INSERT INTO photo_likes (user_id, photo_id) VALUES (7,12);
+INSERT INTO photo_likes (user_id, photo_id) VALUES (8,2);
+INSERT INTO photo_likes (user_id, photo_id) VALUES (8,4);
+INSERT INTO photo_likes (user_id, photo_id) VALUES (8,5);
+INSERT INTO photo_likes (user_id, photo_id) VALUES (8,8);
+INSERT INTO photo_likes (user_id, photo_id) VALUES (9,2);
+INSERT INTO photo_likes (user_id, photo_id) VALUES (9,4);
+INSERT INTO photo_likes (user_id, photo_id) VALUES (9,5);
+INSERT INTO photo_likes (user_id, photo_id) VALUES (9,7);
+INSERT INTO photo_likes (user_id, photo_id) VALUES (9,14);
+INSERT INTO photo_likes (user_id, photo_id) VALUES (9,15);
+INSERT INTO photo_likes (user_id, photo_id) VALUES (10,3);
+INSERT INTO photo_likes (user_id, photo_id) VALUES (10,7);
+INSERT INTO photo_likes (user_id, photo_id) VALUES (10,8);
+INSERT INTO photo_likes (user_id, photo_id) VALUES (10,10);
+INSERT INTO photo_likes (user_id, photo_id) VALUES (11,3);
+INSERT INTO photo_likes (user_id, photo_id) VALUES (11,11);
+INSERT INTO photo_likes (user_id, photo_id) VALUES (12,12);
+INSERT INTO photo_likes (user_id, photo_id) VALUES (12,6);
+
 
 INSERT INTO comments (user_id, photo_id, comment_text) VALUES (1, 4, '**Wow**! What beautiful scenery!');
 INSERT INTO comments (user_id, photo_id, comment_text) VALUES (1, 5, 'That silhouette against the sunset looks so amazing... :)');
