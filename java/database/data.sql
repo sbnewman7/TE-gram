@@ -2,7 +2,7 @@ ROLLBACK;
 BEGIN TRANSACTION;
 
 INSERT INTO users (username,password_hash,email,role) VALUES ('user','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','email1@gmail.com','ROLE_USER');
-INSERT INTO users (username,password_hash,email,role) VALUES ('admin','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','email2@gmail.com','ROLE_ADMIN');
+INSERT INTO users (username,password_hash,email,role,profile_pic_url) VALUES ('Suzie','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','email2@gmail.com','ROLE_ADMIN','https://media.istockphoto.com/id/854175480/photo/elementary-student-going-back-to-school.jpg?s=612x612&w=0&k=20&c=AbEX-mFklLLdcaMB_Fc1ncXbMUMKaMWkPFQkoXCkvUM=');
 INSERT INTO users (username,password_hash,email,role,profile_pic_url) VALUES ('Tommy','$2a$10$D6SYFHbVieC.vWn5oyCR2uT8P6SQrw4thtG7Wq2N5332hzdO8vVOK','tommy@bmail.com','ROLE_USER','http://res.cloudinary.com/dbe3dv8oh/image/upload/v1702505030/ips0v6eapmu41otmraj9.jpg');
 
 INSERT INTO users(username,password_hash, email, role) VALUES ('new1','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkABCD','new1@gmail.com','ROLE_USER');
