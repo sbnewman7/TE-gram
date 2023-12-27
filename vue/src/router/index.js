@@ -63,7 +63,7 @@ const routes = [
     }
   },
   {
-    path: '/user/{id}',
+    path: '/user/:id',
     name: 'user',
     component: UserView,
     meta: {
@@ -87,7 +87,7 @@ const routes = [
     }
   },
   {
-    path: "/{userId}/favorites",
+    path: "/:id/favorites",
     name: "favorites-page",
     component: FavoritesView,
     meta: {
