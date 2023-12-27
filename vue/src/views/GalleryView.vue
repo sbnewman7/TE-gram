@@ -29,9 +29,10 @@ export default {
     created() {
         this.loadUserData(this.$route.params.id);
     },
-    beforeRouteUpdate(to, from, next) {
+    // beforeRouteUpdate(to, from, next) {
+    beforeRouteUpdate(to, from) {
         this.loadUserData(to.params.id);
-        next();
+        // next();
     },
     methods: {
         loadUserData(id) {

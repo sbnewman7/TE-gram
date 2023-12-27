@@ -26,7 +26,7 @@ export default {
     },
     data() {
         return {
-            userId: this.$route.params.id,
+            originalUserId: this.$route.params.id,
             following: false,
         }
     },
@@ -39,20 +39,28 @@ export default {
     methods: {
         follow() {
             if (this.$store.state.token !== '') {
-                FollowGateway.addFollower(this.$store.state.user.id, this.userId);
+                FollowGateway.addFollower(this.$store.state.user.id, this.user.id);
                 this.following = true;
             }
         },
         unfollow() {
             if (this.$store.state.token !== '') {
-                FollowGateway.removeFollower(this.$store.state.user.id, this.userId);
+                FollowGateway.removeFollower(this.$store.state.user.id, this.user.id);
                 this.following = false;
             }
         }
     },
     created() {
         if (this.$store.state.token !== '') {
-            FollowGateway.getUserFollowed(this.$store.state.user.id, this.userId)
+            FollowGateway.getUserFollowed(this.$store.state.user.id, this.originalUserId)
+                .then((response) => {
+                    this.following = response.data;
+                })
+        }
+    },
+    updated() {
+        if (this.user.id != this.originalUserId) {
+            FollowGateway.getUserFollowed(this.$store.state.user.id, this.user.id)
                 .then((response) => {
                     this.following = response.data;
                 })
