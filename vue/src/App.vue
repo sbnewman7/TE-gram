@@ -1,6 +1,4 @@
 <template>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
   <div id="navbar">
     <div id="logo-container">
       <button @click="goToHome" class="logo-button">
@@ -26,19 +24,19 @@
       </button>
       <div class="dropdown-content">
         <router-link class="active-link" v-bind:to="{ name: 'home' }"> 
-            <font-awesome-icon :icon="['fas', 'house-chimney']" pull="left" />&nbsp;Home</router-link>
+            <font-awesome-icon class="icon" :icon="['fas', 'house-chimney']" />Home</router-link>
         <router-link class="active-link" v-if="!loggedIn" v-bind:to="{ name: 'login' }">
-            <font-awesome-icon :icon="['fas', 'arrow-right-to-bracket']" pull="left" />&nbsp;Log in</router-link>
+            <font-awesome-icon class="icon" :icon="['fas', 'arrow-right-to-bracket']" />Log in</router-link>
         <router-link class="active-link" v-if="loggedIn" v-bind:to="{ name: 'favorites-page', params: { id: this.$store.state.user.id } }">
-            <font-awesome-icon :icon="['fas', 'star']" pull="left" />&nbsp;Favorites</router-link>
+            <font-awesome-icon class="icon" :icon="['fas', 'star']" />Favorites</router-link>
         <router-link class="active-link" v-if="loggedIn" v-bind:to="{ name: 'following-page', params: { followerUserId: this.$store.state.user.id } }">
-            <font-awesome-icon :icon="['fas', 'user-plus']" pull="left" />&nbsp;Following</router-link>
+            <font-awesome-icon class="icon" :icon="['fas', 'user-plus']" />Following</router-link>
         <router-link class="active-link" v-if="loggedIn" v-bind:to="{ name: 'user', params: { id: this.$store.state.user.id } }">
-            <font-awesome-icon :icon="['fas', 'user']" pull="left" />&nbsp;Edit Profile</router-link>
+            <font-awesome-icon class="icon" :icon="['fas', 'user']" />Edit Profile</router-link>
         <router-link class="active-link" v-if="loggedIn" v-bind:to="{ name: 'photoupload' }">
-            <font-awesome-icon :icon="['fas', 'cloud-arrow-up']" pull="left" />&nbsp;Photo Upload</router-link>
+            <font-awesome-icon class="icon" :icon="['fas', 'cloud-arrow-up']" />Photo Upload</router-link>
         <router-link class="active-link" v-if="loggedIn" v-bind:to="{ name: 'logout' }">
-            <font-awesome-icon :icon="['fas', 'arrow-right-from-bracket']" pull="left" />&nbsp;Logout</router-link>
+            <font-awesome-icon class="icon" :icon="['fas', 'arrow-right-from-bracket']" />Logout</router-link>
       </div>
     </div>
 
@@ -180,9 +178,7 @@ export default {
       window.setTimeout(() => {
         this.isRunning = false;
       }, 5000);
-
     }
-
 
   }
 };
@@ -194,18 +190,6 @@ export default {
   margin: 0;
   --nav-color: #A25772;
   --font-size: 2rem;
-}
-
-#logo-container {
-  display: flex;
-  align-items: center;
-}
-
-#logo-title {
-  color: #bcd9ff;
-  font-family: Kanit;
-  font-size: 2.2rem;
-  margin-bottom: 4px;
 }
 
 /* Navigation bar */
@@ -225,6 +209,11 @@ export default {
   border: 0;
 }
 
+#logo-container {
+  display: flex;
+  align-items: center;
+}
+
 /* fancy Home button */
 .logo-button {
   border: none;
@@ -237,6 +226,13 @@ export default {
   height: 7vh;
   min-height: 40px;
   margin-top: 3px;
+}
+
+#logo-title {
+  color: #bcd9ff;
+  font-family: Kanit;
+  font-size: 2.2rem;
+  margin-bottom: 4px;
 }
 
 #search-control {
@@ -258,27 +254,22 @@ export default {
   border-radius: 3px;
 }
 
+#user-message {
+  position: absolute;
+  /* height: 40px; */
+  width: 30vw;
+  top: 50px;
+  left: 35vw;
+  background-color: #b22;
+  color: white;
+  font-size: 20px;
+  padding-left: 20px;
+  border-radius: 5px;
+}
+
 /* Drop down menu bar  */
-.active-link {
-  float: left;
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  margin: 5px 10px 5px 10px;
-}
-
-.dropbtn {
-  font-size: var(--font-size);
-  border: none;
-  outline: none;
-  color: white;
-  background-color: inherit;
-  font-family: inherit;
-  margin: 0;
-}
-
 .dropdown {
-  float: right;
+  /* float: right; */
   overflow: hidden;
   font-size: 1.3rem;
   border: none;
@@ -289,16 +280,15 @@ export default {
   margin: 0;
 }
 
-#user-message {
-  position: absolute;
-  width: 30vw;
-  top: 50px;
-  left: 35vw;
-  background-color: #b22;
+.dropbtn {
+  font-size: var(--font-size);
+  border: none;
+  outline: none;
   color: white;
-  font-size: 20px;
-  padding-left: 20px;
-  border-radius: 5px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+  cursor: pointer;
 }
 
 .dropdown-content {
@@ -312,12 +302,28 @@ export default {
   z-index: 1;
 }
 
+/*** .active-link & .dropdown-content a resolve to the same thing ***/
+/* .active-link { */
+  /* float: left; */
+  /* color: white; */
+  /* text-align: center; */
+  /* text-decoration: none; */
+/* } */
+
 .dropdown-content a {
-  float: none;
+  /* float: none; */
   color: white;
   text-decoration: none;
   display: block;
-  text-align: right;
+  /* text-align: right; */
+  margin: 5px 8px 5px 8px;
+}
+
+.icon {
+  /* display: inline-block; */
+  width: 30px;
+  padding-right: 8px;
+  text-align: center;
 }
 
 .dropdown-content a:hover {
@@ -327,6 +333,7 @@ export default {
 .dropdown:hover .dropdown-content {
   display: block;
 }
+
 
 #lis {
   position: relative;
